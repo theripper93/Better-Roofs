@@ -1,6 +1,6 @@
 # Better-Roofs
 
-## H2**A module to improve roofs for foundry 0.8.x**
+## H2 **A module to improve roofs for foundry 0.8.x**
 
 As always you can support me here: [Patreon](https://www.patreon.com/theripper93)
 

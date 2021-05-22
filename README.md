@@ -2,7 +2,7 @@
 
 ## **A module to improve roofs for foundry 0.8.x**
 
-As always you can support me here: [Patreon](https://www.patreon.com/theripper93)
+You can support my work here: [Patreon](https://www.patreon.com/theripper93)
 
 And install the module throught the manifest url here: [Manifest](https://raw.githubusercontent.com/theripper93/Better-Roofs/main/betterRoofs/module.json)
 

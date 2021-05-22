@@ -8,11 +8,11 @@ And install the module throught the manifest url here: [Manifest](https://raw.gi
 
 **Better Roofs Modes**:
 
-⋅⋅***Show:** only show the tile through the fog when the token is in range
+⋅⋅* **Show:** only show the tile through the fog when the token is in range
 
-⋅⋅***Hide:** When a token has vision inside the roof the whole roof is hidden (uses the occlusion alpha for transparency)
+⋅⋅* **Hide:** When a token has vision inside the roof the whole roof is hidden (uses the occlusion alpha for transparency)
 
-⋅⋅***Mask:** The fancy mode, masks what you can see from the roof tile
+⋅⋅* **Mask:** The fancy mode, masks what you can see from the roof tile
 
 **Limitations:** Due to performance concerns all the calculations and masking are done accordingly to the vision range of the token, so a token with no vision or no bright or dim vision will not see this effect even if unrestricted vision range is active
 

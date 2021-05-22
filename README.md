@@ -1,6 +1,6 @@
 # Better-Roofs
 
-------**A module to improve roofs for foundry 0.8.x**
+------ **A module to improve roofs for foundry 0.8.x**
 
 As always you can support me here: [Patreon](https://www.patreon.com/theripper93)
 

@@ -2,7 +2,7 @@
   "name": "betterRoofs",
   "title": "Better Roofs",
   "description": "Vision enhancements for roofs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authors": [
     {
       "name": "theripper93",
@@ -16,7 +16,7 @@
     "./scripts/helpers.js"
   ],
   "minimumCoreVersion": "0.8.4",
-  "compatibleCoreVersion": "0.8.4",
+  "compatibleCoreVersion": "0.8.5",
   "url": "https://github.com/theripper93/Better-Roofs",
   "manifest": "https://raw.githubusercontent.com/theripper93/Better-Roofs/main/betterRoofs/module.json",
   "download": "https://github.com/theripper93/Better-Roofs/raw/main/betterroofs.zip"

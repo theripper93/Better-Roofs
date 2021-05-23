@@ -1,6 +1,7 @@
 # Better-Roofs
 
 ## **A module to improve roofs for foundry 0.8.x**
+![Latest Release Download Count](https://img.shields.io/github/downloads/theripper93/Better-Roofs/latest/module.zip) [![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2F[betterroofs]&colorB=4aa94a)](https://forge-vtt.com/bazaar#package=[YOUR_PACKAGE_NAME])
 
 You can support my work here: [Patreon](https://www.patreon.com/theripper93)
 

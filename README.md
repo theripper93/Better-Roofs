@@ -1,7 +1,7 @@
 # Better-Roofs
 
 ## **A module to improve roofs for foundry 0.8.x**
-![Latest Release Download Count](https://img.shields.io/github/downloads/theripper93/Better-Roofs/latest/module.zip) [![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fbetterroofs&colorB=4aa94a)](https://forge-vtt.com/bazaar#package=betterroofs)![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftheripper93%2FBetter-Roofs%2Fmaster%2Fsrc%2Fmodule.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=orange)
+![Latest Release Download Count](https://img.shields.io/github/downloads/theripper93/Better-Roofs/latest/module.zip) [![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fbetterroofs&colorB=4aa94a)](https://forge-vtt.com/bazaar#package=betterroofs) ![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftheripper93%2FBetter-Roofs%2Fmaster%2Flatest%2Fmodule.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=orange)
 
 You can support my work here: [Patreon](https://www.patreon.com/theripper93)
 

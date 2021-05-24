@@ -1,7 +1,7 @@
 Hooks.on("sightRefresh", () => {
   let controlledToken = canvas.tokens.controlled[0];
   if (!controlledToken || !controlledToken.data.vision) return;
-  let fallback = controlledToken.data.dimSight == 0 && controlledToken.data.brightSight == 0 ? true : false;
+  let fallback = (controlledToken.data.dimSight == 0 && controlledToken.data.brightSight == 0) || game.settings.get("betterroofs", "forceFallback") ? true : false;
   _betterRoofs.roofs.forEach((tile) => {
     let { brMode, overrideHide, tolerance } = getTileFlags(tile);
     if (!fallback) {

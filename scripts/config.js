@@ -20,6 +20,15 @@ Hooks.on("init", () => {
       },
       default: 0.9,
     });
+
+    game.settings.register("betterroofs", "forceFallback", {
+      name: game.i18n.localize("betterroofs.settings.forceFallback.name"),
+      hint: game.i18n.localize("betterroofs.settings.forceFallback.hint"),
+      scope: "client",
+      config: true,
+      type: Boolean,
+      default: false,
+    });
 })
 
 Hooks.on("renderTileConfig", (app, html, data) => {

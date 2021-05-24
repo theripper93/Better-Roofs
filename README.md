@@ -11,7 +11,17 @@
 
 * **Mask:** The fancy mode, masks what you can see from the roof tile
 
-**Limitations:** Due to performance concerns all the calculations and masking are done accordingly to the vision range of the token, so a token with no vision or no bright or dim vision will not see this effect even if unrestricted vision range is active
+**Tolerance**
+
+This options lets you offset when the Hide and Show mode trigger, a higher value will require a token to be closer to a roof before triggering, lower values will make them activate when tokens are further away. Warning: negaive values will make the Hide mode not work correctly
+
+**Limitations:**
+
+Due to performance concerns all the calculations and masking are done accordingly to the vision range of the token, so a token with no vision or no bright or dim vision will not see this effect even if unrestricted vision range is active
+
+**Fallback mode**
+
+To go around the limitations, when a token has no dim\bright sight the module will fall back to a different implementation on hide mode when mask\hide is selected
 
 Remember to use an overehead tile with Fade mode for best results
 

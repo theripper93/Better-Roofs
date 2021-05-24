@@ -1,0 +1,12 @@
+{
+    "betterroofs.settings.fogVisibility.name": "Visibility of tiles through fog",
+    "betterroofs.settings.fogVisibility.hint": "How visible (or how perceptibly bright) are the tiles shown through the fog",
+
+    "betterroofs.tileConfig.brMode.name": "Better Roof Mode",
+    "betterroofs.tileConfig.brMode.option0": "None (Foundry Default)",
+    "betterroofs.tileConfig.brMode.option1": "Show (Show Tile Through Fog)",
+    "betterroofs.tileConfig.brMode.option2": "Hide (Hides Tile on Vision)",
+    "betterroofs.tileConfig.brMode.option3": "Mask (Cutout Tile on Vision)",
+
+    "betterroofs.tileConfig.brTolerance.name": "Tolerance"
+}

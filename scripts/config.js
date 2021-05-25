@@ -1,10 +1,18 @@
-let _betterRoofs;
+/***************************************
+ * INITIALIZE THE BETTER ROOF INSTANCE *
+ ***************************************/
+
+let _betterRoofs
 
 Hooks.on("canvasReady", () => {
   _betterRoofs = betterRoofs.get();
   _betterRoofs.initializeRoofs();
   _betterRoofs.initializePIXIcontainers();
 });
+
+/**************************
+ * REGISTER GAME SETTINGS *
+ **************************/
 
 Hooks.on("init", () => {
     game.settings.register("betterroofs", "fogVisibility", {
@@ -40,6 +48,10 @@ Hooks.on("init", () => {
     });
 })
 
+/****************************************************
+ * ADD BETTER ROOF CONFIGURATION TO THE TILE CONFIG *
+ ****************************************************/
+
 Hooks.on("renderTileConfig", (app, html, data) => {
 if(game.settings.get("betterroofs", "roomPreview") && game.user.isGM){
   let tile = canvas.foreground.get(app.object.id)
@@ -68,11 +80,19 @@ if(game.settings.get("betterroofs", "roomPreview") && game.user.isGM){
   html.find($('button[name="submit"]')).click(app.object,saveTileConfig)
 })
 
+/***********************************************
+ * REMOVE DEBUG POLYGONS FROM FOREGROUND LAYER *
+ ***********************************************/
+
 Hooks.on("closeTileConfig",  (app, html, data) => {
   canvas.foreground.children.forEach((c) => {
     if(c.name == "brDebugPoly") canvas.foreground.removeChild(c)
   })
 })
+
+/****************************************************
+ * INJECT CUSTOM BUTTONS TO THE SCENE WALL CONTROLS *
+ ****************************************************/
 
 Hooks.on("getSceneControlButtons", (controls,b,c) => {
   if (game.user.isGM) {
@@ -91,6 +111,10 @@ Hooks.on("getSceneControlButtons", (controls,b,c) => {
 
 
 })
+
+/*******************************
+ * SAVE THE TILE CONFIGURATION *
+ *******************************/
 
 async function saveTileConfig(event){
   let html = this.offsetParent

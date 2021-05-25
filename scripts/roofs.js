@@ -1,3 +1,7 @@
+/***********************************************************************************
+ * BETTERROOFS CLASS, CONTAINS THE DATA NEEDED FOR FASTER SIGHT REFRESH PROCESSING *
+ ***********************************************************************************/
+
 class betterRoofs {
     constructor() {
       this.fogRoofContainer
@@ -6,14 +10,18 @@ class betterRoofs {
       this.DEBUG = false
     }
   
-  /**********************************************
-   * INITIALIZE THE ROOFS FOR THE FIRST TIME *
-   **********************************************/
+/**********************************************
+ * INITIALIZE THE ROOFS FOR THE FIRST TIME *
+ **********************************************/
   
     static get() {
         betterRoofs._instance = new betterRoofs();
         return betterRoofs._instance;
     }
+
+/************************************************************
+ * INITIALIZE OR RESET THE PIXI CONTAINERS USED FOR MASKING *
+ ************************************************************/
 
     initializePIXIcontainers(){
         this.fogRoofContainer = new PIXI.Container();
@@ -43,18 +51,25 @@ class betterRoofs {
 
     }
 
+/******************************************************************************************
+ * BUILD OR REFRESH THE ROOF ARRAY AND ASSIGN A BUILDING POLYGON TO EACH BETTER ROOF TILE *
+ ******************************************************************************************/
+
     initializeRoofs(){
         this.roofs = []
         canvas.foreground.placeables.forEach((t) => {
-            if(t.document.getFlag(
-                "betterroofs",
-                "brMode"
-              ) != 0) this.roofs.push(t)
-        t.roomPoly = getRoomPoly(t,false)
+            if(t.document.getFlag("betterroofs","brMode") && t.document.getFlag("betterroofs","brMode") != 0){
+              this.roofs.push(t)
+              t.roomPoly = getRoomPoly(t,false)
+            } 
         })
     }
 
 }
+
+/******************************************************************************
+ * REBUILD THE BETTERROOFS ARRAY AND PIXI CONTAINERS UNDER CERTAIN CONDITIONS *
+ ******************************************************************************/
 
 Hooks.on("updateTile", () => {
   _betterRoofs.initializeRoofs();

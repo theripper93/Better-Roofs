@@ -3,6 +3,8 @@
 ## **A module to improve roofs for foundry 0.8.x**
 ![Latest Release Download Count](https://img.shields.io/github/downloads/theripper93/Better-Roofs/latest/module.zip?color=2b82fc&label=DOWNLOADS&style=for-the-badge) [![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fbetterroofs&colorB=03ff1c&style=for-the-badge)](https://forge-vtt.com/bazaar#package=betterroofs) ![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2Ftheripper93%2FBetter-Roofs%2Fmain%2Fmodule.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=orange&style=for-the-badge) [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/theripper93)
 
+## **ATTENTION: Wall off the edges of your map for the masking to work!**
+
 **Better Roofs Modes**:
 
 * **Show:** only show the tile through the fog when the token is in range
@@ -13,16 +15,15 @@
 
 **Tolerance**
 
-This options lets you offset when the Hide and Show mode trigger, a higher value will require a token to be closer to a roof before triggering, lower values will make them activate when tokens are further away. Warning: negaive values will make the Hide mode not work correctly
+The option has been depreciated in favor of the new room detection system
 
 **Limitations:**
 
-Due to performance concerns all the calculations and masking are done accordingly to the vision range of the token, so a token with no vision or no bright or dim vision will not see this effect even if unrestricted vision range is active
+Masking now works even without sight but remember to wall of the edges of your map or it won't work
 
 **Fallback Mode**
 
-To go around the limitations, when a token has no dim\bright sight the module will fall back to a different implementation on hide mode when mask\hide is selected
-You can also foce the Fallback Mode per player in the module settings
+The option has been depreciated in favor of the new room detection system
 
 Remember to use an overehead tile with Fade mode for best results
 

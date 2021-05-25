@@ -13,6 +13,10 @@
 
 * **Mask:** The fancy mode, masks what you can see from the roof tile
 
+**Room Preview**
+
+You can enable the building preview in the settings to show you what the building detection has deemed to be a building when you open a tile's config 
+
 **Tolerance**
 
 The option has been depreciated in favor of the new room detection system

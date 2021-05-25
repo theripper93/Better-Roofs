@@ -38,11 +38,6 @@ Hooks.on("renderTileConfig", (app, html, data) => {
       "brMode"
     ) || 0;
 
-    let brTolerance = app.object.getFlag(
-      "betterroofs",
-      "brTolerance"
-    ) || 0;
-
   let newHtml = `
 <div class="form-group">
           <label>${game.i18n.localize("betterroofs.tileConfig.brMode.name")}</label>
@@ -52,13 +47,6 @@ Hooks.on("renderTileConfig", (app, html, data) => {
               </select>
           </div>
       </div>
-
-      <div class="form-group">
-      <label>${game.i18n.localize("betterroofs.tileConfig.brTolerance.name")} <span class="units">(Pixels)</span></label>
-      <div class="form-fields">
-          <input type="number" name="br.tolerance" value="${brTolerance}" step="1">
-      </div>
-  </div>
 
 `;
   const overh = html.find('input[name="overhead"]');
@@ -75,11 +63,6 @@ async function saveTileConfig(event){
     "betterroofs",
     "brMode",
     html.querySelectorAll("select[name ='br.mode']")[0].value
-  );
-  await event.data.setFlag(
-    "betterroofs",
-    "brTolerance",
-    html.querySelectorAll("input[name ='br.tolerance']")[0].value
   );
   _betterRoofs.initializeRoofs()
   _betterRoofs.initializePIXIcontainers()

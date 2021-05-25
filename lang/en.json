@@ -2,14 +2,12 @@
     "betterroofs.settings.fogVisibility.name": "Visibility of tiles through fog",
     "betterroofs.settings.fogVisibility.hint": "How visible (or how perceptibly bright) are the tiles shown through the fog",
 
-    "betterroofs.settings.forceFallback.name": "Force fallback mode",
-    "betterroofs.settings.forceFallback.hint": "If something is not working correctly, force fallback mode. When in fallback mode Better Roofs will ignore dim/bright sight and use approximations instead. Mask mode will also be forced to run in Hide mode instead",
+    "betterroofs.settings.forceFallback.name": "Force Hide mode",
+    "betterroofs.settings.forceFallback.hint": "Force Hide mode for all Mask roofs, enable if performance is suffering",
 
     "betterroofs.tileConfig.brMode.name": "Better Roof Mode",
     "betterroofs.tileConfig.brMode.option0": "None (Foundry Default)",
     "betterroofs.tileConfig.brMode.option1": "Show (Show Tile Through Fog)",
     "betterroofs.tileConfig.brMode.option2": "Hide (Hides Tile on Vision)",
-    "betterroofs.tileConfig.brMode.option3": "Mask (Cutout Tile on Vision)",
-
-    "betterroofs.tileConfig.brTolerance.name": "Tolerance"
+    "betterroofs.tileConfig.brMode.option3": "Mask (Cutout Tile on Vision)"
 }

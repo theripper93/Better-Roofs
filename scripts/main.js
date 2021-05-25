@@ -1,10 +1,10 @@
 Hooks.on("sightRefresh", () => {
   let controlledToken = canvas.tokens.controlled[0];
   if (!controlledToken || !controlledToken.data.vision) return;
-  let fallback = (controlledToken.data.dimSight == 0 && controlledToken.data.brightSight == 0) || game.settings.get("betterroofs", "forceFallback") ? true : false;
   _betterRoofs.roofs.forEach((tile) => {
     let { brMode, overrideHide, tolerance } = getTileFlags(tile);
-    if (!fallback) {
+    if((brMode==3 && game.settings.get("betterroofs", "forceFallback"))) brMode=2
+    
       if (brMode == 3) {
         computeMask(tile, controlledToken);
       }
@@ -12,15 +12,7 @@ Hooks.on("sightRefresh", () => {
         overrideHide = computeHide(controlledToken, tile, tolerance, overrideHide);
       }
       computeShowHideTile(tile, overrideHide, controlledToken, tolerance, brMode);
-    } else {
-      if (brMode == 2 || brMode == 3) {
-        overrideHide = computeHide(controlledToken, tile, tolerance, overrideHide);
-        if (canvas.scene.data.globalLight) {
-          computeShowHideTile(tile, overrideHide, controlledToken, tolerance, brMode, 60)
-        }
-      }
-    }
-  });
+    });
 });
 
 Hooks.on("controlToken", (token, controlled) => {

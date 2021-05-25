@@ -3,6 +3,7 @@ class betterRoofs {
       this.fogRoofContainer
       this.foregroundSightMaskContainers = {}
       this.roofs
+      this.DEBUG = false
     }
   
   /**********************************************
@@ -49,6 +50,7 @@ class betterRoofs {
                 "betterroofs",
                 "brMode"
               ) != 0) this.roofs.push(t)
+        t.roomPoly = getRoomPoly(t,this.DEBUG)
         })
     }
 
@@ -63,3 +65,12 @@ Hooks.on("deleteTile", () => {
   _betterRoofs.initializeRoofs();
   _betterRoofs.initializePIXIcontainers();
 });
+
+Hooks.on("deleteWall", () => {
+  _betterRoofs.initializeRoofs();
+})
+
+Hooks.on("updateWall", (wall,updates) => {
+  if("ds" in updates) return
+  _betterRoofs.initializeRoofs();
+})

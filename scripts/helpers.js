@@ -270,7 +270,8 @@ function getRoomPoly(tile,debug=false){
   if(debug){
   let s = new PIXI.Graphics()
   let poly = new PIXI.Polygon(pts)
-  s.beginFill(0xff1100).drawPolygon(poly)
+  s.lineStyle(2,0x00ff00).beginFill(0xff1100,0.7).drawPolygon(poly)
+  s.name = "brDebugPoly"
   canvas.foreground.addChild(s)
   }
   return new PIXI.Polygon(pts)

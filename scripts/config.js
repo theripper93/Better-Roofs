@@ -29,10 +29,22 @@ Hooks.on("init", () => {
       type: Boolean,
       default: false,
     });
+
+    game.settings.register("betterroofs", "roomPreview", {
+      name: game.i18n.localize("betterroofs.settings.roomPreview.name"),
+      hint: game.i18n.localize("betterroofs.settings.roomPreview.hint"),
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: false,
+    });
 })
 
 Hooks.on("renderTileConfig", (app, html, data) => {
-
+if(game.settings.get("betterroofs", "roomPreview") && game.user.isGM){
+  let tile = canvas.foreground.get(app.object.id)
+  if(tile)getRoomPoly(tile,true)
+}
     let brMode = app.object.getFlag(
       "betterroofs",
       "brMode"
@@ -54,6 +66,12 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   formGroup.after(newHtml);
   html.find("select[name ='br.mode']")[0].value = brMode
   html.find($('button[name="submit"]')).click(app.object,saveTileConfig)
+})
+
+Hooks.on("closeTileConfig",  (app, html, data) => {
+  canvas.foreground.children.forEach((c) => {
+    if(c.name == "brDebugPoly") canvas.foreground.removeChild(c)
+  })
 })
 
 async function saveTileConfig(event){

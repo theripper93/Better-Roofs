@@ -50,7 +50,7 @@ class betterRoofs {
                 "betterroofs",
                 "brMode"
               ) != 0) this.roofs.push(t)
-        t.roomPoly = getRoomPoly(t,this.DEBUG)
+        t.roomPoly = getRoomPoly(t,false)
         })
     }
 

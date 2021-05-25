@@ -168,7 +168,12 @@ function roomDetection(tile){
     if(!wallPoints[0].collides && !wallPoints[1].collides) buildingWalls.push(wallPoints)
   })
   let orderedPoints = []
-  if(buildingWalls.length == 0) return
+  if(buildingWalls.length < 2 || !buildingWalls) {return [
+    {x:tile.x,y:tile.y},
+    {x:tile.x+tile.width,y:tile.y},
+    {x:tile.x+tile.width,y:tile.y+tile.height},
+    {x:tile.x,y:tile.y+tile.height},
+  ]}
   orderedPoints.push(buildingWalls[0][0])
   orderedPoints.push(buildingWalls[0][1])
   let currentCoord = buildingWalls[0][1]

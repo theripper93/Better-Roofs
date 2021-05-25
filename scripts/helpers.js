@@ -284,3 +284,54 @@ function bringPointCloser(point,center,diff){
   let y = -newL*Math.sin(slope)+center.y
   return {x:x,y:y}
 }
+
+function buildEdgeWalls(){
+  let padX = canvas.scene.dimensions.paddingX
+  let padY= canvas.scene.dimensions.paddingY
+  let width = canvas.scene.dimensions.width-2*padX
+  let height = canvas.scene.dimensions.height-2*padY
+  let wallsCoords = [
+    [padX,padY,padX+width,padY],
+    [padX+width,padY,padX+width,padY+height],
+    [padX+width,padY+height,padX,padY+height],
+    [padX,padY+height,padX,padY]
+  ]
+  wallsCoords.forEach((c) => {
+    Wall.create({
+      "c": c,
+      "move": 1,
+      "sense": 1,
+      "sound": 1,
+      "dir": 0,
+      "door": 0,
+      "ds": 0,
+  })
+  })
+}
+
+async function yesNoPrompt (dTitle,dContent){
+
+  let dialog = new Promise((resolve, reject) => {
+      new Dialog({
+
+      title: `${dTitle}`,
+      content: `<p>${dContent}</p>`,
+      buttons: {
+          one: {
+              icon: '<i class="fas fa-check"></i>',
+              label: game.i18n.localize("betterroofs.yesnodialog.yes"),
+              callback: () => {resolve(true)}
+          },
+          two: {
+              icon: '<i class="fas fa-times"></i>',
+              label: game.i18n.localize("betterroofs.yesnodialog.no"),
+              callback: () => {resolve(false)}
+          }
+      },
+      default: "two"
+      }).render(true);
+    });
+    let result = await dialog;
+    return result;
+
+}

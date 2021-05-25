@@ -74,6 +74,24 @@ Hooks.on("closeTileConfig",  (app, html, data) => {
   })
 })
 
+Hooks.on("getSceneControlButtons", (controls,b,c) => {
+  if (game.user.isGM) {
+    controls.find((t) => t["name"] == "walls").tools.push(
+      {
+        icon: "fas fa-border-style",
+        name: "walledges",
+        title: game.i18n.localize("betterroofs.scenecontrols.walledges"),
+        onClick: async () => {
+          if(await yesNoPrompt(game.i18n.localize("betterroofs.yesnodialog.title"),game.i18n.localize("betterroofs.yesnodialog.desc"))) buildEdgeWalls()
+        },
+      }
+    )
+  }
+
+
+
+})
+
 async function saveTileConfig(event){
   let html = this.offsetParent
   if(!canvas.background.get(event.data.id) && !canvas.foreground.get(event.data.id)) return

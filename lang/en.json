@@ -12,5 +12,12 @@
     "betterroofs.tileConfig.brMode.option0": "None (Foundry Default)",
     "betterroofs.tileConfig.brMode.option1": "Show (Show Tile Through Fog)",
     "betterroofs.tileConfig.brMode.option2": "Hide (Hides Tile on Vision)",
-    "betterroofs.tileConfig.brMode.option3": "Mask (Cutout Tile on Vision)"
+    "betterroofs.tileConfig.brMode.option3": "Mask (Cutout Tile on Vision)",
+
+    "betterroofs.scenecontrols.walledges": "Wall off the edges of the scene",
+
+    "betterroofs.yesnodialog.yes": "Confirm",
+    "betterroofs.yesnodialog.no": "Cancel",
+    "betterroofs.yesnodialog.title": "Wall off the edges of the scene",
+    "betterroofs.yesnodialog.desc": "Are you sure you want to wall off the edges of the scene?"
 }

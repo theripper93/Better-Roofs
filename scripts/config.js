@@ -2,9 +2,10 @@
  * INITIALIZE THE BETTER ROOF INSTANCE *
  ***************************************/
 
-let _betterRoofs
+let _betterRoofs, _betterRoofsHelpers
 
 Hooks.on("canvasReady", () => {
+  _betterRoofsHelpers = new betterRoofsHelpers()
   _betterRoofs = betterRoofs.get();
   _betterRoofs.initializeRoofs();
   _betterRoofs.initializePIXIcontainers();
@@ -55,7 +56,7 @@ Hooks.on("init", () => {
 Hooks.on("renderTileConfig", (app, html, data) => {
 if(game.settings.get("betterroofs", "roomPreview") && game.user.isGM){
   let tile = canvas.foreground.get(app.object.id)
-  if(tile)getRoomPoly(tile,true)
+  if(tile)_betterRoofsHelpers.getRoomPoly(tile,true)
 }
     let brMode = app.object.getFlag(
       "betterroofs",
@@ -77,7 +78,7 @@ if(game.settings.get("betterroofs", "roomPreview") && game.user.isGM){
   const formGroup = overh.closest(".form-group");
   formGroup.after(newHtml);
   html.find("select[name ='br.mode']")[0].value = brMode
-  html.find($('button[name="submit"]')).click(app.object,saveTileConfig)
+  html.find($('button[name="submit"]')).click(app.object,_betterRoofsHelpers.saveTileConfig)
 })
 
 /***********************************************
@@ -102,7 +103,7 @@ Hooks.on("getSceneControlButtons", (controls,b,c) => {
         name: "walledges",
         title: game.i18n.localize("betterroofs.scenecontrols.walledges"),
         onClick: async () => {
-          if(await yesNoPrompt(game.i18n.localize("betterroofs.yesnodialog.title"),game.i18n.localize("betterroofs.yesnodialog.desc"))) buildEdgeWalls()
+          if(await _betterRoofsHelpers.yesNoPrompt(game.i18n.localize("betterroofs.yesnodialog.title"),game.i18n.localize("betterroofs.yesnodialog.desc"))) buildEdgeWalls()
         },
       }
     )
@@ -112,18 +113,3 @@ Hooks.on("getSceneControlButtons", (controls,b,c) => {
 
 })
 
-/*******************************
- * SAVE THE TILE CONFIGURATION *
- *******************************/
-
-async function saveTileConfig(event){
-  let html = this.offsetParent
-  if(!canvas.background.get(event.data.id) && !canvas.foreground.get(event.data.id)) return
-  await event.data.setFlag(
-    "betterroofs",
-    "brMode",
-    html.querySelectorAll("select[name ='br.mode']")[0].value
-  );
-  _betterRoofs.initializeRoofs()
-  _betterRoofs.initializePIXIcontainers()
-}

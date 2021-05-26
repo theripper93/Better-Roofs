@@ -20,16 +20,16 @@ Hooks.on("sightRefresh", () => {
   if(_betterRoofs.DEBUG) perfStart = performance.now()
 
   _betterRoofs.roofs.forEach((tile) => {
-    let { brMode, overrideHide } = getTileFlags(tile);
+    let { brMode, overrideHide } = _betterRoofsHelpers.getTileFlags(tile);
     if((brMode==3 && game.settings.get("betterroofs", "forceFallback"))) brMode=2
     
       if (brMode == 3) {
-        computeMask(tile, controlledToken);
+        _betterRoofsHelpers.computeMask(tile, controlledToken);
       }
       if (brMode == 2 && !tile.occluded) {
-        overrideHide = computeHide(controlledToken, tile, overrideHide);
+        overrideHide = _betterRoofsHelpers.computeHide(controlledToken, tile, overrideHide);
       }
-      computeShowHideTile(tile, overrideHide, controlledToken, brMode);
+      _betterRoofsHelpers.computeShowHideTile(tile, overrideHide, controlledToken, brMode);
     });
 
     if(_betterRoofs.DEBUG){
@@ -48,7 +48,7 @@ Hooks.on("controlToken", (token, controlled) => {
       tile.mask = null;
       if (_betterRoofs.foregroundSightMaskContainers[tile.id])
         _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
-      hideTileThroughFog(tile);
+        _betterRoofsHelpers.hideTileThroughFog(tile);
       if (!tile.occluded) tile.alpha =  game.user.isGM? 0.5 : 1;
     });
 });

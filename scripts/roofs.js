@@ -60,7 +60,7 @@ class betterRoofs {
         canvas.foreground.placeables.forEach((t) => {
             if(t.document.getFlag("betterroofs","brMode") && t.document.getFlag("betterroofs","brMode") != 0){
               this.roofs.push(t)
-              t.roomPoly = getRoomPoly(t,false)
+              t.roomPoly = _betterRoofsHelpers.getRoomPoly(t,false)
             } 
         })
     }
@@ -83,9 +83,11 @@ Hooks.on("deleteTile", () => {
 
 Hooks.on("deleteWall", () => {
   _betterRoofs.initializeRoofs();
+  _betterRoofs.initializePIXIcontainers();
 })
 
 Hooks.on("updateWall", (wall,updates) => {
   if("ds" in updates) return
   _betterRoofs.initializeRoofs();
+  _betterRoofs.initializePIXIcontainers();
 })

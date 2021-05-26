@@ -54,8 +54,8 @@ Hooks.on("init", () => {
  ****************************************************/
 
 Hooks.on("renderTileConfig", (app, html, data) => {
-if(game.settings.get("betterroofs", "roomPreview") && game.user.isGM){
   let tile = canvas.foreground.get(app.object.id)
+  if(game.settings.get("betterroofs", "roomPreview") && game.user.isGM && canvas.foreground.children.filter(c => c.tileId == app.object.id).length == 0){
   if(tile)_betterRoofsHelpers.getRoomPoly(tile,true)
 }
     let brMode = app.object.getFlag(
@@ -86,9 +86,9 @@ if(game.settings.get("betterroofs", "roomPreview") && game.user.isGM){
  ***********************************************/
 
 Hooks.on("closeTileConfig",  (app, html, data) => {
-  canvas.foreground.children.forEach((c) => {
-    if(c.name == "brDebugPoly") canvas.foreground.removeChild(c)
-  })
+  for(let c of canvas.foreground.children){
+    if(c.tileId == app.object.id) c.destroy()
+  }
 })
 
 /****************************************************

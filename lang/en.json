@@ -19,5 +19,8 @@
     "betterroofs.yesnodialog.yes": "Confirm",
     "betterroofs.yesnodialog.no": "Cancel",
     "betterroofs.yesnodialog.title": "Wall off the edges of the scene",
-    "betterroofs.yesnodialog.desc": "Are you sure you want to wall off the edges of the scene?"
+    "betterroofs.yesnodialog.desc": "Are you sure you want to wall off the edges of the scene?",
+
+    "betterroofs.bulk.notification": "WARNING: This operation will change all settings for all selected overhead tiles. If no tiles are selected, all overhead tiles will be processed instead. Overhead tiles with better roof mode set to None will not be affected",
+    "betterroofs.bulk.title": "Bulk change Better Roofs in the scene"
 }

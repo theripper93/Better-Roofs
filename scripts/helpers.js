@@ -404,9 +404,9 @@ class betterRoofsHelpers {
    * CHANGE SETTINGS FOR ALL BETTER ROOFS *
    ****************************************/
 
-  async bulkBUpdate() {
+  async bulkBUpdate(override = false,brModeOverride,ocModeOverride,allOverride=false) {
     let content = `
-    <p class="notification error">WARNING: This operation will change all settings for all selected overhead tiles. If no tiles are selected, all overhead tiles will be processed instead</p>
+    <p class="notification error">${game.i18n.localize("betterroofs.bulk.notification")}</p>
 
 <div class="form-group">
           <label>${game.i18n.localize(
@@ -442,12 +442,12 @@ class betterRoofsHelpers {
       `;
 
     let dialog = new Dialog({
-      title: "Bulk change Better Roofs in the scene",
+      title: game.i18n.localize("betterroofs.bulk.title"),
       content: content,
       buttons: {
-        close: { label: "Close" },
+        close: { label: game.i18n.localize("betterroofs.yesnodialog.no") },
         confirm: {
-          label: "Confirm",
+          label: game.i18n.localize("betterroofs.yesnodialog.yes"),
           callback: (dialog) => {
             updateTiles(dialog);
           },
@@ -457,7 +457,28 @@ class betterRoofsHelpers {
       close: () => {},
     });
 
-    await dialog._render(true);
+    if(!override) {
+      await dialog._render(true);
+    }else{
+      let brmode = brModeOverride
+      let ocmode = ocModeOverride
+      let relevantTiles =
+        canvas.foreground.controlled.length == 0 || allOverride
+          ? canvas.foreground.placeables
+          : canvas.foreground.controlled;
+      let updates = [];
+      for (let tile of relevantTiles) {
+        if (
+          !tile.document.getFlag("betterroofs", "brMode") ||
+          tile.document.getFlag("betterroofs", "brMode") == 0
+        )
+          continue;
+        if(brmode != undefined) await tile.document.setFlag("betterroofs", "brMode", brmode);
+        if(ocmode != undefined) updates.push({ _id: tile.id, "occlusion.mode": ocmode });
+      }
+
+      canvas.scene.updateEmbeddedDocuments("Tile", updates);
+    }
 
     async function updateTiles(dialog) {
       let brmode = parseInt(dialog[0].querySelectorAll('select[name="br.mode"]')[0]
@@ -465,7 +486,6 @@ class betterRoofsHelpers {
       let ocmode = parseInt(dialog[0].querySelectorAll(
         'select[name="occlusion.mode"]'
       )[0].value);
-      debugger
       let relevantTiles =
         canvas.foreground.controlled.length == 0
           ? canvas.foreground.placeables

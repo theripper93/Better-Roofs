@@ -333,9 +333,9 @@ class betterRoofsHelpers {
       [padX + width, padY + height, padX, padY + height],
       [padX, padY + height, padX, padY],
     ];
-
+    let wallDataArray = []
     for (let c of wallsCoords) {
-      await Wall.create({
+      wallDataArray.push({
         c: c,
         move: 1,
         sense: 1,
@@ -345,6 +345,7 @@ class betterRoofsHelpers {
         ds: 0,
       });
     }
+    await canvas.scene.createEmbeddedDocuments("Wall",wallDataArray)
   }
 
   /************************

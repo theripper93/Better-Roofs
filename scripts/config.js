@@ -103,7 +103,7 @@ Hooks.on("getSceneControlButtons", (controls,b,c) => {
         name: "walledges",
         title: game.i18n.localize("betterroofs.scenecontrols.walledges"),
         onClick: async () => {
-          if(await _betterRoofsHelpers.yesNoPrompt(game.i18n.localize("betterroofs.yesnodialog.title"),game.i18n.localize("betterroofs.yesnodialog.desc"))) buildEdgeWalls()
+          if(await _betterRoofsHelpers.yesNoPrompt(game.i18n.localize("betterroofs.yesnodialog.title"),game.i18n.localize("betterroofs.yesnodialog.desc"))) _betterRoofsHelpers.buildEdgeWalls()
         },
       }
     )

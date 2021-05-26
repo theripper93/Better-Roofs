@@ -2,7 +2,7 @@
     "betterroofs.settings.fogVisibility.name": "Visibility of tiles through fog",
     "betterroofs.settings.fogVisibility.hint": "How visible (or how perceptibly bright) are the tiles shown through the fog",
 
-    "betterroofs.settings.forceFallback.name": "Force Hide mode",
+    "betterroofs.settings.forceFallback.name": "Performance Mode",
     "betterroofs.settings.forceFallback.hint": "Force Hide mode for all Mask roofs, enable if performance is suffering",
 
     "betterroofs.settings.roomPreview.name": "Show Building Preview",

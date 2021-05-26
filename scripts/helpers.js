@@ -407,8 +407,10 @@ class betterRoofsHelpers {
     override = false,
     brModeOverride,
     ocModeOverride,
+    ocAlphaOverride,
     allOverride = false
   ) {
+    if(!game.user.isGM) return
     let content = `
     <p class="notification error">${game.i18n.localize(
       "betterroofs.bulk.notification"
@@ -481,8 +483,8 @@ class betterRoofsHelpers {
           continue;
         if (brmode != undefined)
           await tile.document.setFlag("betterroofs", "brMode", brmode);
-        if (ocmode != undefined)
-          updates.push({ _id: tile.id, "occlusion.mode": ocmode });
+          
+        updates.push({ _id: tile.id, "occlusion.mode": ocmode != undefined ? ocmode : tile.data.occlusion.mode,"occlusion.alpha" : ocAlphaOverride != undefined ? ocAlphaOverride: tile.data.occlusion.alpha });
       }
 
       canvas.scene.updateEmbeddedDocuments("Tile", updates);

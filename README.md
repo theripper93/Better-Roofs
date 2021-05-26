@@ -27,6 +27,10 @@ The option has been depreciated in favor of the new room detection system
 Masking now works even without sight but remember to wall of the edges of your map or it won't work.
 You can wall off the edges of your map automatically with this button in the wall controls
 
+**Bulk Utility**
+
+You can change settings for multiple Better Roofs with a console utility. Just run _betterRoofsHelpers.bulkBUpdate() in the console
+
 ![alt text](https://github.com/theripper93/Better-Roofs/raw/main/brbutton.jpg)
 
 **Fallback Mode**

@@ -5,7 +5,7 @@
 
 
 ## **ATTENTION: Wall off the edges of your map for the masking to work!**
-Remember to use an overehead tile with Fade mode for best results
+## **Remember to use an overehead tile with Fade mode for best results - a tile in "Roof" occlusion mode will produce unwanted results!**
 
 **Better Roofs Modes**:
 

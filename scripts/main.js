@@ -32,6 +32,8 @@ Hooks.on("sightRefresh", () => {
       _betterRoofsHelpers.computeShowHideTile(tile, overrideHide, controlledToken, brMode);
     });
 
+    if(game.settings.get("betterroofs", "wbIntegration") && game.modules.get("weatherblock")?.active) refreshWheatherBlockingMask()
+
     if(_betterRoofs.DEBUG){
       perfEnd = performance.now()
       console.log(`Better Roofs compute took ${perfEnd-perfStart} ms, FPS:${Math.round(canvas.app.ticker.FPS)}`)

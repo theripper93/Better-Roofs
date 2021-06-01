@@ -47,6 +47,15 @@ Hooks.on("init", () => {
       type: Boolean,
       default: false,
     });
+
+    game.settings.register("betterroofs", "wbIntegration", {
+      name: game.i18n.localize("betterroofs.settings.wbIntegration.name"),
+      hint: game.i18n.localize("betterroofs.settings.wbIntegration.hint"),
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true,
+    });
 })
 
 /****************************************************

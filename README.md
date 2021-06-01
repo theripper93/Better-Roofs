@@ -15,6 +15,9 @@ Remember to use an overehead tile with Fade mode for best results
 
 * **Mask:** The fancy mode, masks what you can see from the roof tile
 
+**Weather Blocker Integration**
+If you have Weather Blocker installed, you can enable the "Weather Blocker Integration" in the Better Roofs settings to hide weather inside buildings
+
 **Room Preview**
 
 You can enable the building preview in the settings to show you what the building detection has deemed to be a building when you open a tile's config 

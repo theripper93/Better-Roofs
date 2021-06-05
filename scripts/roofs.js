@@ -76,6 +76,11 @@ Hooks.on("updateTile", () => {
   _betterRoofs.initializePIXIcontainers();
 });
 
+Hooks.on("createTile", () => {
+  _betterRoofs.initializeRoofs();
+  _betterRoofs.initializePIXIcontainers();
+});
+
 Hooks.on("deleteTile", () => {
   _betterRoofs.initializeRoofs();
   _betterRoofs.initializePIXIcontainers();

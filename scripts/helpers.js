@@ -153,7 +153,8 @@ class betterRoofsHelpers {
 
   roomDetection(tile) {
     let buildingWalls = [];
-    let tileRange = tile.document.getFlag("levels", "heightRange")?.split(",");
+    let isLevels = game.modules.get('levels')?.active
+    let tileRange = isLevels ? tile.document.getFlag("levels", "heightRange")?.split(",") : undefined;
     let tileCorners = [
       { x: tile.x, y: tile.y }, //tl
       { x: tile.x + tile.width, y: tile.y }, //tr

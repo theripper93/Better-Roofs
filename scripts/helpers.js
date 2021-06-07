@@ -153,6 +153,7 @@ class betterRoofsHelpers {
 
   roomDetection(tile) {
     let buildingWalls = [];
+    let tileRange = tile.document.getFlag("levels", "heightRange")?.split(",");
     let tileCorners = [
       { x: tile.x, y: tile.y }, //tl
       { x: tile.x + tile.width, y: tile.y }, //tr
@@ -160,22 +161,33 @@ class betterRoofsHelpers {
       { x: tile.x + tile.width, y: tile.y + tile.height }, //br
     ];
     canvas.walls.placeables.forEach((wall) => {
-      let wallPoints = [
-        { x: wall.coords[0], y: wall.coords[1], collides: true },
-        { x: wall.coords[2], y: wall.coords[3], collides: true },
+      let wallRange = [
+        wall.data.wallHeight?.wallHeightBottom,
+        wall.data.wallHeight?.wallHeightTop,
       ];
-      wallPoints.forEach((point) => {
-        tileCorners.forEach((c) => {
-          if (
-            this.checkPointInsideTile(point, tile) &&
-            !canvas.walls.checkCollision(new Ray(point, c))
-          ) {
-            point.collides = false;
-          }
+      if (
+        (!wallRange[0] && !wallRange[1]) ||
+        tileRange.length != 2 ||
+        ((wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
+          (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]))
+      ) {
+        let wallPoints = [
+          { x: wall.coords[0], y: wall.coords[1], collides: true },
+          { x: wall.coords[2], y: wall.coords[3], collides: true },
+        ];
+        wallPoints.forEach((point) => {
+          tileCorners.forEach((c) => {
+            if (
+              this.checkPointInsideTile(point, tile) &&
+              !canvas.walls.checkCollision(new Ray(point, c))
+            ) {
+              point.collides = false;
+            }
+          });
         });
-      });
-      if (!wallPoints[0].collides && !wallPoints[1].collides)
-        buildingWalls.push(wallPoints);
+        if (!wallPoints[0].collides && !wallPoints[1].collides)
+          buildingWalls.push(wallPoints);
+      }
     });
     let orderedPoints = [];
     if (buildingWalls.length < 2 || !buildingWalls) {
@@ -333,7 +345,7 @@ class betterRoofsHelpers {
       [padX + width, padY + height, padX, padY + height],
       [padX, padY + height, padX, padY],
     ];
-    let wallDataArray = []
+    let wallDataArray = [];
     for (let c of wallsCoords) {
       wallDataArray.push({
         c: c,
@@ -345,7 +357,7 @@ class betterRoofsHelpers {
         ds: 0,
       });
     }
-    await canvas.scene.createEmbeddedDocuments("Wall",wallDataArray)
+    await canvas.scene.createEmbeddedDocuments("Wall", wallDataArray);
   }
 
   /************************
@@ -411,7 +423,7 @@ class betterRoofsHelpers {
     ocAlphaOverride,
     allOverride = false
   ) {
-    if(!game.user.isGM) return
+    if (!game.user.isGM) return;
     let content = `
     <p class="notification error">${game.i18n.localize(
       "betterroofs.bulk.notification"
@@ -484,8 +496,16 @@ class betterRoofsHelpers {
           continue;
         if (brmode != undefined)
           await tile.document.setFlag("betterroofs", "brMode", brmode);
-          
-        updates.push({ _id: tile.id, "occlusion.mode": ocmode != undefined ? ocmode : tile.data.occlusion.mode,"occlusion.alpha" : ocAlphaOverride != undefined ? ocAlphaOverride: tile.data.occlusion.alpha });
+
+        updates.push({
+          _id: tile.id,
+          "occlusion.mode":
+            ocmode != undefined ? ocmode : tile.data.occlusion.mode,
+          "occlusion.alpha":
+            ocAlphaOverride != undefined
+              ? ocAlphaOverride
+              : tile.data.occlusion.alpha,
+        });
       }
 
       canvas.scene.updateEmbeddedDocuments("Tile", updates);

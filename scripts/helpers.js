@@ -278,11 +278,12 @@ class betterRoofsHelpers {
    *********************************************************/
 
   checkPointInsideTile(pt, tile, tol = 0) {
+    let tileZZ = {x: tile.center.x-tile.width/2,y:tile.center.y-tile.height/2}
     if (
-      pt.x > tile.x + tol &&
-      pt.x < tile.x + tile.width - tol &&
-      pt.y > tile.y + tol &&
-      pt.y < tile.y + tile.height - tol
+      pt.x > tileZZ.x + tol &&
+      pt.x < tileZZ.x + tile.width - tol &&
+      pt.y > tileZZ.y + tol &&
+      pt.y < tileZZ.y + tile.height - tol
     ) {
       return true;
     } else {

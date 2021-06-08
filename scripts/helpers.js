@@ -163,12 +163,13 @@ class betterRoofsHelpers {
     ];
     canvas.walls.placeables.forEach((wall) => {
       let wallRange = [
-        wall.data.wallHeight?.wallHeightBottom,
-        wall.data.wallHeight?.wallHeightTop,
+        wall.data.flags.wallHeight?.wallHeightBottom,
+        wall.data.flags.wallHeight?.wallHeightTop,
       ];
       if (
+        !isLevels ||
         (!wallRange[0] && !wallRange[1]) ||
-        tileRange.length != 2 ||
+        (tileRange && tileRange.length != 2) ||
         ((wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
           (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]))
       ) {

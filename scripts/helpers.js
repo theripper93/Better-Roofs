@@ -8,6 +8,10 @@ class betterRoofsHelpers {
    ******************************************/
 
   showTileThroughFog(tile) {
+    let levelsFlag = tile.document.getFlag("levels","heightRange")
+    if(levelsFlag && levelsFlag.split(",").length == 2){
+      if(!levelsFlag.toLowerCase().includes("infinity")) return
+    }
     tile.alpha = 1;
     let oldSprite = _betterRoofs.fogRoofContainer.children.find(
       (c) => c.name == tile.id

@@ -68,7 +68,7 @@ class betterRoofsHelpers {
     if (
       !tile.occluded &&
       !overrideHide &&
-      this.checkIfInPoly(pointSource, tile, controlledToken, 1)
+      this.checkIfInPoly(pointSource, tile, controlledToken, 5)
     ) {
       this.showTileThroughFog(tile);
     } else {
@@ -90,7 +90,7 @@ class betterRoofsHelpers {
         canvas.sight.sources.get(`Token.${controlledToken.id}`).los.points,
         tile,
         controlledToken,
-        -1
+        -5
       )
     ) {
       tile.alpha = tile.data.occlusion.alpha;

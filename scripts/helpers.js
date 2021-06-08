@@ -155,11 +155,12 @@ class betterRoofsHelpers {
     let buildingWalls = [];
     let isLevels = game.modules.get('levels')?.active
     let tileRange = isLevels ? tile.document.getFlag("levels", "heightRange")?.split(",") : undefined;
+    let tileZZ = {x: tile.center.x-tile.width/2,y:tile.center.y-tile.height/2}
     let tileCorners = [
-      { x: tile.x, y: tile.y }, //tl
-      { x: tile.x + tile.width, y: tile.y }, //tr
-      { x: tile.x, y: tile.y + tile.height }, //bl
-      { x: tile.x + tile.width, y: tile.y + tile.height }, //br
+      { x: tileZZ.x, y: tileZZ.y }, //tl
+      { x: tileZZ.x + tile.width, y: tileZZ.y }, //tr
+      { x: tileZZ.x + tile.width, y: tileZZ.y + tile.height }, //br
+      { x: tileZZ.x, y: tileZZ.y + tile.height }, //bl
     ];
     canvas.walls.placeables.forEach((wall) => {
       let wallRange = [
@@ -169,7 +170,7 @@ class betterRoofsHelpers {
       if (
         !isLevels ||
         (!wallRange[0] && !wallRange[1]) ||
-        (tileRange && tileRange.length != 2) ||
+        (!tileRange || tileRange.length != 2) ||
         ((wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
           (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]))
       ) {
@@ -193,12 +194,7 @@ class betterRoofsHelpers {
     });
     let orderedPoints = [];
     if (buildingWalls.length < 2 || !buildingWalls) {
-      return [
-        { x: tile.x, y: tile.y },
-        { x: tile.x + tile.width, y: tile.y },
-        { x: tile.x + tile.width, y: tile.y + tile.height },
-        { x: tile.x, y: tile.y + tile.height },
-      ];
+      return tileCorners;
     }
     orderedPoints.push(buildingWalls[0][0]);
     orderedPoints.push(buildingWalls[0][1]);

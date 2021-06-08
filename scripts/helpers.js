@@ -192,7 +192,7 @@ class betterRoofsHelpers {
           tileCorners.forEach((c) => {
             if (
               this.checkPointInsideTile(point, tile) &&
-              !canvas.walls.checkCollision(new Ray(point, c))
+              !canvas.walls.checkCollision(new Ray(point, c),{},wallRange[0])
             ) {
               point.collides = false;
             }

@@ -156,7 +156,7 @@ class betterRoofsHelpers {
     let isLevels = game.modules.get('levels')?.active
     let levelsRangeFlag = tile.document.getFlag("levels", "heightRange")?.split(",")
     let range0,range1
-    if(levelsRangeFlag){
+    if(levelsRangeFlag && levelsRangeFlag.length == 2){
       range0 = parseInt(levelsRangeFlag[0])
       range1 = levelsRangeFlag[1].toLowerCase() == "infinity" ? 10000 : parseInt(levelsRangeFlag[1])
     }

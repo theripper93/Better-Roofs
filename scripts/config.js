@@ -76,7 +76,7 @@ Hooks.on("renderTileConfig", (app, html, data) => {
 <div class="form-group">
           <label>${game.i18n.localize("betterroofs.tileConfig.brMode.name")}</label>
           <div class="form-fields">
-              <select name="br.mode" data-dtype="Number">
+              <select name="flags.betterroofs.brMode" data-dtype="Number">
               <option value="0">${game.i18n.localize("betterroofs.tileConfig.brMode.option0")}</option><option value="1">${game.i18n.localize("betterroofs.tileConfig.brMode.option1")}</option><option value="2">${game.i18n.localize("betterroofs.tileConfig.brMode.option2")}</option><option value="3">${game.i18n.localize("betterroofs.tileConfig.brMode.option3")}</option>
               </select>
           </div>
@@ -86,8 +86,8 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   const overh = html.find('input[name="overhead"]');
   const formGroup = overh.closest(".form-group");
   formGroup.after(newHtml);
-  html.find("select[name ='br.mode']")[0].value = brMode
-  html.find($('button[name="submit"]')).click(app.object,_betterRoofsHelpers.saveTileConfig)
+  html.find("select[name ='flags.betterroofs.brMode']")[0].value = brMode
+  //html.find($('button[name="submit"]')).click(app.object,_betterRoofsHelpers.saveTileConfig)
 })
 
 /***********************************************

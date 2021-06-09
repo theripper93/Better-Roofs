@@ -7,6 +7,7 @@ class betterRoofs {
       this.fogRoofContainer
       this.foregroundSightMaskContainers = {}
       this.roofs
+      this.isLevels = game.modules.get('levels')?.active
       this.DEBUG = false
     }
   

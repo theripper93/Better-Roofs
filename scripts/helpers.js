@@ -8,10 +8,7 @@ class betterRoofsHelpers {
    ******************************************/
 
   showTileThroughFog(tile) {
-    let levelsFlag = game.modules.get('levels')?.active ? tile.document.getFlag("levels","heightRange") : undefined
-    if(levelsFlag && levelsFlag.split(",").length == 2){
-      if(!levelsFlag.toLowerCase().includes("infinity")) return
-    }
+    if(_betterRoofs.isLevels && tile.isLevel) return
     tile.alpha = 1;
     let oldSprite = _betterRoofs.fogRoofContainer.children.find(
       (c) => c.name == tile.id
@@ -157,7 +154,7 @@ class betterRoofsHelpers {
 
   roomDetection(tile) {
     let buildingWalls = [];
-    let isLevels = game.modules.get('levels')?.active
+    let isLevels = _betterRoofs.isLevels
     let levelsRangeFlag = isLevels ? tile.document.getFlag("levels", "heightRange")?.split(",") : undefined
     let range0,range1
     if(levelsRangeFlag && levelsRangeFlag.length == 2){

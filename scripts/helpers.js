@@ -158,7 +158,7 @@ class betterRoofsHelpers {
     let levelsRangeFlag = isLevels ? tile.document.getFlag("levels", "heightRange")?.split(",") : undefined
     let range0,range1
     if(levelsRangeFlag && levelsRangeFlag.length == 2){
-      range0 = parseInt(levelsRangeFlag[0])
+      range0 = levelsRangeFlag[1].toLowerCase() == "infinity" ? parseInt(levelsRangeFlag[0])-1 : parseInt(levelsRangeFlag[0])
       range1 = levelsRangeFlag[1].toLowerCase() == "infinity" ? 10000 : parseInt(levelsRangeFlag[1])
     }
     let tileRange = range0 && range1 ? [range0,range1] : undefined;

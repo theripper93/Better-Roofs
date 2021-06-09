@@ -8,7 +8,7 @@ class betterRoofsHelpers {
    ******************************************/
 
   showTileThroughFog(tile) {
-    let levelsFlag = tile.document.getFlag("levels","heightRange")
+    let levelsFlag = game.modules.get('levels')?.active ? tile.document.getFlag("levels","heightRange") : undefined
     if(levelsFlag && levelsFlag.split(",").length == 2){
       if(!levelsFlag.toLowerCase().includes("infinity")) return
     }

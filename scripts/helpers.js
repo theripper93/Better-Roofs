@@ -8,7 +8,7 @@ class betterRoofsHelpers {
    ******************************************/
 
   showTileThroughFog(tile) {
-    if(_betterRoofs.isLevels && tile.isLevel) return
+    if (_betterRoofs.isLevels && tile.isLevel) return;
     tile.alpha = 1;
     let oldSprite = _betterRoofs.fogRoofContainer.children.find(
       (c) => c.name == tile.id
@@ -148,21 +148,34 @@ class betterRoofsHelpers {
     return { brMode, overrideHide };
   }
 
+  getLevelsFlagsForObject(object) {
+    let rangeTop = object.document.getFlag(_levelsModuleName, "rangeTop");
+    let rangeBottom = object.document.getFlag(_levelsModuleName, "rangeBottom");
+    if (!rangeTop) rangeTop = Infinity;
+    if (!rangeBottom) rangeBottom = -Infinity;
+    let isLevel = rangeTop == Infinity ? false : true;
+    if (rangeTop == Infinity && rangeBottom == -Infinity) return false;
+    if (rangeTop == Infinity) rangeBottom -= 1;
+    return { rangeBottom, rangeTop, isLevel };
+  }
+
   /************************************************************************************
    * GENERATE A POLYGON WICH REPRESENTS THE BUILDING PERIMETER UNDER AN OVERHEAD TILE *
    ************************************************************************************/
 
   roomDetection(tile) {
     let buildingWalls = [];
-    let isLevels = _betterRoofs.isLevels
-    let levelsRangeFlag = isLevels ? tile.document.getFlag("levels", "heightRange")?.split(",") : undefined
-    let range0,range1
-    if(levelsRangeFlag && levelsRangeFlag.length == 2){
-      range0 = levelsRangeFlag[1].toLowerCase() == "infinity" ? parseInt(levelsRangeFlag[0])-1 : parseInt(levelsRangeFlag[0])
-      range1 = levelsRangeFlag[1].toLowerCase() == "infinity" ? 10000 : parseInt(levelsRangeFlag[1])
+    let isLevels = _betterRoofs.isLevels;
+    let tileRange;
+    if (isLevels) {
+      let { rangeBottom, rangeTop } = this.getLevelsFlagsForObject(tile);
+      
+      tileRange = [rangeBottom, rangeTop];
     }
-    let tileRange = range0 && range1 ? [range0,range1] : undefined;
-    let tileZZ = {x: tile.center.x-tile.width/2,y:tile.center.y-tile.height/2}
+    let tileZZ = {
+      x: tile.center.x - tile.width / 2,
+      y: tile.center.y - tile.height / 2,
+    };
     let tileCorners = [
       { x: tileZZ.x, y: tileZZ.y }, //tl
       { x: tileZZ.x + tile.width, y: tileZZ.y }, //tr
@@ -177,9 +190,10 @@ class betterRoofsHelpers {
       if (
         !isLevels ||
         (!wallRange[0] && !wallRange[1]) ||
-        (!tileRange || tileRange.length != 2) ||
-        ((wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
-          (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]))
+        !tileRange ||
+        tileRange.length != 2 ||
+        (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
+        (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0])
       ) {
         let wallPoints = [
           { x: wall.coords[0], y: wall.coords[1], collides: true },
@@ -189,7 +203,7 @@ class betterRoofsHelpers {
           tileCorners.forEach((c) => {
             if (
               this.checkPointInsideTile(point, tile) &&
-              !canvas.walls.checkCollision(new Ray(point, c),{},wallRange[0])
+              !canvas.walls.checkCollision(new Ray(point, c), {}, wallRange[0])
             ) {
               point.collides = false;
             }
@@ -279,7 +293,10 @@ class betterRoofsHelpers {
    *********************************************************/
 
   checkPointInsideTile(pt, tile, tol = 0) {
-    let tileZZ = {x: tile.center.x-tile.width/2,y:tile.center.y-tile.height/2}
+    let tileZZ = {
+      x: tile.center.x - tile.width / 2,
+      y: tile.center.y - tile.height / 2,
+    };
     if (
       pt.x > tileZZ.x + tol &&
       pt.x < tileZZ.x + tile.width - tol &&

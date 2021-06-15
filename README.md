@@ -7,6 +7,8 @@
 ## **ATTENTION: Wall off the edges of your map for the masking to work!**
 ## **Remember to use an overehead tile with Fade/None occlusion mode for best results - a tile in "Roof" occlusion mode will produce unwanted results!**
 
+## [Video Tuorial by Baileywiki](https://youtu.be/ELlweNunn4g)
+
 **Better Roofs Modes**:
 
 * **Show:** only show the tile through the fog when the token is in range

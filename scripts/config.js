@@ -9,6 +9,7 @@ Hooks.on("canvasReady", () => {
   _betterRoofs = betterRoofs.get();
   _betterRoofs.initializeRoofs();
   _betterRoofs.initializePIXIcontainers();
+  Hooks.callAll("betterRoofsReady")
 });
 
 /**************************

@@ -64,6 +64,10 @@ class betterRoofs {
               t.roomPoly = _betterRoofsHelpers.getRoomPoly(t,false)
             } 
         })
+
+        
+
+
     }
 
 }

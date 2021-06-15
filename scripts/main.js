@@ -51,6 +51,6 @@ Hooks.on("controlToken", (token, controlled) => {
       if (_betterRoofs.foregroundSightMaskContainers[tile.id])
         _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
         _betterRoofsHelpers.hideTileThroughFog(tile);
-      if (!tile.occluded) tile.alpha =  game.user.isGM? 0.5 : 1;
+      if (!tile.occluded) tile.refresh()//alpha =  game.user.isGM? 0.5 : 1;
     });
 });

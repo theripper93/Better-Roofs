@@ -5,8 +5,8 @@
     "betterroofs.settings.forceFallback.name": "Performance Mode",
     "betterroofs.settings.forceFallback.hint": "Force Hide mode for all Mask roofs, enable if performance is suffering",
 
-    "betterroofs.settings.roomPreview.name": "Show Building Preview",
-    "betterroofs.settings.roomPreview.hint": "When opening a tile config, show what the building detection has computed as a building. Useful for debugging",
+    "betterroofs.settings.roomPreview.name": "Advanced Mode",
+    "betterroofs.settings.roomPreview.hint": "When opening a tile config, show what the building detection has computed as a building. Also exposes controls for manually setting up the polygon for the room. Useful for debugging",
 
     "betterroofs.settings.wbIntegration.name": "Weather Blocker Integration",
     "betterroofs.settings.wbIntegration.hint": "If Weather Blocker module is installed dynamically hide weather inside buildings",
@@ -16,6 +16,10 @@
     "betterroofs.tileConfig.brMode.option1": "Show (Show Tile Through Fog)",
     "betterroofs.tileConfig.brMode.option2": "Hide (Hides Tile on Vision)",
     "betterroofs.tileConfig.brMode.option3": "Mask (Cutout Tile on Vision)",
+    "betterroofs.tileConfig.manualPoly.name": "Selected Walls",
+    "betterroofs.tileConfig.definePoly.name": "Define Polygon",
+    "betterroofs.tileConfig.clearPoly.name": "Clear Polygon",
+    "betterroofs.tileConfig.definePoly.notify": "Select the walls you wish to use for the polygon then click the Define Polygon button again to confirm",
 
     "betterroofs.scenecontrols.walledges": "Wall off the edges of the scene",
 

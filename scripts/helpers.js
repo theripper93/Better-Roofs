@@ -167,9 +167,10 @@ class betterRoofsHelpers {
     let buildingWalls = [];
     let isLevels = _betterRoofs.isLevels;
     let tileRange;
+    let manualPolyFlag = tile.document.getFlag("betterroofs", "manualPoly");
     if (isLevels) {
       let { rangeBottom, rangeTop } = this.getLevelsFlagsForObject(tile);
-      
+
       tileRange = [rangeBottom, rangeTop];
     }
     let tileZZ = {
@@ -182,37 +183,59 @@ class betterRoofsHelpers {
       { x: tileZZ.x + tile.width, y: tileZZ.y + tile.height }, //br
       { x: tileZZ.x, y: tileZZ.y + tile.height }, //bl
     ];
-    canvas.walls.placeables.forEach((wall) => {
-      let wallRange = [
-        wall.data.flags.wallHeight?.wallHeightBottom,
-        wall.data.flags.wallHeight?.wallHeightTop,
-      ];
-      if (
-        !isLevels ||
-        (!wallRange[0] && !wallRange[1]) ||
-        !tileRange ||
-        tileRange.length != 2 ||
-        (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
-        (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0])
-      ) {
+    if (manualPolyFlag && manualPolyFlag != "") {
+      let idArray = manualPolyFlag.split(",");
+      let manualWalls = [];
+      idArray.forEach((id) => {
+        let wallForId = canvas.walls.get(id);
+        if (wallForId) manualWalls.push(wallForId);
+      });
+
+      manualWalls.forEach((wall) => {
         let wallPoints = [
           { x: wall.coords[0], y: wall.coords[1], collides: true },
           { x: wall.coords[2], y: wall.coords[3], collides: true },
         ];
-        wallPoints.forEach((point) => {
-          tileCorners.forEach((c) => {
-            if (
-              this.checkPointInsideTile(point, tile) &&
-              !canvas.walls.checkCollision(new Ray(point, c), {}, wallRange[0])
-            ) {
-              point.collides = false;
-            }
+        buildingWalls.push(wallPoints);
+      });
+    } else {
+      canvas.walls.placeables.forEach((wall) => {
+        let wallRange = [
+          wall.data.flags.wallHeight?.wallHeightBottom,
+          wall.data.flags.wallHeight?.wallHeightTop,
+        ];
+        if (
+          !isLevels ||
+          (!wallRange[0] && !wallRange[1]) ||
+          !tileRange ||
+          tileRange.length != 2 ||
+          (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
+          (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0])
+        ) {
+          let wallPoints = [
+            { x: wall.coords[0], y: wall.coords[1], collides: true },
+            { x: wall.coords[2], y: wall.coords[3], collides: true },
+          ];
+          wallPoints.forEach((point) => {
+            tileCorners.forEach((c) => {
+              if (
+                this.checkPointInsideTile(point, tile) &&
+                !canvas.walls.checkCollision(
+                  new Ray(point, c),
+                  {},
+                  wallRange[0]
+                )
+              ) {
+                point.collides = false;
+              }
+            });
           });
-        });
-        if (!wallPoints[0].collides && !wallPoints[1].collides)
-          buildingWalls.push(wallPoints);
-      }
-    });
+          if (!wallPoints[0].collides && !wallPoints[1].collides)
+            buildingWalls.push(wallPoints);
+        }
+      });
+    }
+
     let orderedPoints = [];
     if (buildingWalls.length < 2 || !buildingWalls) {
       return tileCorners;

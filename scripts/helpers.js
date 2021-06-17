@@ -151,12 +151,20 @@ class betterRoofsHelpers {
   getLevelsFlagsForObject(object) {
     let rangeTop = object.document.getFlag(_levelsModuleName, "rangeTop");
     let rangeBottom = object.document.getFlag(_levelsModuleName, "rangeBottom");
-    if (!rangeTop) rangeTop = Infinity;
-    if (!rangeBottom) rangeBottom = -Infinity;
+    if (rangeTop==null || rangeTop==undefined) rangeTop = Infinity;
+    if (rangeBottom==null||rangeBottom==undefined) rangeBottom = -Infinity;
     let isLevel = rangeTop == Infinity ? false : true;
     if (rangeTop == Infinity && rangeBottom == -Infinity) return false;
     if (rangeTop == Infinity) rangeBottom -= 1;
     return { rangeBottom, rangeTop, isLevel };
+  }
+
+  getWallHeight(wall) {
+      let rangeBottom = wall.data.flags.wallHeight?.wallHeightBottom
+      let rangeTop = wall.data.flags.wallHeight?.wallHeightTop
+    if (rangeTop==null || rangeTop==undefined) rangeTop = Infinity;
+    if (rangeBottom==null||rangeBottom==undefined) rangeBottom = -Infinity;
+    return [rangeBottom,rangeTop]
   }
 
   /************************************************************************************
@@ -200,10 +208,7 @@ class betterRoofsHelpers {
       });
     } else {
       canvas.walls.placeables.forEach((wall) => {
-        let wallRange = [
-          wall.data.flags.wallHeight?.wallHeightBottom,
-          wall.data.flags.wallHeight?.wallHeightTop,
-        ];
+        let wallRange = this.getWallHeight(wall)
         if (
           !isLevels ||
           (!wallRange[0] && !wallRange[1]) ||

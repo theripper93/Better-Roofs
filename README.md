@@ -10,6 +10,8 @@ Other Language: [English](README.md), [Deutsch](README.de.md)
 
 ## [Video Tuorial by Baileywiki](https://youtu.be/ELlweNunn4g)
 
+*The module is free but if you are selling maps that use my modules you'll need a commercial licence wich is available on my patreon
+
 **Better Roofs Modes**:
 
 * **Show:** only show the tile through the fog when the token is in range

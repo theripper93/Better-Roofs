@@ -151,8 +151,9 @@ class betterRoofsHelpers {
   getLevelsFlagsForObject(object) {
     let rangeTop = object.document.getFlag(_levelsModuleName, "rangeTop");
     let rangeBottom = object.document.getFlag(_levelsModuleName, "rangeBottom");
-    if (rangeTop==null || rangeTop==undefined) rangeTop = Infinity;
-    if (rangeBottom==null||rangeBottom==undefined) rangeBottom = -Infinity;
+    if (rangeTop == null || rangeTop == undefined) rangeTop = Infinity;
+    if (rangeBottom == null || rangeBottom == undefined)
+      rangeBottom = -Infinity;
     let isLevel = rangeTop == Infinity ? false : true;
     if (rangeTop == Infinity && rangeBottom == -Infinity) return false;
     if (rangeTop == Infinity) rangeBottom -= 1;
@@ -160,11 +161,12 @@ class betterRoofsHelpers {
   }
 
   getWallHeight(wall) {
-      let rangeBottom = wall.data.flags.wallHeight?.wallHeightBottom
-      let rangeTop = wall.data.flags.wallHeight?.wallHeightTop
-    if (rangeTop==null || rangeTop==undefined) rangeTop = Infinity;
-    if (rangeBottom==null||rangeBottom==undefined) rangeBottom = -Infinity;
-    return [rangeBottom,rangeTop]
+    let rangeBottom = wall.data.flags.wallHeight?.wallHeightBottom;
+    let rangeTop = wall.data.flags.wallHeight?.wallHeightTop;
+    if (rangeTop == null || rangeTop == undefined) rangeTop = Infinity;
+    if (rangeBottom == null || rangeBottom == undefined)
+      rangeBottom = -Infinity;
+    return [rangeBottom, rangeTop];
   }
 
   /************************************************************************************
@@ -198,17 +200,40 @@ class betterRoofsHelpers {
         let wallForId = canvas.walls.get(id);
         if (wallForId) manualWalls.push(wallForId);
       });
-
-      manualWalls.forEach((wall) => {
-        let wallPoints = [
-          { x: wall.coords[0], y: wall.coords[1], collides: true },
-          { x: wall.coords[2], y: wall.coords[3], collides: true },
-        ];
-        buildingWalls.push(wallPoints);
-      });
+      if (manualWalls.length >= 2) {
+        manualWalls.forEach((wall) => {
+          let wallPoints = [
+            { x: wall.coords[0], y: wall.coords[1], collides: true },
+            { x: wall.coords[2], y: wall.coords[3], collides: true },
+          ];
+          buildingWalls.push(wallPoints);
+        });
+      } else {
+        canvas.walls.placeables.forEach((wall) => {
+          if (wall.document.getFlag("betterroofs", "externalWall") &&
+            !isLevels ||
+            (!wallRange[0] && !wallRange[1]) ||
+            !tileRange ||
+            tileRange.length != 2 ||
+            (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
+            (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0])
+          ){
+            let wallPoints = [
+              { x: wall.coords[0], y: wall.coords[1], collides: true },
+              { x: wall.coords[2], y: wall.coords[3], collides: true },
+            ];
+            let Notinside = 0
+            wallPoints.forEach((point) => {
+              if(this.checkPointInsideTile(point, tile)) Notinside++
+            })
+            if(Notinside==2) buildingWalls.push(wallPoints);
+          }
+            
+        });
+      }
     } else {
       canvas.walls.placeables.forEach((wall) => {
-        let wallRange = this.getWallHeight(wall)
+        let wallRange = this.getWallHeight(wall);
         if (
           !isLevels ||
           (!wallRange[0] && !wallRange[1]) ||

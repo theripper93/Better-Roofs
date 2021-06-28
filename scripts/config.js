@@ -130,13 +130,14 @@ Hooks.on("renderTileConfig", (app, html, data) => {
     $($(html).find("button[id='definePoly']")[0]).on("click", define);
     $($(html).find("button[id='clearPoly']")[0]).on("click", clear);
   }
-  function define(event) {
+  async function define(event) {
     event.preventDefault();
     if (canvas.walls._active) {
       let wallids = "";
-      canvas.walls.controlled.forEach((wall) => {
+      for(let wall of canvas.walls.controlled){
+        await wall.document.setFlag("betterroofs", "externalWall",true)
         wallids += `${wall.id},`;
-      });
+      };
       html.find("input[name ='flags.betterroofs.manualPoly']")[0].value =
         wallids;
     } else {
@@ -146,11 +147,47 @@ Hooks.on("renderTileConfig", (app, html, data) => {
       );
     }
   }
-  function clear(event) {
+  async function clear(event) {
     event.preventDefault();
+    let wallstoclear = html.find("input[name ='flags.betterroofs.manualPoly']")[0].value
+    if (wallstoclear && wallstoclear != "") {
+      let idArray = wallstoclear.split(",");
+      for(let id of idArray){
+        let wallForId = canvas.walls.get(id);
+        if (wallForId) await wallForId.document.setFlag("betterroofs", "externalWall",false);
+      };
+
+      manualWalls.forEach((wall) => {
+        let wallPoints = [
+          { x: wall.coords[0], y: wall.coords[1], collides: true },
+          { x: wall.coords[2], y: wall.coords[3], collides: true },
+        ];
+        buildingWalls.push(wallPoints);
+      });
+    }
     html.find("input[name ='flags.betterroofs.manualPoly']")[0].value = "";
   }
   //html.find($('button[name="submit"]')).click(app.object,_betterRoofsHelpers.saveTileConfig)
+});
+
+Hooks.on("renderWallConfig", (app, html, data) => {
+
+  let externalWall = app.object.getFlag("betterroofs", "externalWall");
+  let checkedbox = externalWall ? ` checked=""` : "";
+  let newHtml = `<div class="form-group">
+  <label>${game.i18n.localize(
+    "betterroofs.wallConfig.externalWall.name"
+  )}</label>
+  <div class="form-fields">
+      <input type="checkbox" name="flags.betterroofs.externalWall"${checkedbox}>
+  </div>
+</div>`
+
+const overh = html.find('select[name="ds"]');
+const formGroup = overh.closest(".form-group");
+formGroup.after(newHtml);
+app.setPosition({ height: "auto" });
+
 });
 
 /***********************************************

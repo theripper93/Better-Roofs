@@ -412,10 +412,10 @@ class betterRoofsHelpers {
    *******************************************/
 
   async buildEdgeWalls() {
-    let padX = canvas.scene.dimensions.paddingX;
-    let padY = canvas.scene.dimensions.paddingY;
-    let width = canvas.scene.dimensions.width - 2 * padX;
-    let height = canvas.scene.dimensions.height - 2 * padY;
+    let padX = canvas.scene.dimensions.paddingX+5;
+    let padY = canvas.scene.dimensions.paddingY+5;
+    let width = canvas.scene.dimensions.width - 2 * padX-5;
+    let height = canvas.scene.dimensions.height - 2 * padY-5;
     let wallsCoords = [
       [padX, padY, padX + width, padY],
       [padX + width, padY, padX + width, padY + height],

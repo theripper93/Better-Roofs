@@ -210,6 +210,7 @@ class betterRoofsHelpers {
         });
       } else {
         canvas.walls.placeables.forEach((wall) => {
+          let wallRange = this.getWallHeight(wall);
           if (wall.document.getFlag("betterroofs", "externalWall") &&
             !isLevels ||
             (!wallRange[0] && !wallRange[1]) ||

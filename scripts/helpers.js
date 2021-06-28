@@ -212,12 +212,12 @@ class betterRoofsHelpers {
         canvas.walls.placeables.forEach((wall) => {
           let wallRange = this.getWallHeight(wall);
           if (wall.document.getFlag("betterroofs", "externalWall") &&
-            !isLevels ||
+            (!isLevels ||
             (!wallRange[0] && !wallRange[1]) ||
             !tileRange ||
             tileRange.length != 2 ||
             (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
-            (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0])
+            (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]))
           ){
             let wallPoints = [
               { x: wall.coords[0], y: wall.coords[1], collides: true },

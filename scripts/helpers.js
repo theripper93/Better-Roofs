@@ -211,25 +211,25 @@ class betterRoofsHelpers {
       } else {
         canvas.walls.placeables.forEach((wall) => {
           let wallRange = this.getWallHeight(wall);
-          if (wall.document.getFlag("betterroofs", "externalWall") &&
+          if (
+            wall.document.getFlag("betterroofs", "externalWall") === true &&
             (!isLevels ||
-            (!wallRange[0] && !wallRange[1]) ||
-            !tileRange ||
-            tileRange.length != 2 ||
-            (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
-            (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]))
-          ){
+              (!wallRange[0] && !wallRange[1]) ||
+              !tileRange ||
+              tileRange.length != 2 ||
+              (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
+              (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]))
+          ) {
             let wallPoints = [
               { x: wall.coords[0], y: wall.coords[1], collides: true },
               { x: wall.coords[2], y: wall.coords[3], collides: true },
             ];
-            let Notinside = 0
+            let Notinside = 0;
             wallPoints.forEach((point) => {
-              if(this.checkPointInsideTile(point, tile)) Notinside++
-            })
-            if(Notinside==2) buildingWalls.push(wallPoints);
+              if (this.checkPointInsideTile(point, tile)) Notinside++;
+            });
+            if (Notinside == 2) buildingWalls.push(wallPoints);
           }
-            
         });
       }
     } else {
@@ -241,7 +241,8 @@ class betterRoofsHelpers {
           !tileRange ||
           tileRange.length != 2 ||
           (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
-          (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0])
+          (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]) ||
+          (tileRange[0]=== undefined && tileRange[1]===undefined)
         ) {
           let wallPoints = [
             { x: wall.coords[0], y: wall.coords[1], collides: true },
@@ -412,10 +413,10 @@ class betterRoofsHelpers {
    *******************************************/
 
   async buildEdgeWalls() {
-    let padX = canvas.scene.dimensions.paddingX+5;
-    let padY = canvas.scene.dimensions.paddingY+5;
-    let width = canvas.scene.dimensions.width - 2 * padX-5;
-    let height = canvas.scene.dimensions.height - 2 * padY-5;
+    let padX = canvas.scene.dimensions.paddingX + 5;
+    let padY = canvas.scene.dimensions.paddingY + 5;
+    let width = canvas.scene.dimensions.width - 2 * padX - 5;
+    let height = canvas.scene.dimensions.height - 2 * padY - 5;
     let wallsCoords = [
       [padX, padY, padX + width, padY],
       [padX + width, padY, padX + width, padY + height],

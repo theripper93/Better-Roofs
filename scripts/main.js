@@ -41,7 +41,7 @@ Hooks.on("sightRefresh", () => {
 });
 
 /***********************************************************************************
- * CLEAN UP MASKS AND FIX VISIBILITY OF TILES WHEN A TOKEN IS RELEASE FROM CONTROL *
+ * CLEAN UP MASKS AND FIX VISIBILITY OF TILES WHEN A TOKEN IS RELEASED FROM CONTROL *
  ***********************************************************************************/
 
 Hooks.on("controlToken", (token, controlled) => {

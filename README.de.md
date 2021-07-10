@@ -10,6 +10,8 @@ Andere Sprachen: [English](README.md), [Deutsch](README.de.md)
 
 ## [Video Tuorial by Baileywiki](https://youtu.be/ELlweNunn4g)
 
+*Das Modul ist kostenlos, aber wenn Sie Karten verkaufen, die meine Module verwenden, benötigen Sie eine kommerzielle Lizenz, die auf meinem Patreon erhältlich ist
+
 **Bessere Dächer-Modi**:
 
 * **Anzeigen:** Zeigen Sie die Kachel nur dann durch den Nebel, wenn der Token in Reichweite ist.

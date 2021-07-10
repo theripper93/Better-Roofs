@@ -21,6 +21,8 @@
     "betterroofs.tileConfig.clearPoly.name": "Polygon löschen",
     "betterroofs.tileConfig.definePoly.notify": "Wählen Sie die Wände aus, die Sie für das Polygon verwenden möchten, und klicken Sie zur Bestätigung erneut auf die Schaltfläche Polygon definieren",
 
+    "betterroofs.wallConfig.externalWall.name":"Ist Außenwand?",
+
     "betterroofs.scenecontrols.walledges": "Mauern an den Rändern der Szene",
 
     "betterroofs.yesnodialog.yes": "Bestätigen",

@@ -127,7 +127,7 @@ class betterRoofsHelpers {
 
   computeMask(tile, controlledToken) {
     _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
-    if (!tile.occluded) {
+    if (!tile.occluded && !tile.dontMask) {
       if (!tile.mask)
         tile.mask = _betterRoofs.foregroundSightMaskContainers[tile.id];
       _betterRoofs.foregroundSightMaskContainers[tile.id].addChild(

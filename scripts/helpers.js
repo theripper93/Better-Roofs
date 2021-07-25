@@ -13,7 +13,7 @@ class betterRoofsHelpers {
     let oldSprite = _betterRoofs.fogRoofContainer.children.find(
       (c) => c.name == tile.id
     );
-    let tileImg = tile.children[0];
+    let tileImg = tile.tile;
     if (!tileImg || oldSprite || !tileImg.texture.baseTexture) return;
     let sprite = new PIXI.Sprite.from(tileImg.texture);
     sprite.tint = 0xffffff;

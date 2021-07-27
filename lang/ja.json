@@ -1,0 +1,35 @@
+{
+    "betterroofs.settings.fogVisibility.name": "視覚制御下での前景タイルの視認性",
+    "betterroofs.settings.fogVisibility.hint": "視覚が設定されたシーンで、前景タイルが視界制御の影響をどの程度受けるか設定します。",
+
+    "betterroofs.settings.forceFallback.name": "パフォーマンスモード",
+    "betterroofs.settings.forceFallback.hint": "マスクされたすべての屋根を強制的に非表示モードにします。パフォーマンスの低下が見られる場合に有効にします。",
+
+    "betterroofs.settings.roomPreview.name": "アドバンスドモード",
+    "betterroofs.settings.roomPreview.hint": "タイル設定を開いたとき、建物検出によって建物と判断されたものを表示します。また、部屋のポリゴンを手動設定するためのコントロールが表示されます。デバッグに便利です。",
+
+    "betterroofs.settings.wbIntegration.name": "Weather Blockerの統合",
+    "betterroofs.settings.wbIntegration.hint": "モジュール「Weather Blocker」モジュールがインストールされている場合、建物内の天候エフェクトを自動的に非表示できます。",
+
+    "betterroofs.tileConfig.brMode.name": "Better Roof モード",
+    "betterroofs.tileConfig.brMode.option0": "なし（Foundryの標準）",
+    "betterroofs.tileConfig.brMode.option1": "表示（中に入ると非表示）",
+    "betterroofs.tileConfig.brMode.option2": "非表示（視線が通れば非表示）",
+    "betterroofs.tileConfig.brMode.option3": "マスク （見える部分だけ切り取る）",
+    "betterroofs.tileConfig.manualPoly.name": "選択された壁",
+    "betterroofs.tileConfig.definePoly.name": "ポリゴンの定義",
+    "betterroofs.tileConfig.clearPoly.name": "ポリゴンクリア",
+    "betterroofs.tileConfig.definePoly.notify": "ポリゴンに使用する壁を選択し、再度「ポリゴンの定義」ボタンをクリックして確定させます。",
+
+    "betterroofs.wallConfig.externalWall.name":"外壁ですか？",
+
+    "betterroofs.scenecontrols.walledges": "シーンの端を壁で囲む",
+
+    "betterroofs.yesnodialog.yes": "確認",
+    "betterroofs.yesnodialog.no": "キャンセル",
+    "betterroofs.yesnodialog.title": "シーンの端を壁で囲む",
+    "betterroofs.yesnodialog.desc": "本当にシーンの端を壁で囲いますか？",
+
+    "betterroofs.bulk.notification": "警告：この操作は、選択された前景タイルのすべての設定を変更します。タイルが選択されていない場合、すべての前景タイルが対象になります。Better Roofモードが「なし」の前景タイルには影響しません。",
+    "betterroofs.bulk.title": "シーン内Better Roofsの一括変更"
+}

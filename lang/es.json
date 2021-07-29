@@ -1,0 +1,38 @@
+{
+    "I18N.LANGUAGE": "Español",
+    "I18N.MAINTAINERS": "@Viriato139ac#0342",
+	
+    "betterroofs.settings.fogVisibility.name": "Visión de baldosas a través de la niebla",
+    "betterroofs.settings.fogVisibility.hint": "Cómo de visibles (o cómo es la percepción del brillo) son las baldosas a través de la niebla",
+
+    "betterroofs.settings.forceFallback.name": "Modo rendimiento",
+    "betterroofs.settings.forceFallback.hint": "Fuerza el que se oculten todas las máscaras de los tejados, habilítese si se nota un descenso en el rendimiento",
+
+    "betterroofs.settings.roomPreview.name": "Modo avanzado",
+    "betterroofs.settings.roomPreview.hint": "Cuando se abra la configuración de la baldosa, muestra que la detección de edificios la ha computado como una construcción. También muestra los controles que permiten ajustar de manera manual el polígono que define la habitación. Es útil para hacer depuración de errores",
+
+    "betterroofs.settings.wbIntegration.name": "Integración de Weather Blocker",
+    "betterroofs.settings.wbIntegration.hint": "Si el módulo Weather Blocker está instalado, bloqueará dinámicamente la climatología dentro de los edificios",
+
+    "betterroofs.tileConfig.brMode.name": "Modo Better Roof",
+    "betterroofs.tileConfig.brMode.option0": "Ninguno (por defecto en Foundry)",
+    "betterroofs.tileConfig.brMode.option1": "Mostrar (mostrar baldosas a través de la niebla)",
+    "betterroofs.tileConfig.brMode.option2": "Ocultar (oculta baldosas a la visión)",
+    "betterroofs.tileConfig.brMode.option3": "Enmascarar (recortar baldosas a la visión)",
+    "betterroofs.tileConfig.manualPoly.name": "Muros seleccionados",
+    "betterroofs.tileConfig.definePoly.name": "Definir polígono",
+    "betterroofs.tileConfig.clearPoly.name": "Borrar polígono",
+    "betterroofs.tileConfig.definePoly.notify": "Seleccione los muros que desee usar para el polígono y haga clic en el botón Definir polígono de nuevo para confirmar",
+
+    "betterroofs.wallConfig.externalWall.name":"¿Es un muro externo?",
+
+    "betterroofs.scenecontrols.walledges": "Encapsular los bordes de la escena",
+
+    "betterroofs.yesnodialog.yes": "Confirmar",
+    "betterroofs.yesnodialog.no": "Cancelar",
+    "betterroofs.yesnodialog.title": "Encapsular los bordes de la escena",
+    "betterroofs.yesnodialog.desc": "¿Está seguro que quiere encapsular los bordes de la escena?",
+
+    "betterroofs.bulk.notification": "AVISO: Esta operación modificará todos los ajustes de las baldosas superiores seleccionadas. Si no ha seleccionado ninguna, se procesarán en su lugar todas las baldosas superiores, aunque no afectará a aquellas que tengan seleccionado el modo Better Roof",
+    "betterroofs.bulk.title": "Cambiar en bloque Better Roofs en la escena"
+}

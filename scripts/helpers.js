@@ -88,7 +88,7 @@ class betterRoofsHelpers {
   computeHide(controlledToken, tile, overrideHide) {
     if (
       this.checkIfInPoly(
-        canvas.sight.sources.get(`Token.${controlledToken.id}`).los.points,
+        canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points,
         tile,
         controlledToken,
         -5
@@ -108,12 +108,44 @@ class betterRoofsHelpers {
    *************************************************************************************/
 
   checkIfInPoly(points, tile, token, diff) {
+    if (!points?.length) return false;
+    if(_betterRoofs.isLightspeed) return _betterRoofsHelpers.checkIfInPolyLightspeed(points, tile, token, diff)
     for (let i = 0; i < points.length; i += 2) {
       let pt = this.bringPointCloser(
         { x: points[i], y: points[i + 1] },
         token.center,
         diff
       );
+      if (tile.roomPoly.contains(pt.x, pt.y)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkIfInPolyLightspeed(points, tile, token, diff) {
+    for (let i = 0; i < points.length; i += 2) {
+      
+      if (points[i + 3]) {
+        let midPoint = {
+          x: points[i] + (points[i + 2] - points[i]) / 2,
+          y: points[i + 1] + (points[i + 3] - points[i + 1]) / 2,
+        };
+        let mpt = this.bringPointCloser(
+          { x: midPoint.x, y: midPoint.y },
+          token.center,
+          diff
+        );
+        if (tile.roomPoly.contains(mpt.x, mpt.y)) {
+          return true;
+        }
+      }
+      let pt = this.bringPointCloser(
+        { x: points[i], y: points[i + 1] },
+        token.center,
+        diff
+      );
+
       if (tile.roomPoly.contains(pt.x, pt.y)) {
         return true;
       }
@@ -242,7 +274,7 @@ class betterRoofsHelpers {
           tileRange.length != 2 ||
           (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
           (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]) ||
-          (tileRange[0]=== undefined && tileRange[1]===undefined)
+          (tileRange[0] === undefined && tileRange[1] === undefined)
         ) {
           let wallPoints = [
             { x: wall.coords[0], y: wall.coords[1], collides: true },

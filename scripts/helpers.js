@@ -124,12 +124,13 @@ class betterRoofsHelpers {
   }
 
   checkIfInPolyLightspeed(points, tile, token, diff) {
+    points.push(points[0],points[1])
     for (let i = 0; i < points.length; i += 2) {
       
       if (points[i + 3]) {
         let midPoint = {
-          x: points[i] + (points[i + 2] - points[i]) / 2,
-          y: points[i + 1] + (points[i + 3] - points[i + 1]) / 2,
+          x: (points[i + 2] + points[i]) / 2,
+          y: (points[i + 3] + points[i + 1]) / 2,
         };
         let mpt = this.bringPointCloser(
           { x: midPoint.x, y: midPoint.y },
@@ -145,7 +146,6 @@ class betterRoofsHelpers {
         token.center,
         diff
       );
-
       if (tile.roomPoly.contains(pt.x, pt.y)) {
         return true;
       }

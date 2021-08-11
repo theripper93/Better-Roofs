@@ -64,8 +64,8 @@ class betterRoofsHelpers {
 
   computeShowHideTile(tile, overrideHide, controlledToken, brMode) {
     let pointSource = canvas.scene.data.globalLight
-      ? canvas.sight.sources.get(`Token.${controlledToken.id}`).los.points
-      : canvas.sight.sources.get(`Token.${controlledToken.id}`).fov.points;
+      ? canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
+      : canvas.sight.sources.get(`Token.${controlledToken.id}`)?.fov.points;
     if (
       !tile.occluded &&
       !overrideHide &&
@@ -127,7 +127,7 @@ class betterRoofsHelpers {
     points.push(points[0],points[1])
     for (let i = 0; i < points.length; i += 2) {
       
-      if (points[i + 3]) {
+      if (points[i + 3]) { //&& (Math.pow(points[i]-points[i+2],2)+Math.pow(points[i+1]-points[i+3],2)) > 70000
         let midPoint = {
           x: (points[i + 2] + points[i]) / 2,
           y: (points[i + 3] + points[i + 1]) / 2,

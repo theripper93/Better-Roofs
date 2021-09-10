@@ -71,6 +71,16 @@ class betterRoofs {
 
     }
 
+    static debouncedInitializeRoofs(){
+      if(_betterRoofs?.initializing) return
+      _betterRoofs.initializing = true
+      setTimeout(() => {
+        _betterRoofs.initializing = false
+        _betterRoofs.initializeRoofs();
+        _betterRoofs.initializePIXIcontainers();
+      },1000)
+    }
+
 }
 
 /******************************************************************************
@@ -78,27 +88,22 @@ class betterRoofs {
  ******************************************************************************/
 
 Hooks.on("updateTile", () => {
-  _betterRoofs.initializeRoofs();
-  _betterRoofs.initializePIXIcontainers();
+  betterRoofs.debouncedInitializeRoofs()
 });
 
 Hooks.on("createTile", () => {
-  _betterRoofs.initializeRoofs();
-  _betterRoofs.initializePIXIcontainers();
+  betterRoofs.debouncedInitializeRoofs()
 });
 
 Hooks.on("deleteTile", () => {
-  _betterRoofs.initializeRoofs();
-  _betterRoofs.initializePIXIcontainers();
+  betterRoofs.debouncedInitializeRoofs()
 });
 
 Hooks.on("deleteWall", () => {
-  _betterRoofs.initializeRoofs();
-  _betterRoofs.initializePIXIcontainers();
+  betterRoofs.debouncedInitializeRoofs()
 })
 
 Hooks.on("updateWall", (wall,updates) => {
   if("ds" in updates) return
-  _betterRoofs.initializeRoofs();
-  _betterRoofs.initializePIXIcontainers();
+  betterRoofs.debouncedInitializeRoofs()
 })

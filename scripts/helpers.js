@@ -47,11 +47,11 @@ class betterRoofsHelpers {
    *****************************/
 
   drawSightPoli(token) {
-    let sightPoli = new PIXI.Graphics();
+    let sightPoli = new PIXI.Graphics(); //USE LegacyGraphics() for V9
     let polipoints = canvas.sight.sources.get(`Token.${token.id}`).los.points;
     sightPoli
       .beginFill(0xffffff)
-      .drawRect(0, 0, canvas.dimensions.width, canvas.dimensions.height)
+      .drawRect(0, 0, canvas.dimensions.width, canvas.dimensions.height) //ALternative: .drawPolygon instead of rect
       .endFill();
     sightPoli.beginHole().drawPolygon(polipoints).endHole();
     sightPoli.isMask = true;
@@ -63,6 +63,7 @@ class betterRoofsHelpers {
    **************************************************************/
 
   computeShowHideTile(tile, overrideHide, controlledToken, brMode) {
+    // USE THIS INSTEAD FOR V9 let pointSource = canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
     let pointSource = canvas.scene.data.globalLight
       ? canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
       : canvas.sight.sources.get(`Token.${controlledToken.id}`)?.fov.points;

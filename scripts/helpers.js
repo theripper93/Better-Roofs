@@ -48,7 +48,8 @@ class betterRoofsHelpers {
 
   drawSightPoli(token) {
     let sightPoli = new PIXI.Graphics(); //USE LegacyGraphics() for V9
-    let polipoints = canvas.sight.sources.get(`Token.${token.id}`).los.points;
+    let polipoints = canvas.sight.sources.get(`Token.${token.id}`)?.los?.points;
+    if(!polipoints) return sightPoli;
     sightPoli
       .beginFill(0xffffff)
       .drawRect(0, 0, canvas.dimensions.width, canvas.dimensions.height) //ALternative: .drawPolygon instead of rect

@@ -203,7 +203,7 @@ Hooks.on("renderWallConfig", (app, html, data) => {
 
 Hooks.on("closeTileConfig", (app, html, data) => {
   for (let c of canvas.foreground.children) {
-    if (c.tileId == app.object.id) c.destroy();
+    if (c.tileId == app.object.id && app.object.id) c.destroy();
   }
 });
 

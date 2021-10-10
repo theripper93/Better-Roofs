@@ -20,6 +20,8 @@
     "betterroofs.tileConfig.definePoly.name": "Define Polygon",
     "betterroofs.tileConfig.clearPoly.name": "Clear Polygon",
     "betterroofs.tileConfig.definePoly.notify": "Select the walls you wish to use for the polygon then click the Define Polygon button again to confirm",
+    "betterroofs.tileConfig.occlusionLinkId": "Occlusion Link Id",
+    "betterroofs.tileConfig.occlusionLinkSource": "Occlusion Link Source?",
 
     "betterroofs.wallConfig.externalWall.name":"Is External Wall?",
 

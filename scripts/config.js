@@ -77,6 +77,10 @@ Hooks.on("renderTileConfig", (app, html, data) => {
 
   let manualPoly = app.object.getFlag("betterroofs", "manualPoly") || "";
 
+  let occlusionLinkSource = app.object.getFlag("betterroofs", "occlusionLinkSource") || false;
+
+  let occlusionLinkId = app.object.getFlag("betterroofs", "occlusionLinkId") || "";
+
   let newHtml = `
 <div class="form-group">
           <label>${game.i18n.localize(
@@ -97,6 +101,22 @@ Hooks.on("renderTileConfig", (app, html, data) => {
           </div>
       </div>
       `;
+
+  const occlusionLink = `
+  <div class="form-group">
+  <label for="occlusionLinkId">${game.i18n.localize("betterroofs.tileConfig.occlusionLinkId")}</label>
+  <div class="form-fields">
+      <input type="text" name="flags.betterroofs.occlusionLinkId" value="${occlusionLinkId}">
+  </div>
+</div>
+
+<div class="form-group">
+            <label>${game.i18n.localize("betterroofs.tileConfig.occlusionLinkSource")}</label>
+            <div class="form-fields">
+                <input type="checkbox" name="flags.betterroofs.occlusionLinkSource" ${occlusionLinkSource ? "checked" : ""}>
+            </div>
+        </div>
+  `
 
   if (game.settings.get("betterroofs", "roomPreview"))
     newHtml += `     <hr>
@@ -124,6 +144,7 @@ Hooks.on("renderTileConfig", (app, html, data) => {
 
   const overh = html.find('input[name="overhead"]');
   const formGroup = overh.closest(".form-group");
+  html.find(`select[name="occlusion.mode"]`).closest(".form-group").after(occlusionLink);
   formGroup.after(newHtml);
   html.find("select[name ='flags.betterroofs.brMode']")[0].value = brMode;
   if (game.settings.get("betterroofs", "roomPreview")) {

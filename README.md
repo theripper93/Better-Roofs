@@ -20,6 +20,11 @@ Other Language: [English](README.md), [Deutsch](README.de.md)
 
 * **Mask:** The fancy mode, masks what you can see from the roof tile
 
+**Occlusion Link**
+
+With Occlusion Link you can link the occlusion state of tiles:
+A tile marked as Occlusion Link Source will set all the tiles with matching Occlusion Link Id to its occluded state
+
 **Weather Blocker Integration**
 
 If you have Weather Blocker installed, you can enable the "Weather Blocker Integration" in the Better Roofs settings to hide weather inside buildings

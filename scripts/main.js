@@ -55,3 +55,15 @@ Hooks.on("controlToken", (token, controlled) => {
         tile.refresh()
     });
 });
+
+Hooks.on("levelsReady", ()=>{
+  _betterRoofs.roofs.forEach((tile) => {
+    tile.mask = null;
+    if (_betterRoofs.foregroundSightMaskContainers[tile.id])
+      _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
+      _betterRoofsHelpers.hideTileThroughFog(tile);
+      tile.alpha=1;
+      tile.refresh()
+  });
+  canvas.sight.refresh();
+})

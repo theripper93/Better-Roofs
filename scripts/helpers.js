@@ -286,12 +286,7 @@ class betterRoofsHelpers {
             tileCorners.forEach((c) => {
               if (
                 this.checkPointInsideTile(point, tile) &&
-                !canvas.walls.checkCollision(
-                  new Ray(point, c),
-                  {},
-                  wallRange[0]
-                )
-              ) {
+                !this.checkCollision(point,c,wallRange[0])){
                 point.collides = false;
               }
             });
@@ -375,6 +370,21 @@ class betterRoofsHelpers {
       buildingWalls.splice(closestWall.i, 1);
     }
     return orderedPoints;
+  }
+
+  /*************************************
+   * COLLISION TEST FOR ROOM DETECTION *
+   *************************************/
+
+  checkCollision(p1, p2, height) {
+    if(_betterRoofs.isLevels && _levels){
+      let p3 = this.bringPointCloser(p1,p2, -1);
+      p3.z = height;
+      p2.z = height;
+      return _levels.testCollision(p3, p2, "collision");
+    }else{
+      return canvas.walls.checkCollision(new Ray(p1, p2),{},height)
+    }
   }
 
   /*********************************************************

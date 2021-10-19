@@ -23,6 +23,8 @@
     "betterroofs.tileConfig.definePoly.name": "Definir polígono",
     "betterroofs.tileConfig.clearPoly.name": "Borrar polígono",
     "betterroofs.tileConfig.definePoly.notify": "Seleccione los muros que desee usar para el polígono y haga clic en el botón Definir polígono de nuevo para confirmar",
+    "betterroofs.tileConfig.occlusionLinkId": "Id del enlace de oclusión",
+    "betterroofs.tileConfig.occlusionLinkSource": "¿Fuente del enlace de oclusión?",
 
     "betterroofs.wallConfig.externalWall.name":"¿Es un muro externo?",
 

@@ -5,13 +5,15 @@ Hooks.on("init", () => {
     occlusionLink,
     "WRAPPER"
   );
+ if(!game.modules.get("perfect-vision")?.active){
+    libWrapper.register(
+        "betterroofs",
+        "ForegroundLayer.prototype._drawOcclusionShapes",
+        _drawOcclusionShapes,
+        "OVERRIDE"
+      );
+ }
 
-  libWrapper.register(
-    "betterroofs",
-    "ForegroundLayer.prototype._drawOcclusionShapes",
-    _drawOcclusionShapes,
-    "OVERRIDE"
-  );
 
 function _drawOcclusionShapes(tokens) {
     if (!this.tiles.length) return;

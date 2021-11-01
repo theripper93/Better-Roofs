@@ -39,6 +39,15 @@ Hooks.on("init", () => {
     default: 0.9,
   });
 
+  game.settings.register("betterroofs", "occlusionRadius", {
+    name: game.i18n.localize("betterroofs.settings.occlusionRadius.name"),
+    hint: game.i18n.localize("betterroofs.settings.occlusionRadius.hint"),
+    scope: "world",
+    config: true,
+    type: Number,
+    default: 1,
+  });
+
   game.settings.register("betterroofs", "forceFallback", {
     name: game.i18n.localize("betterroofs.settings.forceFallback.name"),
     hint: game.i18n.localize("betterroofs.settings.forceFallback.hint"),

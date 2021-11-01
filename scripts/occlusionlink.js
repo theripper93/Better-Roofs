@@ -6,6 +6,26 @@ Hooks.on("init", () => {
     "WRAPPER"
   );
 
+  libWrapper.register(
+    "betterroofs",
+    "ForegroundLayer.prototype._drawOcclusionShapes",
+    _drawOcclusionShapes,
+    "OVERRIDE"
+  );
+
+function _drawOcclusionShapes(tokens) {
+    if (!this.tiles.length) return;
+    const rMulti = canvas.scene.getFlag("betterroofs", "occlusionRadius") ?? game.settings.get("betterroofs", "occlusionRadius")
+    const g = this.occlusionMask.tokens;
+    g.clear().beginFill(0x00FF00, 1.0); // Draw radial occlusion using the green channel
+    for (let token of tokens) {
+      const c = token.center;
+      const r = Math.max(token.w, token.h)*rMulti;
+      g.drawCircle(c.x, c.y, r); // TODO - don't drawCircle every time, just move an existing circle with setPosition
+    }
+    g.endFill();
+  }
+
 function occlusionLink(wrapped,...args){
     wrapped(...args);
     for(let otile of canvas.foreground.placeables){

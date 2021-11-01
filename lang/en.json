@@ -11,6 +11,9 @@
     "betterroofs.settings.wbIntegration.name": "Weather Blocker Integration",
     "betterroofs.settings.wbIntegration.hint": "If Weather Blocker module is installed dynamically hide weather inside buildings",
 
+    "betterroofs.settings.occlusionRadius.name": "Occlusion Radius",
+    "betterroofs.settings.occlusionRadius.hint": "Radius Multiplier for Radial occlusion mode",
+
     "betterroofs.tileConfig.brMode.name": "Better Roof Mode",
     "betterroofs.tileConfig.brMode.option0": "None (Foundry Default)",
     "betterroofs.tileConfig.brMode.option1": "Show (Show Tile Through Fog)",

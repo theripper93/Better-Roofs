@@ -25,6 +25,11 @@ Other Language: [English](README.md), [Deutsch](README.de.md)
 With Occlusion Link you can link the occlusion state of tiles:
 A tile marked as Occlusion Link Source will set all the tiles with matching Occlusion Link Id to its occluded state
 
+**Occlusion Radius**
+You can now set an occlusion radius multiplyer in the Better Roofs module settings, this will set it globally, however you can set it per scene with this simple macro command
+`canvas.scene.setFlag("betterroofs", "occlusionRadius", 2)`
+2 is used in the example but it can be any number
+
 **Weather Blocker Integration**
 
 If you have Weather Blocker installed, you can enable the "Weather Blocker Integration" in the Better Roofs settings to hide weather inside buildings

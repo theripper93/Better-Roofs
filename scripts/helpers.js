@@ -47,7 +47,7 @@ class betterRoofsHelpers {
    *****************************/
 
   drawSightPoli(token) {
-    let sightPoli = new PIXI.Graphics(); //USE LegacyGraphics() for V9
+    let sightPoli = _betterRoofs.isV9 ? new PIXI.LegacyGraphics() : new PIXI.Graphics(); //USE LegacyGraphics() for V9
     let polipoints = canvas.sight.sources.get(`Token.${token.id}`)?.los?.points;
     if(!polipoints) return sightPoli;
     sightPoli
@@ -65,9 +65,14 @@ class betterRoofsHelpers {
 
   computeShowHideTile(tile, overrideHide, controlledToken, brMode) {
     // USE THIS INSTEAD FOR V9 let pointSource = canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
-    let pointSource = canvas.scene.data.globalLight
+    let pointSource
+    if(_betterRoofs.isV9){
+      pointSource = canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
+    }else{
+      canvas.scene.data.globalLight
       ? canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
       : canvas.sight.sources.get(`Token.${controlledToken.id}`)?.fov.points;
+    }
     if (
       !tile.occluded &&
       !overrideHide &&

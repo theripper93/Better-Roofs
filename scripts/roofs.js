@@ -9,7 +9,8 @@ class betterRoofs {
       this.roofs
       this.isLevels = game.modules.get('levels')?.active
       this.DEBUG = false
-      this.isLightspeed = game.modules.get("lichtgeschwindigkeit")?.active
+      this.isV9 = game.version >= 9
+      this.isLightspeed = this.isV9 || game.modules.get("lichtgeschwindigkeit")?.active
     }
   
 /**********************************************

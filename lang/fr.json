@@ -1,0 +1,40 @@
+{
+    "betterroofs.settings.fogVisibility.name": "Visibilité des tuiles à travers le brouillard",
+    "betterroofs.settings.fogVisibility.hint": "Dans quelle mesure les tuiles sont-ils visibles (ou perceptiblement brillants) à travers le brouillard",
+
+    "betterroofs.settings.forceFallback.name": "Mode Performance",
+    "betterroofs.settings.forceFallback.hint": "Forcer le mode Masquer pour tous les toits Masque, activer si les performances souffrent",
+
+    "betterroofs.settings.roomPreview.name": "Mode avancé",
+    "betterroofs.settings.roomPreview.hint": "Lors de l'ouverture d'une configuration de tuile, affiche ce que la détection de bâtiment a calculé en tant que bâtiment. Expose également des commandes pour configurer manuellement le polygone de la pièce. Utile pour le débogage",
+
+    "betterroofs.settings.wbIntegration.name": "Intégration du bloqueur de météo",
+    "betterroofs.settings.wbIntegration.hint": "Si le module Weather Blocker est installé, masquez dynamiquement la météo à l'intérieur des bâtiments",
+
+    "betterroofs.settings.occlusionRadius.name": "Rayon d'occlusion",
+    "betterroofs.settings.occlusionRadius.hint": "Multiplicateur de rayon pour le mode d'occlusion radiale",
+
+    "betterroofs.tileConfig.brMode.name": "Mode Better Roof",
+    "betterroofs.tileConfig.brMode.option0": "Aucun (Foundry par défaut)",
+    "betterroofs.tileConfig.brMode.option1": "Afficher (Afficher la tuile à travers le brouillard)",
+    "betterroofs.tileConfig.brMode.option2": "Masquer (Masquer la tuile sur la vision)",
+    "betterroofs.tileConfig.brMode.option3": "Masque (Tuile découpée sur la vision)",
+    "betterroofs.tileConfig.manualPoly.name": "Murs sélectionnés",
+    "betterroofs.tileConfig.definePoly.name": "Définir un polygone",
+    "betterroofs.tileConfig.clearPoly.name": "Effacer le polygone",
+    "betterroofs.tileConfig.definePoly.notify": "Sélectionnez les murs que vous souhaitez utiliser pour le polygone puis cliquez à nouveau sur le bouton Définir le polygone pour confirmer",
+    "betterroofs.tileConfig.occlusionLinkId": "Id de lien d'occlusion",
+    "betterroofs.tileConfig.occlusionLinkSource": "Source du lien d'occlusion ?", 
+
+    "betterroofs.wallConfig.externalWall.name":"Est-ce un mur externe ?",
+
+    "betterroofs.scenecontrols.walledges": "Murer les bords de la scène ",
+
+    "betterroofs.yesnodialog.yes": "Confirmer",
+    "betterroofs.yesnodialog.no": "Annuler",
+    "betterroofs.yesnodialog.title": "Appuyez sur les bords de la scène",
+    "betterroofs.yesnodialog.desc": "Êtes-vous sûr de vouloir murer les bords de la scène ?",
+
+    "betterroofs.bulk.notification": "AVERTISSEMENT : cette opération modifiera tous les paramètres de toutes les tuiles aériennes sélectionnées. Si aucune tuile n'est sélectionnée, toutes les tuiles aériennes seront traitées à la place. Les tuiles aériennes avec un meilleur mode de toit défini sur Aucun ne seront pas affectées ",
+    "betterroofs.bulk.title": "Modifier en bloc Better Roofs dans la scène" 
+}

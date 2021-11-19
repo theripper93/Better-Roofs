@@ -67,7 +67,9 @@ class betterRoofsHelpers {
     // USE THIS INSTEAD FOR V9 let pointSource = canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
     let pointSource
     if(_betterRoofs.isV9){
-      pointSource = canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
+      pointSource = canvas.scene.data.globalLight ?
+        canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points 
+        : this.bringLosCloser(canvas.sight.sources.get(`Token.${controlledToken.id}`)?.fov, canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los)
     }else{
       canvas.scene.data.globalLight
       ? canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
@@ -86,6 +88,41 @@ class betterRoofsHelpers {
       }
       this.hideTileThroughFog(tile);
     }
+  }
+
+  makeCircle(fov) {
+    const center = {x: fov.x, y: fov.y};
+    const radius = fov.radius;
+    let points = [];
+    let angle = 0;
+    for (let i = 0; i < 360; i+=4) {
+      let x = center.x + radius * Math.cos(angle);
+      let y = center.y + radius * Math.sin(angle);
+      points.push(x, y);
+      angle += 0.1;
+    }
+    return points;
+  }
+
+  //given a center and an array of points, if a point is farther than the radius bring it closer to the center
+  bringLosCloser(fov,los) {
+    const center = {x: fov.x, y: fov.y}
+    const points = los.points;
+    const radius = fov.radius;
+    let newPoints = [];
+    for (let i = 0; i < points.length; i+=2) {
+      let x = points[i];
+      let y = points[i+1];
+      let distance = Math.sqrt(Math.pow(x - center.x, 2) + Math.pow(y - center.y, 2));
+      if (distance > radius) {
+        let newX = center.x + (x - center.x) * radius / distance;
+        let newY = center.y + (y - center.y) * radius / distance;
+        newPoints.push(newX, newY);
+      } else {
+        newPoints.push(x, y);
+      }
+    }
+    return newPoints;
   }
 
   /**********************************************************************

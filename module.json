@@ -24,7 +24,7 @@
         {
             "lang": "fr",
             "name": "Français",
-            "path": "languages/fr.json"
+            "path": "lang/fr.json"
         },
         {
             "lang": "ja",

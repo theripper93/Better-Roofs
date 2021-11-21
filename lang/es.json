@@ -14,6 +14,9 @@
     "betterroofs.settings.wbIntegration.name": "Integración de Weather Blocker",
     "betterroofs.settings.wbIntegration.hint": "Si el módulo Weather Blocker está instalado, bloqueará dinámicamente la climatología dentro de los edificios",
 
+    "betterroofs.settings.occlusionRadius.name": "Radio de oclusión",
+    "betterroofs.settings.occlusionRadius.hint": "Multiplicador del radio para el modo de oclusión radial",
+
     "betterroofs.tileConfig.brMode.name": "Modo Better Roof",
     "betterroofs.tileConfig.brMode.option0": "Ninguno (por defecto en Foundry)",
     "betterroofs.tileConfig.brMode.option1": "Mostrar (mostrar baldosas a través de la niebla)",

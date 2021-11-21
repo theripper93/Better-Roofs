@@ -71,7 +71,7 @@ class betterRoofsHelpers {
         canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points 
         : this.bringLosCloser(canvas.sight.sources.get(`Token.${controlledToken.id}`)?.fov, canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los)
     }else{
-      canvas.scene.data.globalLight
+      pointSource = canvas.scene.data.globalLight
       ? canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
       : canvas.sight.sources.get(`Token.${controlledToken.id}`)?.fov.points;
     }

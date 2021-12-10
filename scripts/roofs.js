@@ -30,6 +30,8 @@ class betterRoofs {
         this.fogRoofContainer = new PIXI.Container();
         this.fogRoofContainer.name = "fogRoofContainer";
         this.fogRoofContainer.spriteIndex = {}
+        const oldContainer = canvas.sight.childerns.find(c => c.name == "fogRoofContainer")
+        if(oldContainer) canvas.sight.removeChild(oldContainer)
         canvas.sight.addChild(this.fogRoofContainer);
         this.roofs.forEach((t) => {
             if(this.foregroundSightMaskContainers[t.id])t.removeChild(this.foregroundSightMaskContainers[t.id])

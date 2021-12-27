@@ -106,6 +106,7 @@ class betterRoofsHelpers {
 
   //given a center and an array of points, if a point is farther than the radius bring it closer to the center
   bringLosCloser(fov,los) {
+    if(!fov || !los) return [];
     const center = {x: fov.x, y: fov.y}
     const points = los.points;
     const radius = fov.radius;

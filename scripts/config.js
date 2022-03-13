@@ -81,6 +81,8 @@ Hooks.on("init", () => {
  ****************************************************/
 
 Hooks.on("renderTileConfig", (app, html, data) => {
+  const isInjected = html.find(`input[name="flags.betterroofs.occlusionLinkId"]`).length > 0;
+  if(isInjected) return;
   let tile = canvas.foreground.get(app.object.id);
   if (
     game.settings.get("betterroofs", "roomPreview") &&

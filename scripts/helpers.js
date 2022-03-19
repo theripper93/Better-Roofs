@@ -426,7 +426,8 @@ class betterRoofsHelpers {
       p2.z = height;
       return _levels.testCollision(p3, p2, "collision");
     }else{
-      return canvas.walls.checkCollision(new Ray(p1, p2),{},height)
+      let p3 = this.bringPointCloser(p1,p2, -1);
+      return canvas.walls.checkCollision(new Ray(p3, p2),{},height)
     }
   }
 

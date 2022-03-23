@@ -9,7 +9,7 @@
     "betterroofs.settings.roomPreview.hint": "When opening a tile config, show what the building detection has computed as a building. Also exposes controls for manually setting up the polygon for the room. Useful for debugging",
 
     "betterroofs.settings.wbIntegration.name": "Weather Blocker Integration",
-    "betterroofs.settings.wbIntegration.hint": "If Weather Blocker module is installed dynamically hide weather inside buildings",
+    "betterroofs.settings.wbIntegration.hint": "If Weather Blocker module is installed dynamically hide weather inside buildings. Requires Refresh",
 
     "betterroofs.settings.occlusionRadius.name": "Occlusion Radius",
     "betterroofs.settings.occlusionRadius.hint": "Radius Multiplier for Radial occlusion mode",

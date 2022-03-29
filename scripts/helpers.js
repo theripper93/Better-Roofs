@@ -238,12 +238,8 @@ class betterRoofsHelpers {
   }
 
   getWallHeight(wall) {
-    let rangeBottom = wall.data.flags.wallHeight?.wallHeightBottom;
-    let rangeTop = wall.data.flags.wallHeight?.wallHeightTop;
-    if (rangeTop == null || rangeTop == undefined) rangeTop = Infinity;
-    if (rangeBottom == null || rangeBottom == undefined)
-      rangeBottom = -Infinity;
-    return [rangeBottom, rangeTop];
+    const {top, bottom} = WallHeight.getWallBounds(wall);
+    return [bottom, top];
   }
 
   /************************************************************************************

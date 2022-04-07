@@ -238,6 +238,7 @@ class betterRoofsHelpers {
   }
 
   getWallHeight(wall) {
+    if(!_betterRoofs.isWallHeight) return [-Infinity, Infinity]
     const {top, bottom} = WallHeight.getWallBounds(wall);
     return [bottom, top];
   }

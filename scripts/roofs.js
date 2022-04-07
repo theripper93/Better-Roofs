@@ -11,6 +11,7 @@ class betterRoofs {
       this.DEBUG = false
       this.isV9 = game.version >= 9
       this.isLightspeed = this.isV9 || game.modules.get("lichtgeschwindigkeit")?.active
+      this.isWallHeight = game.modules.get("wall-height")?.active
     }
   
 /**********************************************

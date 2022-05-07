@@ -24,6 +24,7 @@
     "betterroofs.tileConfig.clearPoly.name": "Clear Polygon",
     "betterroofs.tileConfig.definePoly.notify": "Select the walls you wish to use for the polygon then click the Define Polygon button again to confirm",
     "betterroofs.tileConfig.occlusionLinkId": "Occlusion Link Id",
+    "betterroofs.tileConfig.occlusionLinkIdHint": "Can be any text. When a tile with 'Occlusion Link Source?' is occluded (has a token under it) all tiles with the same 'Occlusion Link Id' will be occluded as well. Example usage: linking roofs together.",
     "betterroofs.tileConfig.occlusionLinkSource": "Occlusion Link Source?",
 
     "betterroofs.wallConfig.externalWall.name":"Is External Wall?",

@@ -127,6 +127,7 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   <div class="form-fields">
       <input type="text" name="flags.betterroofs.occlusionLinkId" value="${occlusionLinkId}">
   </div>
+  <p class="notes">${game.i18n.localize("betterroofs.tileConfig.occlusionLinkIdHint")}</p>
 </div>
 
 <div class="form-group">

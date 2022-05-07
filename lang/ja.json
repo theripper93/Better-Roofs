@@ -1,4 +1,5 @@
 {
+    "Localization Provided By": "touge",
     "betterroofs.settings.fogVisibility.name": "視覚制御下での前景タイルの視認性",
     "betterroofs.settings.fogVisibility.hint": "視覚が設定されたシーンで、前景タイルが視界制御の影響をどの程度受けるか設定します。",
 
@@ -11,6 +12,9 @@
     "betterroofs.settings.wbIntegration.name": "Weather Blockerの統合",
     "betterroofs.settings.wbIntegration.hint": "モジュール「Weather Blocker」モジュールがインストールされている場合、建物内の天候エフェクトを自動的に非表示できます。",
 
+    "betterroofs.settings.occlusionRadius.name": "オクルージョン範囲",
+    "betterroofs.settings.occlusionRadius.hint": "オクルージョンモードのときの半径倍率を設定します。（手前の屋根の透過に使用します）",
+
     "betterroofs.tileConfig.brMode.name": "Better Roof モード",
     "betterroofs.tileConfig.brMode.option0": "なし（Foundryの標準）",
     "betterroofs.tileConfig.brMode.option1": "表示（中に入ると非表示）",
@@ -20,6 +24,8 @@
     "betterroofs.tileConfig.definePoly.name": "ポリゴンの定義",
     "betterroofs.tileConfig.clearPoly.name": "ポリゴンクリア",
     "betterroofs.tileConfig.definePoly.notify": "ポリゴンに使用する壁を選択し、再度「ポリゴンの定義」ボタンをクリックして確定させます。",
+    "betterroofs.tileConfig.occlusionLinkId": "オクルージョンリンクIDを",
+    "betterroofs.tileConfig.occlusionLinkSource": "オクルージョンリンク元",
 
     "betterroofs.wallConfig.externalWall.name":"外壁ですか？",
 

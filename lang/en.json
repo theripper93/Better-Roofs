@@ -27,6 +27,8 @@
     "betterroofs.tileConfig.occlusionLinkIdHint": "Can be any text. When a tile with 'Occlusion Link Source?' is occluded (has a token under it) all tiles with the same 'Occlusion Link Id' will be occluded as well. Example usage: linking roofs together.",
     "betterroofs.tileConfig.occlusionLinkSource": "Occlusion Link Source?",
 
+    "betterroofs.tileConfig.isbroken": "The Polygon autodetection for this tile might have failed. Please enable advanced mode in the module settings and manually define the polygon.",
+
     "betterroofs.wallConfig.externalWall.name":"Is External Wall?",
 
     "betterroofs.scenecontrols.walledges": "Wall off the edges of the scene",

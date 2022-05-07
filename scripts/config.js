@@ -92,6 +92,9 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   ) {
     if (tile) _betterRoofsHelpers.getRoomPoly(tile, true);
   }
+
+  const isBroken = tile ? _betterRoofsHelpers.getRoomPoly(tile, false, true).isBroken : false;
+
   let brMode = app.object.getFlag("betterroofs", "brMode") || 0;
 
   let manualPoly = app.object.getFlag("betterroofs", "manualPoly") || "";
@@ -99,6 +102,8 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   let occlusionLinkSource = app.object.getFlag("betterroofs", "occlusionLinkSource") || false;
 
   let occlusionLinkId = app.object.getFlag("betterroofs", "occlusionLinkId") || "";
+
+  const brokenNotes = `<p class="notes" style="color: red;">${game.i18n.localize("betterroofs.tileConfig.isbroken")}</p>`
 
   let newHtml = `
 <div class="form-group">
@@ -118,6 +123,7 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   )}</option>
               </select>
           </div>
+  ${isBroken ? brokenNotes : ""}
       </div>
       `;
 

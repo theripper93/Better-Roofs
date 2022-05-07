@@ -469,16 +469,25 @@ class betterRoofsHelpers {
    * GET THE ROOM POLYGON AND DRAW IT IF DEBUG==TRUE *
    ***************************************************/
 
-  getRoomPoly(tile, debug = false) {
+  getRoomPoly(tile, debug = false, checkBroken = false) {
     let pts = this.roomDetection(tile);
+    let poly = new PIXI.Polygon(pts);
+    if(checkBroken || debug){
+      let isBroken = false;
+      for(let pt of pts){
+        const newPt = this.bringPointCloser(pt,tile.center,5);
+        if(isBroken) break;
+        if(poly.contains(newPt.x, newPt.y)) isBroken = true;
+      }
+      poly.isBroken = isBroken;
+    }
     if (debug) {
       let s = new PIXI.Graphics();
-      let poly = new PIXI.Polygon(pts);
-      s.lineStyle(4, 0x00ff00).beginFill(0xffffff, 0.7).drawPolygon(poly);
+      s.lineStyle(4, poly.isBroken ? 0xff0000 : 0x00ff00).beginFill(0xffffff, 0.7).drawPolygon(poly);
       s.tileId = tile.id;
       canvas.foreground.addChild(s);
     }
-    return new PIXI.Polygon(pts);
+    return poly;
   }
 
   /***************************************************************************************

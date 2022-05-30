@@ -14,8 +14,8 @@
     "betterroofs.settings.wbIntegration.name": "Integración de Weather Blocker",
     "betterroofs.settings.wbIntegration.hint": "Si el módulo Weather Blocker está instalado, bloqueará dinámicamente la climatología dentro de los edificios",
 
-    "betterroofs.settings.occlusionRadius.name": "Radio de oclusión",
-    "betterroofs.settings.occlusionRadius.hint": "Multiplicador del radio para el modo de oclusión radial",
+    "betterroofs.settings.occlusionRadius.name": "Radio de bloqueo",
+    "betterroofs.settings.occlusionRadius.hint": "Multiplicador del radio para el modo de bloqueo radial",
 
     "betterroofs.tileConfig.brMode.name": "Modo Better Roof",
     "betterroofs.tileConfig.brMode.option0": "Ninguno (por defecto en Foundry)",
@@ -26,8 +26,11 @@
     "betterroofs.tileConfig.definePoly.name": "Definir polígono",
     "betterroofs.tileConfig.clearPoly.name": "Borrar polígono",
     "betterroofs.tileConfig.definePoly.notify": "Seleccione los muros que desee usar para el polígono y haga clic en el botón Definir polígono de nuevo para confirmar",
-    "betterroofs.tileConfig.occlusionLinkId": "Id del enlace de oclusión",
-    "betterroofs.tileConfig.occlusionLinkSource": "¿Fuente del enlace de oclusión?",
+    "betterroofs.tileConfig.occlusionLinkId": "Id enlace de bloqueo",
+    "betterroofs.tileConfig.occlusionLinkIdHint": "Puede ser cualquier cadena de texto. Cuando una baldosa con '¿Fuente del enlace de bloqueo?' es bloqueado (tiene un icono debajo) todas las baldosas con el mismo 'Id enlace de bloqueo' también se bloquearán. Ejemplo de uso: unir tejados",
+    "betterroofs.tileConfig.occlusionLinkSource": "¿Fuente del enlace de bloqueo?",
+
+    "betterroofs.tileConfig.isbroken": "La autodetección de polígonos de esta baldosa ha fallado. Por favor, active el modo avanzado en los ajustes del módulo y defina de manera manual el polígono",
 
     "betterroofs.wallConfig.externalWall.name":"¿Es un muro externo?",
 

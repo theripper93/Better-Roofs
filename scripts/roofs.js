@@ -12,6 +12,7 @@ class betterRoofs {
       this.isV9 = game.version >= 9
       this.isLightspeed = this.isV9 || game.modules.get("lichtgeschwindigkeit")?.active
       this.isWallHeight = game.modules.get("wall-height")?.active
+      this.initializeRoofsDebounced = debounce(this.initializeRoofs.bind(this),1000)
     }
   
 /**********************************************
@@ -62,6 +63,7 @@ class betterRoofs {
  ******************************************************************************************/
 
     initializeRoofs(){
+      if(game.Levels3DPreview?._active && game.Levels3DPreview?.object3dSight) return;
         this.roofs = []
         canvas.foreground.placeables.forEach((t) => {
             if(t.document.getFlag("betterroofs","brMode") && t.document.getFlag("betterroofs","brMode") != 0){
@@ -70,19 +72,13 @@ class betterRoofs {
             } 
         })
 
-        
+        console.log("Roofs initialized")
 
 
     }
 
     static debouncedInitializeRoofs(){
-      if(_betterRoofs?.initializing) return
-      _betterRoofs.initializing = true
-      setTimeout(() => {
-        _betterRoofs.initializing = false
-        _betterRoofs.initializeRoofs();
-        _betterRoofs.initializePIXIcontainers();
-      },1000)
+      _betterRoofs.initializeRoofsDebounced()
     }
 
 }

@@ -63,7 +63,10 @@ class betterRoofs {
  ******************************************************************************************/
 
     initializeRoofs(){
-      if(game.Levels3DPreview?._active && game.Levels3DPreview?.object3dSight) return;
+      if(game.Levels3DPreview?._active && game.Levels3DPreview?.object3dSight) {
+        this.roofs = []
+        return;
+      }
         this.roofs = []
         canvas.foreground.placeables.forEach((t) => {
             if(t.document.getFlag("betterroofs","brMode") && t.document.getFlag("betterroofs","brMode") != 0){

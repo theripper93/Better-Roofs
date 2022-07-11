@@ -17,8 +17,8 @@ class betterRoofsHelpers {
     if (!tileImg || oldSprite || !tileImg.texture.baseTexture) return;
     let sprite = SpriteMesh.from(tileImg.texture, undefined, WhiteAsFuckShader);
     sprite.alpha = game.settings.get("betterroofs", "fogVisibility");
-    sprite.width = tile.data.width;
-    sprite.height = tile.data.height;
+    sprite.width = tile.document.width;
+    sprite.height = tile.document.height;
     sprite.position = tile.position;
     sprite.angle = tileImg.angle;
     //sprite.alpha = game.settings.get("betterroofs", "fogVisibility");
@@ -43,7 +43,7 @@ class betterRoofsHelpers {
    *****************************/
 
   drawSightPoli(token) {
-    let sightPoli = _betterRoofs.isV9 ? new PIXI.LegacyGraphics() : new PIXI.Graphics(); //USE LegacyGraphics() for V9
+    let sightPoli = new PIXI.LegacyGraphics(); //USE LegacyGraphics() for V9
     let polipoints = canvas.effects.visionSources.get(`Token.${token.id}`)?.los?.points;
     if(!polipoints) return sightPoli;
     sightPoli
@@ -61,16 +61,10 @@ class betterRoofsHelpers {
 
   computeShowHideTile(tile, overrideHide, controlledToken, brMode) {
     // USE THIS INSTEAD FOR V9 let pointSource = canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points
-    let pointSource
-    if(_betterRoofs.isV9){
-      pointSource = canvas.scene.data.globalLight ?
+    const pointSource = canvas.lighting.globalLight ?
         canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points 
-        : this.bringLosCloser(canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov, canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los)
-    }else{
-      pointSource = canvas.scene.data.globalLight
-      ? canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points
-      : canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points;
-    }
+        : canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points
+
     if (
       !tile.occluded &&
       !overrideHide &&
@@ -135,7 +129,7 @@ class betterRoofsHelpers {
         -5
       )
     ) {
-      tile.alpha = tile.data.occlusion.alpha;
+      tile.alpha = tile.document.occlusion.alpha;
       this.hideTileThroughFog(tile);
       overrideHide = true;
     } else {
@@ -150,21 +144,6 @@ class betterRoofsHelpers {
 
   checkIfInPoly(points, tile, token, diff) {
     if (!points?.length) return false;
-    if(_betterRoofs.isLightspeed) return _betterRoofsHelpers.checkIfInPolyLightspeed(points, tile, token, diff)
-    for (let i = 0; i < points.length; i += 2) {
-      let pt = this.bringPointCloser(
-        { x: points[i], y: points[i + 1] },
-        token.center,
-        diff
-      );
-      if (tile.roomPoly.contains(pt.x, pt.y)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  checkIfInPolyLightspeed(points, tile, token, diff) {
     points.push(points[0],points[1])
     for (let i = 0; i < points.length; i += 2) {
       
@@ -199,7 +178,7 @@ class betterRoofsHelpers {
    *************************************************************/
 
   computeMask(tile, controlledToken) {
-    _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
+    _betterRoofs.foregroundSightMaskContainers[tile.id]?.removeChildren();
     if (!tile.occluded && !tile.dontMask) {
       if (!tile.mesh.mask)
         tile.mesh.mask = _betterRoofs.foregroundSightMaskContainers[tile.id];
@@ -254,14 +233,14 @@ class betterRoofsHelpers {
       tileRange = [rangeBottom, rangeTop];
     }
     let tileZZ = {
-      x: tile.center.x - tile.data.width / 2,
-      y: tile.center.y - tile.data.height / 2,
+      x: tile.center.x - tile.document.width / 2,
+      y: tile.center.y - tile.document.height / 2,
     };
     let tileCorners = [
       { x: tileZZ.x, y: tileZZ.y }, //tl
-      { x: tileZZ.x + tile.data.width, y: tileZZ.y }, //tr
-      { x: tileZZ.x + tile.data.width, y: tileZZ.y + tile.data.height }, //br
-      { x: tileZZ.x, y: tileZZ.y + tile.data.height }, //bl
+      { x: tileZZ.x + tile.document.width, y: tileZZ.y }, //tr
+      { x: tileZZ.x + tile.document.width, y: tileZZ.y + tile.document.height }, //br
+      { x: tileZZ.x, y: tileZZ.y + tile.document.height }, //bl
     ];
     if (manualPolyFlag && manualPolyFlag != "") {
       let idArray = manualPolyFlag.split(",");
@@ -430,14 +409,14 @@ class betterRoofsHelpers {
 
   checkPointInsideTile(pt, tile, tol = 0) {
     let tileZZ = {
-      x: tile.center.x - tile.data.width / 2,
-      y: tile.center.y - tile.data.height / 2,
+      x: tile.center.x - tile.document.width / 2,
+      y: tile.center.y - tile.document.height / 2,
     };
     if (
       pt.x > tileZZ.x + tol &&
-      pt.x < tileZZ.x + tile.data.width - tol &&
+      pt.x < tileZZ.x + tile.document.width - tol &&
       pt.y > tileZZ.y + tol &&
-      pt.y < tileZZ.y + tile.data.height - tol
+      pt.y < tileZZ.y + tile.document.height - tol
     ) {
       return true;
     } else {
@@ -567,142 +546,17 @@ class betterRoofsHelpers {
   async saveTileConfig(event) {
     let html = this.offsetParent;
     if (
-      !canvas.background.get(event.data.id) &&
-      !canvas.tiles.get(event.data.id)
+      !canvas.background.get(event.document.id) &&
+      !canvas.tiles.get(event.document.id)
     )
       return;
-    await event.data.setFlag(
+    await event.document.setFlag(
       "betterroofs",
       "brMode",
       html.querySelectorAll("select[name ='br.mode']")[0].value
     );
     _betterRoofs.initializeRoofs();
     _betterRoofs.initializePIXIcontainers();
-  }
-
-  /****************************************
-   * CHANGE SETTINGS FOR ALL BETTER ROOFS *
-   ****************************************/
-
-  async bulkBUpdate(
-    override = false,
-    brModeOverride,
-    ocModeOverride,
-    ocAlphaOverride,
-    allOverride = false
-  ) {
-    if (!game.user.isGM) return;
-    let content = `
-    <p class="notification error">${game.i18n.localize(
-      "betterroofs.bulk.notification"
-    )}</p>
-
-<div class="form-group">
-          <label>${game.i18n.localize(
-            "betterroofs.tileConfig.brMode.name"
-          )}</label>
-          <div class="form-fields">
-              <select name="br.mode" data-dtype="Number">
-              <option value="0">${game.i18n.localize(
-                "betterroofs.tileConfig.brMode.option0"
-              )}</option><option value="1">${game.i18n.localize(
-      "betterroofs.tileConfig.brMode.option1"
-    )}</option><option value="2">${game.i18n.localize(
-      "betterroofs.tileConfig.brMode.option2"
-    )}</option><option value="3">${game.i18n.localize(
-      "betterroofs.tileConfig.brMode.option3"
-    )}</option>
-              </select>
-          </div>
-      </div>
-
-
-      <div class="form-group">
-      <label>Occlusion Mode</label>
-      <div class="form-fields">
-          <select name="occlusion.mode" data-dtype="Number">
-              <option value="0">None (Always Visible)</option><option value="1" selected="">Fade (Entire Tile)</option><option value="2">Roof (Blocks Vision and Lighting)</option><option value="3">Radial (Surrounding Token)</option>
-          </select>
-      </div>
-  </div>
-
-
-  
-      `;
-
-    let dialog = new Dialog({
-      title: game.i18n.localize("betterroofs.bulk.title"),
-      content: content,
-      buttons: {
-        close: { label: game.i18n.localize("betterroofs.yesnodialog.no") },
-        confirm: {
-          label: game.i18n.localize("betterroofs.yesnodialog.yes"),
-          callback: (dialog) => {
-            updateTiles(dialog);
-          },
-        },
-      },
-      default: "close",
-      close: () => {},
-    });
-
-    if (!override) {
-      await dialog._render(true);
-    } else {
-      let brmode = brModeOverride;
-      let ocmode = ocModeOverride;
-      let relevantTiles =
-        canvas.tiles.controlled.length == 0 || allOverride
-          ? canvas.tiles.placeables.filter(t => t.document.overhead)
-          : canvas.tiles.controlled;
-      let updates = [];
-      for (let tile of relevantTiles) {
-        if (
-          !tile.document.getFlag("betterroofs", "brMode") ||
-          tile.document.getFlag("betterroofs", "brMode") == 0
-        )
-          continue;
-        if (brmode != undefined)
-          await tile.document.setFlag("betterroofs", "brMode", brmode);
-
-        updates.push({
-          _id: tile.id,
-          "occlusion.mode":
-            ocmode != undefined ? ocmode : tile.data.occlusion.mode,
-          "occlusion.alpha":
-            ocAlphaOverride != undefined
-              ? ocAlphaOverride
-              : tile.data.occlusion.alpha,
-        });
-      }
-
-      canvas.scene.updateEmbeddedDocuments("Tile", updates);
-    }
-
-    async function updateTiles(dialog) {
-      let brmode = parseInt(
-        dialog[0].querySelectorAll('select[name="br.mode"]')[0].value
-      );
-      let ocmode = parseInt(
-        dialog[0].querySelectorAll('select[name="occlusion.mode"]')[0].value
-      );
-      let relevantTiles =
-        canvas.tiles.controlled.length == 0
-          ? canvas.tiles.placeables.filter(t => t.document.overhead)
-          : canvas.tiles.controlled;
-      let updates = [];
-      for (let tile of relevantTiles) {
-        if (
-          !tile.document.getFlag("betterroofs", "brMode") ||
-          tile.document.getFlag("betterroofs", "brMode") == 0
-        )
-          continue;
-        await tile.document.setFlag("betterroofs", "brMode", brmode);
-        updates.push({ _id: tile.id, "occlusion.mode": ocmode });
-      }
-
-      canvas.scene.updateEmbeddedDocuments("Tile", updates);
-    }
   }
 }
 

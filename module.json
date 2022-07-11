@@ -1,57 +1,63 @@
 {
-    "name": "betterroofs",
-    "title": "Better Roofs",
-    "description": "Vision enhancements for roofs",
-    "version": "1.1",
-    "authors": [
-        {
-            "name": "theripper93",
-            "email": "tsplab@gmail.com",
-            "url": "https://www.patreon.com/theripper93"
-        }
-    ],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "lang/en.json"
-        },
-        {
-            "lang": "de",
-            "name": "Deutsch",
-            "path": "lang/de.json"
-        },
-        {
-            "lang": "fr",
-            "name": "Français",
-            "path": "lang/fr.json"
-        },
-        {
-            "lang": "ja",
-            "name": "日本語",
-            "path": "lang/ja.json"
-        },
-        {
-            "lang": "es",
-            "name": "Español",
-            "path": "lang/es.json"
-        }
-    ],
-    "scripts": [
-        "./scripts/main.js",
-        "./scripts/roofs.js",
-        "./scripts/helpers.js",
-        "./scripts/config.js",
-        "./scripts/occlusionlink.js"
-    ],
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
-    "url": "https://github.com/theripper93/Better-Roofs",
-    "manifest": "https://github.com/theripper93/Better-Roofs/releases/latest/download/module.json",
-    "download": "https://github.com/theripper93/Better-Roofs/releases/download/0.9.0.1/module.zip",
-    "dependencies": [
-        {
-            "name": "lib-wrapper"
-        }
+  "title": "Better Roofs",
+  "description": "Vision enhancements for roofs",
+  "version": "1.1",
+  "authors": [
+    {
+      "name": "theripper93",
+      "email": "tsplab@gmail.com",
+      "url": "https://www.patreon.com/theripper93"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "lang/ja.json"
+    },
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json"
+    }
+  ],
+  "scripts": [
+    "scripts/main.js",
+    "scripts/roofs.js",
+    "scripts/helpers.js",
+    "scripts/config.js",
+    "scripts/occlusionlink.js"
+  ],
+  "url": "https://github.com/theripper93/Better-Roofs",
+  "manifest": "https://github.com/theripper93/Better-Roofs/releases/latest/download/module.json",
+  "download": "https://github.com/theripper93/Better-Roofs/releases/download/0.9.0.1/module.zip",
+  "id": "betterroofs",
+  "relationships": {
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "compatibility": {}
+      }
     ]
+  },
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  }
 }

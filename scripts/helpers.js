@@ -13,20 +13,16 @@ class betterRoofsHelpers {
     let oldSprite = _betterRoofs.fogRoofContainer.children.find(
       (c) => c.name == tile.id
     );
-    let tileImg = tile.tile;
+    let tileImg = tile.mesh;
     if (!tileImg || oldSprite || !tileImg.texture.baseTexture) return;
-    let sprite = new PIXI.Sprite.from(tileImg.texture);
-    sprite.tint = 0xffffff;
-    sprite.isSprite = true;
+    let sprite = SpriteMesh.from(tileImg.texture, undefined, WhiteAsFuckShader);
+    sprite.alpha = game.settings.get("betterroofs", "fogVisibility");
     sprite.width = tile.data.width;
     sprite.height = tile.data.height;
     sprite.position = tile.position;
-    sprite.position.x += tileImg.x;
-    sprite.position.y += tileImg.y;
-    sprite.anchor = tileImg.anchor;
     sprite.angle = tileImg.angle;
-    sprite.alpha = game.settings.get("betterroofs", "fogVisibility");
-    sprite.blendMode = 26;
+    //sprite.alpha = game.settings.get("betterroofs", "fogVisibility");
+    //sprite.blendMode = 26;
     sprite.name = tile.id;
     _betterRoofs.fogRoofContainer.spriteIndex[tile.id] = sprite;
     _betterRoofs.fogRoofContainer.addChild(sprite);
@@ -48,7 +44,7 @@ class betterRoofsHelpers {
 
   drawSightPoli(token) {
     let sightPoli = _betterRoofs.isV9 ? new PIXI.LegacyGraphics() : new PIXI.Graphics(); //USE LegacyGraphics() for V9
-    let polipoints = canvas.sight.sources.get(`Token.${token.id}`)?.los?.points;
+    let polipoints = canvas.effects.visionSources.get(`Token.${token.id}`)?.los?.points;
     if(!polipoints) return sightPoli;
     sightPoli
       .beginFill(0xffffff)
@@ -64,16 +60,16 @@ class betterRoofsHelpers {
    **************************************************************/
 
   computeShowHideTile(tile, overrideHide, controlledToken, brMode) {
-    // USE THIS INSTEAD FOR V9 let pointSource = canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
+    // USE THIS INSTEAD FOR V9 let pointSource = canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points
     let pointSource
     if(_betterRoofs.isV9){
       pointSource = canvas.scene.data.globalLight ?
-        canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points 
-        : this.bringLosCloser(canvas.sight.sources.get(`Token.${controlledToken.id}`)?.fov, canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los)
+        canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points 
+        : this.bringLosCloser(canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov, canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los)
     }else{
       pointSource = canvas.scene.data.globalLight
-      ? canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points
-      : canvas.sight.sources.get(`Token.${controlledToken.id}`)?.fov.points;
+      ? canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points
+      : canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points;
     }
     if (
       !tile.occluded &&
@@ -84,7 +80,7 @@ class betterRoofsHelpers {
     } else {
       if (brMode == 2 && _betterRoofs.foregroundSightMaskContainers[tile.id]) {
         _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
-        tile.mask = null;
+        tile.mesh.mask = null;
       }
       this.hideTileThroughFog(tile);
     }
@@ -133,7 +129,7 @@ class betterRoofsHelpers {
   computeHide(controlledToken, tile, overrideHide) {
     if (
       this.checkIfInPoly(
-        canvas.sight.sources.get(`Token.${controlledToken.id}`)?.los.points,
+        canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points,
         tile,
         controlledToken,
         -5
@@ -205,13 +201,13 @@ class betterRoofsHelpers {
   computeMask(tile, controlledToken) {
     _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
     if (!tile.occluded && !tile.dontMask) {
-      if (!tile.mask)
-        tile.mask = _betterRoofs.foregroundSightMaskContainers[tile.id];
+      if (!tile.mesh.mask)
+        tile.mesh.mask = _betterRoofs.foregroundSightMaskContainers[tile.id];
       _betterRoofs.foregroundSightMaskContainers[tile.id].addChild(
         this.drawSightPoli(controlledToken)
       );
     } else {
-      tile.mask = null;
+      tile.mesh.mask = null;
     }
   }
 
@@ -485,7 +481,7 @@ class betterRoofsHelpers {
       let s = new PIXI.Graphics();
       s.lineStyle(4, poly.isBroken ? 0xff0000 : 0x00ff00).beginFill(0xffffff, 0.7).drawPolygon(poly);
       s.tileId = tile.id;
-      canvas.foreground.addChild(s);
+      canvas.tiles.addChild(s);
     }
     return poly;
   }
@@ -572,7 +568,7 @@ class betterRoofsHelpers {
     let html = this.offsetParent;
     if (
       !canvas.background.get(event.data.id) &&
-      !canvas.foreground.get(event.data.id)
+      !canvas.tiles.get(event.data.id)
     )
       return;
     await event.data.setFlag(
@@ -656,9 +652,9 @@ class betterRoofsHelpers {
       let brmode = brModeOverride;
       let ocmode = ocModeOverride;
       let relevantTiles =
-        canvas.foreground.controlled.length == 0 || allOverride
-          ? canvas.foreground.placeables
-          : canvas.foreground.controlled;
+        canvas.tiles.controlled.length == 0 || allOverride
+          ? canvas.tiles.placeables.filter(t => t.document.overhead)
+          : canvas.tiles.controlled;
       let updates = [];
       for (let tile of relevantTiles) {
         if (
@@ -691,9 +687,9 @@ class betterRoofsHelpers {
         dialog[0].querySelectorAll('select[name="occlusion.mode"]')[0].value
       );
       let relevantTiles =
-        canvas.foreground.controlled.length == 0
-          ? canvas.foreground.placeables
-          : canvas.foreground.controlled;
+        canvas.tiles.controlled.length == 0
+          ? canvas.tiles.placeables.filter(t => t.document.overhead)
+          : canvas.tiles.controlled;
       let updates = [];
       for (let tile of relevantTiles) {
         if (
@@ -708,4 +704,21 @@ class betterRoofsHelpers {
       canvas.scene.updateEmbeddedDocuments("Tile", updates);
     }
   }
+}
+
+//funny name haha
+
+class WhiteAsFuckShader extends BaseSamplerShader{
+  pluginName = null;
+
+  static fragmentShader = `
+    precision ${PIXI.settings.PRECISION_FRAGMENT} float;
+    uniform sampler2D sampler;
+    uniform vec4 tintAlpha;
+    varying vec2 vUvs;
+  
+    void main() {
+      gl_FragColor = vec4(1.0) * (texture2D(sampler, vUvs).a * tintAlpha);
+    }`;
+    
 }

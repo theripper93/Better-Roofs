@@ -83,11 +83,11 @@ Hooks.on("init", () => {
 Hooks.on("renderTileConfig", (app, html, data) => {
   const isInjected = html.find(`input[name="flags.betterroofs.occlusionLinkId"]`).length > 0;
   if(isInjected) return;
-  let tile = canvas.foreground.get(app.object.id);
+  let tile = canvas.tiles.get(app.object.id);
   if (
     game.settings.get("betterroofs", "roomPreview") &&
     game.user.isGM &&
-    canvas.foreground.children.filter((c) => c.tileId == app.object.id)
+    canvas.tiles.children.filter((c) => c.tileId == app.object.id)
       .length == 0
   ) {
     if (tile) _betterRoofsHelpers.getRoomPoly(tile, true);
@@ -249,7 +249,7 @@ Hooks.on("renderWallConfig", (app, html, data) => {
  ***********************************************/
 
 Hooks.on("closeTileConfig", (app, html, data) => {
-  for (let c of canvas.foreground.children) {
+  for (let c of canvas.tiles.children) {
     if (c.tileId == app.object.id && app.object.id) c.destroy();
   }
 });

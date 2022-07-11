@@ -14,7 +14,7 @@
 Hooks.on("sightRefresh", () => {
   if(!_betterRoofs) return;
   let controlledToken = canvas.tokens.controlled[0];
-  if (!controlledToken || !controlledToken.data.vision) return
+  if (!controlledToken || !controlledToken.document.sight.enabled) return
 
   let perfStart
   let perfEnd
@@ -46,7 +46,7 @@ Hooks.on("sightRefresh", () => {
 Hooks.on("controlToken", (token, controlled) => {
   if (!controlled)
     _betterRoofs.roofs.forEach((tile) => {
-      tile.mask = null;
+      tile.mesh.mask = null;
       if (_betterRoofs.foregroundSightMaskContainers[tile.id])
         _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
         _betterRoofsHelpers.hideTileThroughFog(tile);
@@ -57,7 +57,7 @@ Hooks.on("controlToken", (token, controlled) => {
 
 Hooks.on("levelsReady", ()=>{
   _betterRoofs.roofs.forEach((tile) => {
-    tile.mask = null;
+    tile.mesh.mask = null;
     const maskSprite = tile.children.find((c) => c.name == tile.id);
     if(maskSprite) tile.removeChild(maskSprite);
     if (_betterRoofs.foregroundSightMaskContainers[tile.id])
@@ -66,5 +66,5 @@ Hooks.on("levelsReady", ()=>{
       tile.alpha=1;
       tile.refresh()
   });
-  canvas.sight.refresh();
+  //canvas.sight.refresh();
 })

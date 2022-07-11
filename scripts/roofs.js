@@ -32,12 +32,13 @@ class betterRoofs {
         this.fogRoofContainer = new PIXI.Container();
         this.fogRoofContainer.name = "fogRoofContainer";
         this.fogRoofContainer.spriteIndex = {}
-        const oldContainer = canvas.sight.children.find(c => c.name == "fogRoofContainer")
-        if(oldContainer) canvas.sight.removeChild(oldContainer)
-        canvas.sight.addChild(this.fogRoofContainer);
+        const oldContainer = canvas.effects.visibility.explored.children.find(c => c.name == "fogRoofContainer")
+        if(oldContainer) canvas.effects.visibility.explored.removeChild(oldContainer)
+        canvas.effects.visibility.explored.addChild(this.fogRoofContainer);
+        //canvas.effects.visibility.filter.enabled = false
         this.roofs.forEach((t) => {
             if(this.foregroundSightMaskContainers[t.id])t.removeChild(this.foregroundSightMaskContainers[t.id])
-            t.mask = null
+            t.mesh.mask = null
           })
         this.foregroundSightMaskContainers = {}
         this.roofs.forEach((t) => {
@@ -55,7 +56,7 @@ class betterRoofs {
             
         })
         
-        canvas.sight.refresh()
+        //canvas.sight.refresh()
     }
 
 /******************************************************************************************
@@ -68,7 +69,7 @@ class betterRoofs {
         return;
       }
         this.roofs = []
-        canvas.foreground.placeables.forEach((t) => {
+        canvas.tiles.placeables.filter(t => t.document.overhead).forEach((t) => {
             if(t.document.getFlag("betterroofs","brMode") && t.document.getFlag("betterroofs","brMode") != 0){
               this.roofs.push(t)
               t.roomPoly = _betterRoofsHelpers.getRoomPoly(t,false)

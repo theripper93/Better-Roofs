@@ -546,7 +546,6 @@ class betterRoofsHelpers {
   async saveTileConfig(event) {
     let html = this.offsetParent;
     if (
-      !canvas.background.get(event.document.id) &&
       !canvas.tiles.get(event.document.id)
     )
       return;

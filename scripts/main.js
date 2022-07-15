@@ -1,11 +1,3 @@
-/***************************************************************
- *                     BETTERROOFS MODES:                      *
- *                                                             *
- *0: NONE                                                      *
- *1: ONLY HIDE/SHOW THROUGH FOG                                *
- *2: HIDE A ROOF WHEN THE TOKEN HAS SIGHT INSIDE THE BUILDING  *
- *3: MASK OUT THE PART OF THE TILE THAT IS WITHIN THE LOS      *
- ***************************************************************/
 
 /******************************************
  * COMPUTE THE MAIN SIGHTREFRESH FUNCTION *
@@ -22,14 +14,6 @@ Hooks.on("sightRefresh", () => {
 
   _betterRoofs.roofs.forEach((tile) => {
     let { brMode, overrideHide } = _betterRoofsHelpers.getTileFlags(tile);
-    if((brMode==3 && game.settings.get("betterroofs", "forceFallback"))) brMode=2
-    
-      if (brMode == 3) {
-        _betterRoofsHelpers.computeMask(tile, controlledToken);
-      }
-      if (brMode == 2 && !tile.occluded) {
-        overrideHide = _betterRoofsHelpers.computeHide(controlledToken, tile, overrideHide);
-      }
       _betterRoofsHelpers.computeShowHideTile(tile, overrideHide, controlledToken, brMode);
     });
 

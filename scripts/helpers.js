@@ -38,23 +38,6 @@ class betterRoofsHelpers {
     if (sprite) _betterRoofs.fogRoofContainer.removeChild(sprite);
   }
 
-  /*****************************
-   * GENERATE THE MASK POLYGON *
-   *****************************/
-
-  drawSightPoli(token) {
-    let sightPoli = new PIXI.LegacyGraphics(); //USE LegacyGraphics() for V9
-    let polipoints = canvas.effects.visionSources.get(`Token.${token.id}`)?.los?.points;
-    if(!polipoints) return sightPoli;
-    sightPoli
-      .beginFill(0xffffff)
-      .drawRect(0, 0, canvas.dimensions.width, canvas.dimensions.height) //ALternative: .drawPolygon instead of rect
-      .endFill();
-    sightPoli.beginHole().drawPolygon(polipoints).endHole();
-    sightPoli.isMask = true;
-    return sightPoli;
-  }
-
   /**************************************************************
    * DECIDE IF A TILE SHOULD BE SHOWN OR HIDDEN THROUGH THE FOG *
    **************************************************************/
@@ -157,7 +140,7 @@ class betterRoofsHelpers {
           token.center,
           diff
         );
-        if (tile.roomPoly.contains(mpt.x, mpt.y)) {
+        if (tile.containsPixel(mpt.x, mpt.y)) {
           return true;
         }
       }
@@ -166,28 +149,11 @@ class betterRoofsHelpers {
         token.center,
         diff
       );
-      if (tile.roomPoly.contains(pt.x, pt.y)) {
+      if (tile.containsPixel(pt.x, pt.y)) {
         return true;
       }
     }
     return false;
-  }
-
-  /*************************************************************
-   * DECIDE IF A MASK SHOULD BE APPLIED AND CLEAR UNUSED MASKS *
-   *************************************************************/
-
-  computeMask(tile, controlledToken) {
-    _betterRoofs.foregroundSightMaskContainers[tile.id]?.removeChildren();
-    if (!tile.occluded && !tile.dontMask) {
-      if (!tile.mesh.mask)
-        tile.mesh.mask = _betterRoofs.foregroundSightMaskContainers[tile.id];
-      _betterRoofs.foregroundSightMaskContainers[tile.id].addChild(
-        this.drawSightPoli(controlledToken)
-      );
-    } else {
-      tile.mesh.mask = null;
-    }
   }
 
   /**********************************
@@ -201,8 +167,8 @@ class betterRoofsHelpers {
   }
 
   getLevelsFlagsForObject(object) {
-    let rangeTop = object.document.getFlag(_levelsModuleName, "rangeTop");
-    let rangeBottom = object.document.getFlag(_levelsModuleName, "rangeBottom");
+    let rangeTop = object.document.getFlag(CONFIG.Levels.MODULE_ID, "rangeTop");
+    let rangeBottom = object.document.getFlag(CONFIG.Levels.MODULE_ID, "rangeBottom");
     if (rangeTop == null || rangeTop == undefined) rangeTop = Infinity;
     if (rangeBottom == null || rangeBottom == undefined)
       rangeBottom = -Infinity;
@@ -218,253 +184,6 @@ class betterRoofsHelpers {
     return [bottom, top];
   }
 
-  /************************************************************************************
-   * GENERATE A POLYGON WICH REPRESENTS THE BUILDING PERIMETER UNDER AN OVERHEAD TILE *
-   ************************************************************************************/
-
-  roomDetection(tile) {
-    let buildingWalls = [];
-    let isLevels = _betterRoofs.isLevels;
-    let tileRange;
-    let manualPolyFlag = tile.document.getFlag("betterroofs", "manualPoly");
-    if (isLevels) {
-      let { rangeBottom, rangeTop } = this.getLevelsFlagsForObject(tile);
-
-      tileRange = [rangeBottom, rangeTop];
-    }
-    let tileZZ = {
-      x: tile.center.x - tile.document.width / 2,
-      y: tile.center.y - tile.document.height / 2,
-    };
-    let tileCorners = [
-      { x: tileZZ.x, y: tileZZ.y }, //tl
-      { x: tileZZ.x + tile.document.width, y: tileZZ.y }, //tr
-      { x: tileZZ.x + tile.document.width, y: tileZZ.y + tile.document.height }, //br
-      { x: tileZZ.x, y: tileZZ.y + tile.document.height }, //bl
-    ];
-    if (manualPolyFlag && manualPolyFlag != "") {
-      let idArray = manualPolyFlag.split(",");
-      let manualWalls = [];
-      idArray.forEach((id) => {
-        let wallForId = canvas.walls.get(id);
-        if (wallForId) manualWalls.push(wallForId);
-      });
-      if (manualWalls.length >= 2) {
-        manualWalls.forEach((wall) => {
-          let wallPoints = [
-            { x: wall.coords[0], y: wall.coords[1], collides: true },
-            { x: wall.coords[2], y: wall.coords[3], collides: true },
-          ];
-          buildingWalls.push(wallPoints);
-        });
-      } else {
-        canvas.walls.placeables.forEach((wall) => {
-          let wallRange = this.getWallHeight(wall);
-          if (
-            wall.document.getFlag("betterroofs", "externalWall") === true &&
-            (!isLevels ||
-              (!wallRange[0] && !wallRange[1]) ||
-              !tileRange ||
-              tileRange.length != 2 ||
-              (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
-              (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]))
-          ) {
-            let wallPoints = [
-              { x: wall.coords[0], y: wall.coords[1], collides: true },
-              { x: wall.coords[2], y: wall.coords[3], collides: true },
-            ];
-            let Notinside = 0;
-            wallPoints.forEach((point) => {
-              if (this.checkPointInsideTile(point, tile)) Notinside++;
-            });
-            if (Notinside == 2) buildingWalls.push(wallPoints);
-          }
-        });
-      }
-    } else {
-      canvas.walls.placeables.forEach((wall) => {
-        let wallRange = this.getWallHeight(wall);
-        if (
-          !isLevels ||
-          (!wallRange[0] && !wallRange[1]) ||
-          !tileRange ||
-          tileRange.length != 2 ||
-          (wallRange[1] <= tileRange[1] && wallRange[1] >= tileRange[0]) ||
-          (wallRange[0] <= tileRange[1] && wallRange[0] >= tileRange[0]) ||
-          (tileRange[0] === undefined && tileRange[1] === undefined)
-        ) {
-          let wallPoints = [
-            { x: wall.coords[0], y: wall.coords[1], collides: true },
-            { x: wall.coords[2], y: wall.coords[3], collides: true },
-          ];
-          wallPoints.forEach((point) => {
-            tileCorners.forEach((c) => {
-              if (
-                this.checkPointInsideTile(point, tile) &&
-                !this.checkCollision(point,c,wallRange[0])){
-                point.collides = false;
-              }
-            });
-          });
-          if (!wallPoints[0].collides && !wallPoints[1].collides)
-            buildingWalls.push(wallPoints);
-        }
-      });
-    }
-
-    let orderedPoints = [];
-    if (buildingWalls.length < 2 || !buildingWalls) {
-      return tileCorners;
-    }
-    orderedPoints.push(buildingWalls[0][0]);
-    orderedPoints.push(buildingWalls[0][1]);
-    let currentCoord = buildingWalls[0][1];
-    buildingWalls.splice(0, 1);
-
-    while (buildingWalls.length != 0) {
-      let nextWhile = false;
-      for (let wallpoints of buildingWalls) {
-        if (
-          wallpoints[0].x == currentCoord.x &&
-          wallpoints[0].y == currentCoord.y
-        ) {
-          currentCoord = wallpoints[1];
-          orderedPoints.push(wallpoints[1]);
-          buildingWalls.splice(buildingWalls.indexOf(wallpoints), 1);
-          nextWhile = true;
-          break;
-        }
-        if (
-          wallpoints[1].x == currentCoord.x &&
-          wallpoints[1].y == currentCoord.y
-        ) {
-          currentCoord = wallpoints[0];
-          orderedPoints.push(wallpoints[0]);
-          buildingWalls.splice(buildingWalls.indexOf(wallpoints), 1);
-          nextWhile = true;
-          break;
-        }
-      }
-      if (nextWhile) continue;
-      let simplifiedArray = [];
-      for (let wallpoints of buildingWalls) {
-        simplifiedArray.push({
-          x: wallpoints[0].x,
-          y: wallpoints[0].y,
-          i: buildingWalls.indexOf(wallpoints),
-          ii: 0,
-        });
-        simplifiedArray.push({
-          x: wallpoints[1].x,
-          y: wallpoints[1].y,
-          i: buildingWalls.indexOf(wallpoints),
-          ii: 1,
-        });
-      }
-      const reducer = (previousC, currentC) => {
-        return this.getDist(currentC, currentCoord) <
-          this.getDist(previousC, currentCoord)
-          ? currentC
-          : previousC;
-      };
-      let closestWall = simplifiedArray.reduce(reducer);
-      if (closestWall.ii == 0) {
-        orderedPoints.push(
-          buildingWalls[closestWall.i][0],
-          buildingWalls[closestWall.i][1]
-        );
-        currentCoord = buildingWalls[closestWall.i][1];
-      }
-      if (closestWall.ii == 1) {
-        orderedPoints.push(
-          buildingWalls[closestWall.i][1],
-          buildingWalls[closestWall.i][0]
-        );
-        currentCoord = buildingWalls[closestWall.i][0];
-      }
-      buildingWalls.splice(closestWall.i, 1);
-    }
-    return orderedPoints;
-  }
-
-  /*************************************
-   * COLLISION TEST FOR ROOM DETECTION *
-   *************************************/
-
-  checkCollision(p1, p2, height) {
-    if(_betterRoofs.isLevels && _levels){
-      let p3 = this.bringPointCloser(p1,p2, -1);
-      p3.z = height;
-      p2.z = height;
-      return _levels.testCollision(p3, p2, "collision");
-    }else{
-      let p3 = this.bringPointCloser(p1,p2, -1);
-      return canvas.walls.checkCollision(new Ray(p3, p2),{},height)
-    }
-  }
-
-  /*********************************************************
-   * CHECK IF A POINT IS WITHIN THE BOUNDING BOX OF A TILE *
-   *********************************************************/
-
-  checkPointInsideTile(pt, tile, tol = 0) {
-    let tileZZ = {
-      x: tile.center.x - tile.document.width / 2,
-      y: tile.center.y - tile.document.height / 2,
-    };
-    if (
-      pt.x > tileZZ.x + tol &&
-      pt.x < tileZZ.x + tile.document.width - tol &&
-      pt.y > tileZZ.y + tol &&
-      pt.y < tileZZ.y + tile.document.height - tol
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /***********************************************
-   * GET THE SLOPE IN RADIANS BETWEEN TWO POINTS *
-   ***********************************************/
-
-  getSlope(pt1, pt2) {
-    return Math.atan2(pt2.y - pt1.y, pt2.x - pt1.x);
-  }
-
-  /*************************************************
-   * GET THE DISTANCE IN PIXELS BETWEEN TWO POINTS *
-   *************************************************/
-
-  getDist(pt1, pt2) {
-    return Math.sqrt(Math.pow(pt1.x - pt2.x, 2) + Math.pow(pt1.y - pt2.y, 2));
-  }
-
-  /***************************************************
-   * GET THE ROOM POLYGON AND DRAW IT IF DEBUG==TRUE *
-   ***************************************************/
-
-  getRoomPoly(tile, debug = false, checkBroken = false) {
-    let pts = this.roomDetection(tile);
-    let poly = new PIXI.Polygon(pts);
-    if(checkBroken || debug){
-      let isBroken = false;
-      for(let pt of pts){
-        const newPt = this.bringPointCloser(pt,tile.center,5);
-        if(isBroken) break;
-        if(poly.contains(newPt.x, newPt.y)) isBroken = true;
-      }
-      poly.isBroken = isBroken;
-    }
-    if (debug) {
-      let s = new PIXI.Graphics();
-      s.lineStyle(4, poly.isBroken ? 0xff0000 : 0x00ff00).beginFill(0xffffff, 0.7).drawPolygon(poly);
-      s.tileId = tile.id;
-      canvas.tiles.addChild(s);
-    }
-    return poly;
-  }
-
   /***************************************************************************************
    * GIVEN A POINT AND A CENTER GET THE POINT CLOSER TO THE CENTER BY THE SPECIFIED DIFF *
    ***************************************************************************************/
@@ -475,6 +194,23 @@ class betterRoofsHelpers {
     let x = -newL * Math.cos(slope) + center.x;
     let y = -newL * Math.sin(slope) + center.y;
     return { x: x, y: y };
+  }
+
+  
+  /***********************************************
+   * GET THE SLOPE IN RADIANS BETWEEN TWO POINTS *
+   ***********************************************/
+
+   getSlope(pt1, pt2) {
+    return Math.atan2(pt2.y - pt1.y, pt2.x - pt1.x);
+  }
+
+  /*************************************************
+   * GET THE DISTANCE IN PIXELS BETWEEN TWO POINTS *
+   *************************************************/
+
+  getDist(pt1, pt2) {
+    return Math.sqrt(Math.pow(pt1.x - pt2.x, 2) + Math.pow(pt1.y - pt2.y, 2));
   }
 
   /*******************************************
@@ -562,7 +298,7 @@ class betterRoofsHelpers {
 //funny name haha
 
 class WhiteAsFuckShader extends BaseSamplerShader{
-  pluginName = null;
+  static classPluginName = null;
 
   static fragmentShader = `
     precision ${PIXI.settings.PRECISION_FRAGMENT} float;

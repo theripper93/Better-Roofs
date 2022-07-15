@@ -14,6 +14,7 @@
     "betterroofs.settings.occlusionRadius.name": "Occlusion Radius",
     "betterroofs.settings.occlusionRadius.hint": "Radius Multiplier for Radial occlusion mode",
 
+    "betterroofs.tileConfig.showInFog": "Reveal in Fog",
     "betterroofs.tileConfig.brMode.name": "Better Roof Mode",
     "betterroofs.tileConfig.brMode.option0": "None (Foundry Default)",
     "betterroofs.tileConfig.brMode.option1": "Show (Show Tile Through Fog)",

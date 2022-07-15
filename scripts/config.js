@@ -67,7 +67,15 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   const isInjected = html.find(`input[name="flags.betterroofs.occlusionLinkId"]`).length > 0;
   if(isInjected) return;
 
-  let brMode = app.object.getFlag("betterroofs", "brMode") ? true : false;
+  let brMode = app.object.getFlag("betterroofs", "brMode");
+
+  if(!(brMode instanceof Boolean)){
+    if(brMode == 1 || brMode == 3){
+      brMode = true;
+    }else{
+      brMode = false;
+    }
+  }
 
   let occlusionLinkSource = app.object.getFlag("betterroofs", "occlusionLinkSource") || false;
 

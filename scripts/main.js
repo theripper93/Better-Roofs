@@ -34,21 +34,6 @@ Hooks.on("controlToken", (token, controlled) => {
       if (_betterRoofs.foregroundSightMaskContainers[tile.id])
         _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
         _betterRoofsHelpers.hideTileThroughFog(tile);
-        tile.alpha=1;
         tile.refresh()
     });
 });
-
-Hooks.on("levelsReady", ()=>{
-  _betterRoofs.roofs.forEach((tile) => {
-    tile.mesh.mask = null;
-    const maskSprite = tile.children.find((c) => c.name == tile.id);
-    if(maskSprite) tile.removeChild(maskSprite);
-    if (_betterRoofs.foregroundSightMaskContainers[tile.id])
-      _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
-      _betterRoofsHelpers.hideTileThroughFog(tile);
-      tile.alpha=1;
-      tile.refresh()
-  });
-  //canvas.sight.refresh();
-})

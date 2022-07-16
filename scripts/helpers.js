@@ -8,7 +8,7 @@ class betterRoofsHelpers {
    ******************************************/
 
   showTileThroughFog(tile) {
-    if (_betterRoofs.isLevels && tile.isLevel) return;
+    if (!tile.visible) return this.hideTileThroughFog(tile);
     tile.alpha = 1;
     let oldSprite = _betterRoofs.fogRoofContainer.children.find(
       (c) => c.name == tile.id

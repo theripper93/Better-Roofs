@@ -69,6 +69,7 @@ class betterRoofs {
         return;
       }
         this.roofs = []
+        if(!canvas.tiles?.placeables) return;
         canvas.tiles.placeables.filter(t => t.document.overhead).forEach((t) => {
             if(t.document.getFlag("betterroofs","brMode") && t.document.getFlag("betterroofs","brMode") != 0){
               this.roofs.push(t)

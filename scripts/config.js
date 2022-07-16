@@ -12,14 +12,6 @@ Hooks.on("canvasReady", () => {
   Hooks.callAll("betterRoofsReady");
 });
 
-Hooks.once("levelsReady", () => {
-  _betterRoofsHelpers = new betterRoofsHelpers();
-  _betterRoofs = betterRoofs.get();
-  _betterRoofs.initializeRoofs();
-  _betterRoofs.initializePIXIcontainers();
-  Hooks.callAll("betterRoofsReady");
-})
-
 /**************************
  * REGISTER GAME SETTINGS *
  **************************/

@@ -5,13 +5,9 @@
 class betterRoofs {
     constructor() {
       this.fogRoofContainer
-      this.foregroundSightMaskContainers = {}
       this.roofs
       this.isLevels = game.modules.get('levels')?.active
       this.DEBUG = false
-      this.isV9 = game.version >= 9
-      this.isLightspeed = this.isV9 || game.modules.get("lichtgeschwindigkeit")?.active
-      this.isWallHeight = game.modules.get("wall-height")?.active
       this.initializeRoofsDebounced = debounce(this.initializeRoofs.bind(this),1000)
     }
   
@@ -35,12 +31,6 @@ class betterRoofs {
         const oldContainer = canvas.effects.visibility.explored.children.find(c => c.name == "fogRoofContainer")
         if(oldContainer) canvas.effects.visibility.explored.removeChild(oldContainer)
         canvas.effects.visibility.explored.addChild(this.fogRoofContainer);
-        //canvas.effects.visibility.filter.enabled = false
-        this.roofs.forEach((t) => {
-            if(this.foregroundSightMaskContainers[t.id])t.removeChild(this.foregroundSightMaskContainers[t.id])
-            t.mesh.mask = null
-          })
-        this.foregroundSightMaskContainers = {}
     }
 
 /******************************************************************************************
@@ -86,12 +76,3 @@ Hooks.on("createTile", () => {
 Hooks.on("deleteTile", () => {
   betterRoofs.debouncedInitializeRoofs()
 });
-
-Hooks.on("deleteWall", () => {
-  betterRoofs.debouncedInitializeRoofs()
-})
-
-Hooks.on("updateWall", (wall,updates) => {
-  if("ds" in updates) return
-  betterRoofs.debouncedInitializeRoofs()
-})

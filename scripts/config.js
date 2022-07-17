@@ -7,10 +7,13 @@ let _betterRoofs, _betterRoofsHelpers;
 Hooks.on("drawCanvasVisibility", () => {
   _betterRoofsHelpers = new betterRoofsHelpers();
   _betterRoofs = betterRoofs.get();
-  _betterRoofs.initializeRoofs();
   _betterRoofs.initializePIXIcontainers();
   Hooks.callAll("betterRoofsReady");
 });
+
+Hooks.on("canvasReady", () => {
+  _betterRoofs.initializeRoofs();
+})
 
 /**************************
  * REGISTER GAME SETTINGS *
@@ -29,25 +32,6 @@ Hooks.on("init", () => {
       step: 0.05,
     },
     default: 0.9,
-  });
-
-
-  game.settings.register("betterroofs", "roomPreview", {
-    name: game.i18n.localize("betterroofs.settings.roomPreview.name"),
-    hint: game.i18n.localize("betterroofs.settings.roomPreview.hint"),
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: false,
-  });
-
-  game.settings.register("betterroofs", "wbIntegration", {
-    name: game.i18n.localize("betterroofs.settings.wbIntegration.name"),
-    hint: game.i18n.localize("betterroofs.settings.wbIntegration.hint"),
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: true,
   });
 });
 
@@ -98,9 +82,7 @@ Hooks.on("renderTileConfig", (app, html, data) => {
             </div>
         </div>
   `
-
-  const overh = html.find('input[name="overhead"]');
-  const formGroup = overh.closest(".form-group");
+  
   html.find(`select[name="occlusion.mode"]`).closest(".form-group").after(newHtml);
 
 });

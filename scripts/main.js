@@ -22,18 +22,3 @@ Hooks.on("sightRefresh", () => {
       console.log(`Better Roofs compute took ${perfEnd-perfStart} ms, FPS:${Math.round(canvas.app.ticker.FPS)}`)
     } 
 });
-
-/***********************************************************************************
- * CLEAN UP MASKS AND FIX VISIBILITY OF TILES WHEN A TOKEN IS RELEASED FROM CONTROL *
- ***********************************************************************************/
-
-Hooks.on("controlToken", (token, controlled) => {
-  if (!controlled)
-    _betterRoofs.roofs.forEach((tile) => {
-      tile.mesh.mask = null;
-      if (_betterRoofs.foregroundSightMaskContainers[tile.id])
-        _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
-        _betterRoofsHelpers.hideTileThroughFog(tile);
-        tile.refresh()
-    });
-});

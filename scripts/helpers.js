@@ -8,9 +8,7 @@ class betterRoofsHelpers {
    ******************************************/
 
   showTileThroughFog(tile) {
-    if (!tile.visible) return this.hideTileThroughFog(tile);
-    tile.alpha = 1;
-    let oldSprite = _betterRoofs.fogRoofContainer.children.find(
+    const oldSprite = _betterRoofs.fogRoofContainer.children.find(
       (c) => c.name == tile.id
     );
     let tileImg = tile.mesh;
@@ -21,8 +19,6 @@ class betterRoofsHelpers {
     sprite.height = tile.document.height;
     sprite.position = tile.position;
     sprite.angle = tileImg.angle;
-    //sprite.alpha = game.settings.get("betterroofs", "fogVisibility");
-    //sprite.blendMode = 26;
     sprite.name = tile.id;
     _betterRoofs.fogRoofContainer.spriteIndex[tile.id] = sprite;
     _betterRoofs.fogRoofContainer.addChild(sprite);
@@ -47,7 +43,6 @@ class betterRoofsHelpers {
     const pointSource = canvas.lighting.globalLight ?
         canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points 
         : canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points
-
     if (
       controlledToken &&
       !tile.occluded &&
@@ -97,28 +92,6 @@ class betterRoofsHelpers {
     return newPoints;
   }
 
-  /**********************************************************************
-   * DECIDE IF A TILE SHOULD BE HIDDEN BASED ON SIGHT INSIDE A BUILDING *
-   **********************************************************************/
-
-  computeHide(controlledToken, tile, overrideHide) {
-    if (
-      this.checkIfInPoly(
-        canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points,
-        tile,
-        controlledToken,
-        -5
-      )
-    ) {
-      tile.alpha = tile.document.occlusion.alpha;
-      this.hideTileThroughFog(tile);
-      overrideHide = true;
-    } else {
-      tile.alpha = 1;
-    }
-    return overrideHide;
-  }
-
   /*************************************************************************************
    * CHECK IF ANY POINT IN AN ARRAY OF POINTS IS CONTAINED INSIDE THE BUILDING POLYGON *
    *************************************************************************************/
@@ -162,24 +135,6 @@ class betterRoofsHelpers {
     let overrideHide = false;
     let brMode = tile.document.getFlag("betterroofs", "brMode");
     return { brMode, overrideHide };
-  }
-
-  getLevelsFlagsForObject(object) {
-    let rangeTop = object.document.getFlag(CONFIG.Levels.MODULE_ID, "rangeTop");
-    let rangeBottom = object.document.getFlag(CONFIG.Levels.MODULE_ID, "rangeBottom");
-    if (rangeTop == null || rangeTop == undefined) rangeTop = Infinity;
-    if (rangeBottom == null || rangeBottom == undefined)
-      rangeBottom = -Infinity;
-    let isLevel = rangeTop == Infinity ? false : true;
-    if (rangeTop == Infinity && rangeBottom == -Infinity) return false;
-    if (rangeTop == Infinity) rangeBottom -= 1;
-    return { rangeBottom, rangeTop, isLevel };
-  }
-
-  getWallHeight(wall) {
-    if(!_betterRoofs.isWallHeight) return [-Infinity, Infinity]
-    const {top, bottom} = WallHeight.getWallBounds(wall);
-    return [bottom, top];
   }
 
   /***************************************************************************************
@@ -239,57 +194,6 @@ class betterRoofsHelpers {
       });
     }
     await canvas.scene.createEmbeddedDocuments("Wall", wallDataArray);
-  }
-
-  /************************
-   * SIMPLE YES NO PROMPT *
-   ************************/
-
-  async yesNoPrompt(dTitle, dContent) {
-    let dialog = new Promise((resolve, reject) => {
-      new Dialog({
-        title: `${dTitle}`,
-        content: `<p>${dContent}</p>`,
-        buttons: {
-          one: {
-            icon: '<i class="fas fa-check"></i>',
-            label: game.i18n.localize("betterroofs.yesnodialog.yes"),
-            callback: () => {
-              resolve(true);
-            },
-          },
-          two: {
-            icon: '<i class="fas fa-times"></i>',
-            label: game.i18n.localize("betterroofs.yesnodialog.no"),
-            callback: () => {
-              resolve(false);
-            },
-          },
-        },
-        default: "two",
-      }).render(true);
-    });
-    let result = await dialog;
-    return result;
-  }
-
-  /*******************************
-   * SAVE THE TILE CONFIGURATION *
-   *******************************/
-
-  async saveTileConfig(event) {
-    let html = this.offsetParent;
-    if (
-      !canvas.tiles.get(event.document.id)
-    )
-      return;
-    await event.document.setFlag(
-      "betterroofs",
-      "brMode",
-      html.querySelectorAll("select[name ='br.mode']")[0].value
-    );
-    _betterRoofs.initializeRoofs();
-    _betterRoofs.initializePIXIcontainers();
   }
 }
 

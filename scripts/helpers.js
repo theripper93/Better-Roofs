@@ -49,16 +49,14 @@ class betterRoofsHelpers {
         : canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points
 
     if (
+      controlledToken &&
       !tile.occluded &&
-      !overrideHide &&
+      tile.visible &&
+      (controlledToken.losHeight ?? controlledToken.document.elevation) < tile.document.elevation &&
       this.checkIfInPoly(pointSource, tile, controlledToken, 5)
     ) {
       this.showTileThroughFog(tile);
     } else {
-      if (brMode == 2 && _betterRoofs.foregroundSightMaskContainers[tile.id]) {
-        _betterRoofs.foregroundSightMaskContainers[tile.id].removeChildren();
-        tile.mesh.mask = null;
-      }
       this.hideTileThroughFog(tile);
     }
   }

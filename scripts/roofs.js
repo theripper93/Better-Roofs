@@ -41,22 +41,6 @@ class betterRoofs {
             t.mesh.mask = null
           })
         this.foregroundSightMaskContainers = {}
-        this.roofs.forEach((t) => {
-            if(t.document.getFlag(
-              "betterroofs",
-              "brMode"
-            ) == 3){
-              t.removeChild(this.foregroundSightMaskContainers[t.id])
-              this.foregroundSightMaskContainers[t.id] = new PIXI.Container();
-              this.foregroundSightMaskContainers[t.id].name = t.id;
-              this.foregroundSightMaskContainers[t.id].x -= t.x
-              this.foregroundSightMaskContainers[t.id].y -= t.y
-              t.addChild(this.foregroundSightMaskContainers[t.id]);
-            }
-            
-        })
-        
-        //canvas.sight.refresh()
     }
 
 /******************************************************************************************

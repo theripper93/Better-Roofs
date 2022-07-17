@@ -4,7 +4,7 @@
 
 let _betterRoofs, _betterRoofsHelpers;
 
-Hooks.on("canvasReady", () => {
+Hooks.on("drawCanvasVisibility", () => {
   _betterRoofsHelpers = new betterRoofsHelpers();
   _betterRoofs = betterRoofs.get();
   _betterRoofs.initializeRoofs();

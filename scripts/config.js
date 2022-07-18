@@ -60,10 +60,11 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   const newHtml = `
 
   <div class="form-group">
-  <label>${game.i18n.localize("betterroofs.tileConfig.showInFog")}</label>
+  <label>${game.i18n.localize("betterroofs.tileConfig.showInFog.name")}</label>
   <div class="form-fields">
       <input type="checkbox" name="flags.betterroofs.brMode" ${brMode ? "checked" : ""}>
   </div>
+  <p class="notes">${game.i18n.localize("betterroofs.tileConfig.showInFog.hint")}</p>
   </div>
 
 
@@ -84,5 +85,16 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   `
   
   html.find(`select[name="occlusion.mode"]`).closest(".form-group").after(newHtml);
-
+  app.setPosition({height: "auto"});
 });
+
+Hooks.on("renderTokenConfig", (app, html, data) => {
+  const occlusionRadius = (app.token ?? app.object).getFlag("core", "occlusionRadius") || "";
+  const injectHtml = `
+  <div class="form-group">
+    <label>${game.i18n.localize("betterroofs.tokenConfig.occlusionRadius.name")} <span class="units">(Pixels)</span></label>
+    <input name="flags.core.occlusionRadius" type="text" data-dtype="Number" value="${occlusionRadius}" placeholder="${game.i18n.localize("betterroofs.tokenConfig.occlusionRadius.placeholder")}">
+  </div>`
+  html.find(`input[name="alpha"]`).closest(".form-group").after(injectHtml);
+  app.setPosition({height: "auto"});
+})

@@ -11,7 +11,7 @@ Hooks.on("sightRefresh", () => {
   let perfStart
   let perfEnd
   if(_betterRoofs.DEBUG) perfStart = performance.now()
-
+  if(!_betterRoofs.roofs) _betterRoofs.initializeRoofs();
   _betterRoofs.roofs.forEach((tile) => {
     let { brMode, overrideHide } = _betterRoofsHelpers.getTileFlags(tile);
       _betterRoofsHelpers.computeShowHideTile(tile, overrideHide, controlledToken, brMode);

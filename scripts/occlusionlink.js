@@ -1,7 +1,7 @@
 Hooks.on("init", () => {
   libWrapper.register(
     "betterroofs",
-    "PrimaryCanvasGroup.prototype._identifyOccludedTiles",
+    "CanvasOcclusionMask.prototype._identifyOccludedTiles",
     occlusionLink,
     "WRAPPER"
   );

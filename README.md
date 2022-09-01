@@ -6,4 +6,4 @@
 
 Other Language: [English](README.md), [Deutsch](README.de.md)
 
-The documentation has moved to the [WIKI](https://theripper93.com/wiki/index.php/Better_Roofs)
+## The documentation has moved to the [WIKI](https://theripper93.com/wiki/index.php/Better_Roofs)

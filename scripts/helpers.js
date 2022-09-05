@@ -40,7 +40,7 @@ class betterRoofsHelpers {
 
   computeShowHideTile(tile, overrideHide, controlledToken, brMode) {
     // USE THIS INSTEAD FOR V9 let pointSource = canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points
-    const pointSource = canvas.lighting.globalLight ?
+    const pointSource = canvas.effects.globalLightSource?.active ?
         canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points 
         : canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points
     if (

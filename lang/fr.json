@@ -14,6 +14,11 @@
     "betterroofs.settings.occlusionRadius.name": "Rayon d'occlusion",
     "betterroofs.settings.occlusionRadius.hint": "Multiplicateur de rayon pour le mode d'occlusion radiale",
 
+    "betterroofs.tokenConfig.occlusionRadius.name": "Rayon d'occlusion",
+    "betterroofs.tokenConfig.occlusionRadius.placeholder": "Défaut",
+
+    "betterroofs.tileConfig.showInFog.name": "Révèle le Brouillard de guerre",
+    "betterroofs.tileConfig.showInFog.hint": "Lorsqu'un jeton a une vision de cette tuile, la tuile sera visible à travers le Brouillard de guerre. Ne fonctionne pas avec Lumières.",
     "betterroofs.tileConfig.brMode.name": "Mode Better Roof",
     "betterroofs.tileConfig.brMode.option0": "Aucun (Foundry par défaut)",
     "betterroofs.tileConfig.brMode.option1": "Afficher (Afficher la tuile à travers le brouillard)",
@@ -24,8 +29,11 @@
     "betterroofs.tileConfig.clearPoly.name": "Effacer le polygone",
     "betterroofs.tileConfig.definePoly.notify": "Sélectionnez les murs que vous souhaitez utiliser pour le polygone puis cliquez à nouveau sur le bouton Définir le polygone pour confirmer",
     "betterroofs.tileConfig.occlusionLinkId": "Id de lien d'occlusion",
+    "betterroofs.tileConfig.occlusionLinkIdHint": "Peut être n'importe quel texte. Lorsqu'une tuile avec 'Source du lien d'occlusion ?' est occultée (a un jeton en dessous d'elle) toutes les tuiles avec le même 'Id de lien d'occlusion' seont également occultées. Exemple d'utilisation : lier les toits entre eux.",
     "betterroofs.tileConfig.occlusionLinkSource": "Source du lien d'occlusion ?", 
 
+    "betterroofs.tileConfig.isbroken": "L'uto-détection de polygone pour cette tuile pourrait avoir échoué. SVP, activer le mode avancé dans les réglages du module et définissez manuellement le polygone.",
+    
     "betterroofs.wallConfig.externalWall.name":"Est-ce un mur externe ?",
 
     "betterroofs.scenecontrols.walledges": "Murer les bords de la scène ",

@@ -4,13 +4,6 @@
 
 let _betterRoofs, _betterRoofsHelpers;
 
-Hooks.on("drawCanvasVisibility", () => {
-  _betterRoofsHelpers = new betterRoofsHelpers();
-  _betterRoofs = betterRoofs.get();
-  _betterRoofs.initializePIXIcontainers();
-  Hooks.callAll("betterRoofsReady");
-});
-
 Hooks.on("canvasReady", () => {
   _betterRoofs.initializeRoofs();
 })
@@ -20,6 +13,15 @@ Hooks.on("canvasReady", () => {
  **************************/
 
 Hooks.on("init", () => {
+  Hooks.on(game.modules.get("levels")?.active ? "levelsAdvancedFogInit" : "drawCanvasVisibility", () => {
+    _betterRoofsHelpers = new betterRoofsHelpers();
+    _betterRoofs = betterRoofs.get();
+    _betterRoofs.initializePIXIcontainers();
+    Hooks.callAll("betterRoofsReady");
+  });
+
+
+
   game.settings.register("betterroofs", "fogVisibility", {
     name: game.i18n.localize("betterroofs.settings.fogVisibility.name"),
     hint: game.i18n.localize("betterroofs.settings.fogVisibility.hint"),

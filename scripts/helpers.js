@@ -21,7 +21,8 @@ class betterRoofsHelpers {
     sprite.angle = tileImg.angle;
     sprite.name = tile.id;
     sprite.anchor.set(0.5, 0.5);
-    sprite.scale.set(tile.document.texture.scaleX, tile.document.texture.scaleY);
+    sprite.scale.x = (tile.mesh.width / tile.mesh.texture.width) * tile.document.texture.scaleX;
+    sprite.scale.y = (tile.mesh.height / tile.mesh.height) * tile.document.texture.scaleY;
     _betterRoofs.fogRoofContainer.spriteIndex[tile.id] = sprite;
     _betterRoofs.fogRoofContainer.addChild(sprite);
   }

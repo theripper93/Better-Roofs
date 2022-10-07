@@ -19,22 +19,6 @@ Hooks.on("init", () => {
     _betterRoofs.initializePIXIcontainers();
     Hooks.callAll("betterRoofsReady");
   });
-
-
-
-  game.settings.register("betterroofs", "fogVisibility", {
-    name: game.i18n.localize("betterroofs.settings.fogVisibility.name"),
-    hint: game.i18n.localize("betterroofs.settings.fogVisibility.hint"),
-    scope: "world",
-    config: true,
-    type: Number,
-    range: {
-      min: 0.1,
-      max: 1,
-      step: 0.05,
-    },
-    default: 0.9,
-  });
 });
 
 /****************************************************

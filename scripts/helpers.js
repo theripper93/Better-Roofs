@@ -14,7 +14,7 @@ class betterRoofsHelpers {
     let tileImg = tile.mesh;
     if (!tileImg || oldSprite || !tileImg.texture.baseTexture) return;
     let sprite = SpriteMesh.from(tileImg.texture, undefined, WhiteAsFuckShader);
-    sprite.alpha = game.settings.get("betterroofs", "fogVisibility");
+    sprite.alpha = 1;
     sprite.width = tile.document.width;
     sprite.height = tile.document.height;
     sprite.position.set(tile.center.x, tile.center.y);

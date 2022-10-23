@@ -17,6 +17,11 @@
     "betterroofs.settings.occlusionRadius.name": "Radio de bloqueo",
     "betterroofs.settings.occlusionRadius.hint": "Multiplicador del radio para el modo de bloqueo radial",
 
+    "betterroofs.tokenConfig.occlusionRadius.name": "Radio de oclusión",
+    "betterroofs.tokenConfig.occlusionRadius.placeholder": "Por defecto",
+
+    "betterroofs.tileConfig.showInFog.name": "Revela la niebla de guerra",
+    "betterroofs.tileConfig.showInFog.hint": "Cuando un icono tiene visión de esta baldosa, la misma será visible a través de la niebla de guerra. No funciona con las luces",
     "betterroofs.tileConfig.brMode.name": "Modo Better Roof",
     "betterroofs.tileConfig.brMode.option0": "Ninguno (por defecto en Foundry)",
     "betterroofs.tileConfig.brMode.option1": "Mostrar (mostrar baldosas a través de la niebla)",

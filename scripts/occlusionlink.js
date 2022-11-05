@@ -12,6 +12,7 @@ function occlusionLink(wrapped,...args){
     for(let otile of canvas.tiles.placeables.filter(t => t.document.overhead)){
         const occlusionLinkId = otile.document.flags?.betterroofs?.occlusionLinkId;
         if(!occlusionLinkId) continue;
+        if(_betterRoofs?.isLevels && CONFIG.Levels.currentToken?.document?.elevation >= otile.document.elevation) continue;
         let occlusionLink = false;
         for(let tile of canvas.tiles.placeables.filter(t => t.document.overhead)){
             if(_betterRoofs?.isLevels && CONFIG.Levels.currentToken?.document?.elevation >= tile.document.elevation) continue;    

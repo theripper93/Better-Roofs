@@ -5,6 +5,7 @@
 let _betterRoofs, _betterRoofsHelpers;
 
 Hooks.on("canvasReady", () => {
+  _betterRoofs.initializePIXIcontainers();
   _betterRoofs.initializeRoofs();
 })
 

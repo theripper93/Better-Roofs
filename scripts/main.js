@@ -11,7 +11,8 @@ Hooks.on("sightRefresh", () => {
   let perfStart
   let perfEnd
   if(_betterRoofs.DEBUG) perfStart = performance.now()
-  if(!_betterRoofs.roofs) _betterRoofs.initializeRoofs();
+  if (!_betterRoofs.roofs) _betterRoofs.initializeRoofs();
+  canvas.masks.vision.addChild(_betterRoofs.fogRoofContainer);
   _betterRoofs.roofs.forEach((tile) => {
     let { brMode, overrideHide } = _betterRoofsHelpers.getTileFlags(tile);
       _betterRoofsHelpers.computeShowHideTile(tile, overrideHide, controlledToken, brMode);
@@ -22,3 +23,8 @@ Hooks.on("sightRefresh", () => {
       console.log(`Better Roofs compute took ${perfEnd-perfStart} ms, FPS:${Math.round(canvas.app.ticker.FPS)}`)
     } 
 });
+
+
+
+
+

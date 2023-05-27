@@ -9,7 +9,6 @@ Hooks.on("init", () => {
 
 function occlusionLink(wrapped,...args){
     const occluded = wrapped(...args);
-    debugger
     for(let otile of canvas.tiles.placeables.filter(t => t.document.overhead)){
         const occlusionLinkId = otile.document.flags?.betterroofs?.occlusionLinkId;
         if(!occlusionLinkId) continue;

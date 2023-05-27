@@ -57,10 +57,7 @@
     ]
   },
   "compatibility": {
-    "minimum": "10",
-    "verified": "10"
-  },
-
-  "name": "betterroofs",
-  "minimumCoreVersion": "10"
+    "minimum": "11",
+    "verified": "11"
+  }
 }

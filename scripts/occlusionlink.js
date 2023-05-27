@@ -1,7 +1,7 @@
 Hooks.on("init", () => {
   libWrapper.register(
     "betterroofs",
-    "CanvasOcclusionMask.prototype._identifyOccludedTiles",
+    "CanvasOcclusionMask.prototype._identifyOccludedObjects",
     occlusionLink,
     "WRAPPER"
   );
@@ -9,6 +9,7 @@ Hooks.on("init", () => {
 
 function occlusionLink(wrapped,...args){
     const occluded = wrapped(...args);
+    debugger
     for(let otile of canvas.tiles.placeables.filter(t => t.document.overhead)){
         const occlusionLinkId = otile.document.flags?.betterroofs?.occlusionLinkId;
         if(!occlusionLinkId) continue;
@@ -16,7 +17,7 @@ function occlusionLink(wrapped,...args){
         let occlusionLink = false;
         for(let tile of canvas.tiles.placeables.filter(t => t.document.overhead)){
             if(_betterRoofs?.isLevels && CONFIG.Levels.currentToken?.document?.elevation >= tile.document.elevation) continue;    
-            if(!occluded.has(tile) || tile.id === otile.id) continue;
+            if(!occluded.has(tile.mesh) || tile.id === otile.id) continue;
             const occlusionLinkSource = tile.document.flags?.betterroofs?.occlusionLinkSource;
             const tOcclusionLinkId = tile.document.flags?.betterroofs?.occlusionLinkId;
             if(occlusionLinkSource && tOcclusionLinkId === occlusionLinkId){
@@ -25,7 +26,7 @@ function occlusionLink(wrapped,...args){
             }
         }
         if(occlusionLink){
-            occluded.add(otile);
+            occluded.add(otile.mesh);
         }
     }
 

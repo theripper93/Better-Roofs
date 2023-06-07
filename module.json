@@ -54,6 +54,14 @@
         "type": "module",
         "compatibility": {}
       }
+    ],
+    "recommends": [
+      {
+        "id": "theripper-premium-hub",
+        "type": "module",
+        "reason": "TheRipper93's Module Hub will alert you of critical updates and give you easy access to documentation in the configure settings screen",
+        "compatibility": {}
+      }
     ]
   },
   "compatibility": {

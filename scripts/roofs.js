@@ -8,7 +8,7 @@ class betterRoofs {
       this.roofs
       this.isLevels = game.modules.get('levels')?.active
       this.DEBUG = false
-      this.initializeRoofsDebounced = debounce(this.initializeRoofs.bind(this),1000)
+      this.initializeRoofsDebounced = foundry.utils.debounce(this.initializeRoofs.bind(this),1000)
     }
   
 /**********************************************
@@ -44,7 +44,7 @@ class betterRoofs {
       }
         this.roofs = []
         if(!canvas.tiles?.placeables) return;
-        canvas.tiles.placeables.filter(t => t.document.overhead).forEach((t) => {
+        canvas.tiles.placeables.forEach((t) => {
             if(t.document.getFlag("betterroofs","brMode") && t.document.getFlag("betterroofs","brMode") != 0){
               this.roofs.push(t)
             } 

@@ -38,8 +38,7 @@ class betterRoofsHelpers {
      **************************************************************/
 
     computeShowHideTile(tile, overrideHide, controlledToken, brMode) {
-        // USE THIS INSTEAD FOR V9 let pointSource = canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points
-        const pointSource = canvas.effects?.illumination?.globalLight ? canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points : canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points;
+       const pointSource = canvas?.scene?.environment?.globalLight?.enabled ? canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points : canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points;
         if (controlledToken && !tile.occluded && tile.visible && (controlledToken.losHeight ?? controlledToken.document.elevation) < tile.document.elevation && this.checkIfInPoly(pointSource, tile, controlledToken, 5)) {
             this.showTileThroughFog(tile);
         } else {
@@ -98,12 +97,12 @@ class betterRoofsHelpers {
                     y: (points[i + 3] + points[i + 1]) / 2,
                 };
                 let mpt = this.bringPointCloser({ x: midPoint.x, y: midPoint.y }, token.center, diff);
-                if (tile.mesh?.containsPixel(mpt.x, mpt.y)) {
+                if (tile.mesh?.containsCanvasPoint({x: mpt.x, y: mpt.y})) {
                     return true;
                 }
             }
             let pt = this.bringPointCloser({ x: points[i], y: points[i + 1] }, token.center, diff);
-            if (tile.mesh?.containsPixel(pt.x, pt.y)) {
+            if (tile.mesh?.containsCanvasPoint({x: pt.x, y: pt.y})) {
                 return true;
             }
         }

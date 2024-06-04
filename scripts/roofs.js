@@ -4,61 +4,58 @@
 
 class betterRoofs {
     constructor() {
-      this.fogRoofContainer
-      this.roofs
-      this.isLevels = game.modules.get('levels')?.active
-      this.DEBUG = false
-      this.initializeRoofsDebounced = foundry.utils.debounce(this.initializeRoofs.bind(this),1000)
+        this.fogRoofContainer;
+        this.roofs;
+        this.isLevels = game.modules.get("levels")?.active;
+        this.DEBUG = false;
+        this.initializeRoofsDebounced = foundry.utils.debounce(this.initializeRoofs.bind(this), 1000);
     }
-  
-/**********************************************
- * INITIALIZE THE ROOFS FOR THE FIRST TIME *
- **********************************************/
-  
+
+    /**********************************************
+     * INITIALIZE THE ROOFS FOR THE FIRST TIME *
+     **********************************************/
+
     static get() {
         betterRoofs._instance = new betterRoofs();
         return betterRoofs._instance;
     }
 
-/************************************************************
- * INITIALIZE OR RESET THE PIXI CONTAINERS USED FOR MASKING *
- ************************************************************/
+    /************************************************************
+     * INITIALIZE OR RESET THE PIXI CONTAINERS USED FOR MASKING *
+     ************************************************************/
 
-    initializePIXIcontainers(){
+    initializePIXIcontainers() {
         this.fogRoofContainer = new PIXI.Container();
         this.fogRoofContainer.name = "fogRoofContainer";
-        this.fogRoofContainer.spriteIndex = {}
-        const oldContainer = canvas.masks.vision.children.find(c => c.name == "fogRoofContainer")
-        if(oldContainer) canvas.masks.vision.removeChild(oldContainer)
+        this.fogRoofContainer.spriteIndex = {};
+        const oldContainer = canvas.masks.vision.children.find((c) => c.name == "fogRoofContainer");
+        if (oldContainer) canvas.masks.vision.removeChild(oldContainer);
         canvas.masks.vision.addChild(this.fogRoofContainer);
     }
 
-/******************************************************************************************
- * BUILD OR REFRESH THE ROOF ARRAY AND ASSIGN A BUILDING POLYGON TO EACH BETTER ROOF TILE *
- ******************************************************************************************/
+    /******************************************************************************************
+     * BUILD OR REFRESH THE ROOF ARRAY AND ASSIGN A BUILDING POLYGON TO EACH BETTER ROOF TILE *
+     ******************************************************************************************/
 
-    initializeRoofs(){
-      if(game.Levels3DPreview?._active && game.Levels3DPreview?.object3dSight) {
-        this.roofs = []
-        return;
-      }
-        this.roofs = []
-        if(!canvas.tiles?.placeables) return;
+    initializeRoofs() {
+        if (game.Levels3DPreview?._active && game.Levels3DPreview?.object3dSight) {
+            this.roofs = [];
+            return;
+        }
+        this.roofs = [];
+        if (!canvas.tiles?.placeables) return;
         canvas.tiles.placeables.forEach((t) => {
-            if(t.document.getFlag("betterroofs","brMode") && t.document.getFlag("betterroofs","brMode") != 0){
-              this.roofs.push(t)
-            } 
-        })
+            if (t.document.getFlag("betterroofs", "brMode") && t.document.getFlag("betterroofs", "brMode") != 0) {
+                this.roofs.push(t);
+            }
+        });
 
-        console.log("Roofs initialized")
-
-
+        console.log("Roofs initialized");
     }
 
-    static debouncedInitializeRoofs(){
-      _betterRoofs.initializeRoofsDebounced()
+    static debouncedInitializeRoofs() {
+        _betterRoofs.initializeRoofsDebounced();
     }
-
 }
 
 /******************************************************************************
@@ -66,13 +63,13 @@ class betterRoofs {
  ******************************************************************************/
 
 Hooks.on("updateTile", () => {
-  betterRoofs.debouncedInitializeRoofs()
+    betterRoofs.debouncedInitializeRoofs();
 });
 
 Hooks.on("createTile", () => {
-  betterRoofs.debouncedInitializeRoofs()
+    betterRoofs.debouncedInitializeRoofs();
 });
 
 Hooks.on("deleteTile", () => {
-  betterRoofs.debouncedInitializeRoofs()
+    betterRoofs.debouncedInitializeRoofs();
 });

@@ -74,14 +74,3 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   html.find(`select[name="occlusion.mode"]`).closest(".form-group").after(newHtml);
   app.setPosition({height: "auto"});
 });
-
-Hooks.on("renderTokenConfig", (app, html, data) => {
-  const occlusionRadius = (app.token ?? app.object).getFlag("core", "occlusionRadius") || "";
-  const injectHtml = `
-  <div class="form-group">
-    <label>${game.i18n.localize("betterroofs.tokenConfig.occlusionRadius.name")} <span class="units">(${canvas.scene.grid.units})</span></label>
-    <input name="flags.core.occlusionRadius" type="text" data-dtype="Number" value="${occlusionRadius}" placeholder="${game.i18n.localize("betterroofs.tokenConfig.occlusionRadius.placeholder")}">
-  </div>`
-  html.find(`input[name="alpha"]`).closest(".form-group").after(injectHtml);
-  app.setPosition({height: "auto"});
-})

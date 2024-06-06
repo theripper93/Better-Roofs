@@ -14,6 +14,30 @@ Hooks.on("canvasReady", () => {
  **************************/
 
 Hooks.on("init", () => {
+
+  let hoverFadeCached = true;
+
+  game.settings.register("betterroofs", "hoverFade", {
+    name: "Hover Fade",
+    hint: "When enabled, the roofs will fade out when you hover over them. This is a Core Foundry VTT feature, this setting simply lets you turn it off.",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean,
+    onChange: (value) => {
+      hoverFadeCached = value;
+      canvas.tiles.placeables.forEach(t=>t.refresh())
+    },
+  });
+
+  hoverFadeCached = game.settings.get("betterroofs", "hoverFade");
+
+
+  Hooks.on("refreshTile", (tile) => {
+    tile.mesh.hoverFade = hoverFadeCached;
+  });
+
+
   Hooks.on(game.modules.get("levels")?.active ? "levelsAdvancedFogInit" : "drawCanvasVisibility", () => {
     _betterRoofsHelpers = new betterRoofsHelpers();
     _betterRoofs = betterRoofs.get();

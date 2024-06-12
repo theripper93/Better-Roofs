@@ -34,7 +34,7 @@ Hooks.on("init", () => {
 
 
   Hooks.on("refreshTile", (tile) => {
-    tile.mesh.hoverFade = hoverFadeCached;
+    if(tile?.mesh) tile.mesh.hoverFade = hoverFadeCached;
   });
 
 

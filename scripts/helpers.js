@@ -38,8 +38,8 @@ class betterRoofsHelpers {
      **************************************************************/
 
     computeShowHideTile(tile, overrideHide, controlledToken, brMode) {
-        //canvas?.scene?.environment?.globalLight?.enabled ? canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.los.points : 
-       const pointSource = canvas.effects.visionSources.get(`Token.${controlledToken.id}`)?.fov.points;
+        const pointSource = canvas.scene.environment.globalLight.enabled ? controlledToken.vision?.los?.points : controlledToken.vision?.fov?.points;
+
         if (controlledToken && !tile.occluded && tile.visible && (controlledToken.losHeight ?? controlledToken.document.elevation) < tile.document.elevation && this.checkIfInPoly(pointSource, tile, controlledToken, 5)) {
             this.showTileThroughFog(tile);
         } else {

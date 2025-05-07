@@ -51,10 +51,10 @@ Hooks.on("init", () => {
  ****************************************************/
 
 Hooks.on("renderTileConfig", (app, html, data) => {
-  const isInjected = html.find(`input[name="flags.betterroofs.occlusionLinkId"]`).length > 0;
+  const isInjected = html.querySelector(`[name="flags.betterroofs.occlusionLinkId"]`);
   if(isInjected) return;
 
-  let brMode = app.object.getFlag("betterroofs", "brMode");
+  let brMode = app.document.getFlag("betterroofs", "brMode");
 
   if(!(brMode instanceof Boolean)){
     if(brMode == 1 || brMode == 3){
@@ -64,9 +64,9 @@ Hooks.on("renderTileConfig", (app, html, data) => {
     }
   }
 
-  let occlusionLinkSource = app.object.getFlag("betterroofs", "occlusionLinkSource") || false;
+  let occlusionLinkSource = app.document.getFlag("betterroofs", "occlusionLinkSource") || false;
 
-  let occlusionLinkId = app.object.getFlag("betterroofs", "occlusionLinkId") || "";
+  let occlusionLinkId = app.document.getFlag("betterroofs", "occlusionLinkId") || "";
 
   const newHtml = `
 
@@ -75,7 +75,7 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   <div class="form-fields">
       <input type="checkbox" name="flags.betterroofs.brMode" ${brMode ? "checked" : ""}>
   </div>
-  <p class="notes">${game.i18n.localize("betterroofs.tileConfig.showInFog.hint")}</p>
+  <p class="hint">${game.i18n.localize("betterroofs.tileConfig.showInFog.hint")}</p>
   </div>
 
 
@@ -84,7 +84,7 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   <div class="form-fields">
       <input type="text" name="flags.betterroofs.occlusionLinkId" value="${occlusionLinkId}">
   </div>
-  <p class="notes">${game.i18n.localize("betterroofs.tileConfig.occlusionLinkIdHint")}</p>
+  <p class="hint">${game.i18n.localize("betterroofs.tileConfig.occlusionLinkIdHint")}</p>
 </div>
 
 <div class="form-group">
@@ -95,6 +95,6 @@ Hooks.on("renderTileConfig", (app, html, data) => {
         </div>
   `
   
-  html.find(`select[name="occlusion.mode"]`).closest(".form-group").after(newHtml);
+  html.querySelector(`select[name="occlusion.mode"]`).closest(".form-group").insertAdjacentHTML("afterend", newHtml);
   app.setPosition({height: "auto"});
 });

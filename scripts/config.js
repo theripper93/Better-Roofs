@@ -18,8 +18,8 @@ Hooks.on("init", () => {
   let hoverFadeCached = true;
 
   game.settings.register("betterroofs", "hoverFade", {
-    name: "Hover Fade",
-    hint: "When enabled, the roofs will fade out when you hover over them. This is a Core Foundry VTT feature, this setting simply lets you turn it off.",
+    name: game.i18n.localize(`betterroofs.settings.hoverFade.name`),
+    hint: game.i18n.localize(`betterroofs.settings.hoverFade.hint`),
     scope: "world",
     config: true,
     default: true,

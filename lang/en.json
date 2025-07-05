@@ -1,7 +1,15 @@
 {
-    "betterroofs.tileConfig.showInFog.name": "Reveals Fog of War",
-    "betterroofs.tileConfig.showInFog.hint": "When a token has vision of this tile, the tile will be visible through Fog of War. Does not work with Lights.",
-    "betterroofs.tileConfig.occlusionLinkId": "Occlusion Link Id",
-    "betterroofs.tileConfig.occlusionLinkIdHint": "Can be any text. When a tile with 'Occlusion Link Source?' is occluded (has a token under it) all tiles with the same 'Occlusion Link Id' will be occluded as well. Example usage: linking roofs together.",
-    "betterroofs.tileConfig.occlusionLinkSource": "Occlusion Link Source?"
+    "betterroofs": { 
+        "tileConfig": {
+            "showInFog.name": "Reveals Fog of War",
+            "showInFog.hint": "When a token has vision of this tile, the tile will be visible through Fog of War. Does not work with Lights.",
+            "occlusionLinkId": "Occlusion Link Id",
+            "occlusionLinkIdHint": "Can be any text. When a tile with 'Occlusion Link Source?' is occluded (has a token under it) all tiles with the same 'Occlusion Link Id' will be occluded as well. Example usage: linking roofs together.",
+            "occlusionLinkSource": "Occlusion Link Source?"
+        },
+        "settings": {
+            "hoverFade.name": "Hover Fade",
+            "hoverFade.hint": "When enabled, the roofs will fade out when you hover over them. This is a Core Foundry VTT feature, this setting simply lets you turn it off."
+        }
+    }
 }

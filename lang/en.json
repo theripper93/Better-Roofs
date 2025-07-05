@@ -1,48 +1,7 @@
 {
-    "betterroofs.settings.fogVisibility.name": "Visibility of tiles through fog",
-    "betterroofs.settings.fogVisibility.hint": "How visible (or how perceptibly bright) are the tiles shown through the fog",
-
-    "betterroofs.settings.forceFallback.name": "Performance Mode",
-    "betterroofs.settings.forceFallback.hint": "Force Hide mode for all Mask roofs, enable if performance is suffering",
-
-    "betterroofs.settings.roomPreview.name": "Advanced Mode",
-    "betterroofs.settings.roomPreview.hint": "When opening a tile config, show what the building detection has computed as a building. Also exposes controls for manually setting up the polygon for the room. Useful for debugging",
-
-    "betterroofs.settings.wbIntegration.name": "Weather Blocker Integration",
-    "betterroofs.settings.wbIntegration.hint": "If Weather Blocker module is installed dynamically hide weather inside buildings. Requires Refresh",
-
-    "betterroofs.settings.occlusionRadius.name": "Occlusion Radius",
-    "betterroofs.settings.occlusionRadius.hint": "Radius Multiplier for Radial occlusion mode",
-
-    "betterroofs.tokenConfig.occlusionRadius.name": "Occlusion Radius",
-    "betterroofs.tokenConfig.occlusionRadius.placeholder": "Default",
-
     "betterroofs.tileConfig.showInFog.name": "Reveals Fog of War",
     "betterroofs.tileConfig.showInFog.hint": "When a token has vision of this tile, the tile will be visible through Fog of War. Does not work with Lights.",
-    "betterroofs.tileConfig.brMode.name": "Better Roof Mode",
-    "betterroofs.tileConfig.brMode.option0": "None (Foundry Default)",
-    "betterroofs.tileConfig.brMode.option1": "Show (Show Tile Through Fog)",
-    "betterroofs.tileConfig.brMode.option2": "Hide (Hides Tile on Vision)",
-    "betterroofs.tileConfig.brMode.option3": "Mask (Cutout Tile on Vision)",
-    "betterroofs.tileConfig.manualPoly.name": "Selected Walls",
-    "betterroofs.tileConfig.definePoly.name": "Define Polygon",
-    "betterroofs.tileConfig.clearPoly.name": "Clear Polygon",
-    "betterroofs.tileConfig.definePoly.notify": "Select the walls you wish to use for the polygon then click the Define Polygon button again to confirm",
     "betterroofs.tileConfig.occlusionLinkId": "Occlusion Link Id",
     "betterroofs.tileConfig.occlusionLinkIdHint": "Can be any text. When a tile with 'Occlusion Link Source?' is occluded (has a token under it) all tiles with the same 'Occlusion Link Id' will be occluded as well. Example usage: linking roofs together.",
-    "betterroofs.tileConfig.occlusionLinkSource": "Occlusion Link Source?",
-
-    "betterroofs.tileConfig.isbroken": "The Polygon autodetection for this tile might have failed. Please enable advanced mode in the module settings and manually define the polygon.",
-
-    "betterroofs.wallConfig.externalWall.name":"Is External Wall?",
-
-    "betterroofs.scenecontrols.walledges": "Wall off the edges of the scene",
-
-    "betterroofs.yesnodialog.yes": "Confirm",
-    "betterroofs.yesnodialog.no": "Cancel",
-    "betterroofs.yesnodialog.title": "Wall off the edges of the scene",
-    "betterroofs.yesnodialog.desc": "Are you sure you want to wall off the edges of the scene?",
-
-    "betterroofs.bulk.notification": "WARNING: This operation will change all settings for all selected overhead tiles. If no tiles are selected, all overhead tiles will be processed instead. Overhead tiles with better roof mode set to None will not be affected",
-    "betterroofs.bulk.title": "Bulk change Better Roofs in the scene"
+    "betterroofs.tileConfig.occlusionLinkSource": "Occlusion Link Source?"
 }

@@ -2,50 +2,9 @@
     "I18N.LANGUAGE": "Español",
     "I18N.MAINTAINERS": "@Viriato139ac#0342",
 	
-    "betterroofs.settings.fogVisibility.name": "Visión de baldosas a través de la niebla",
-    "betterroofs.settings.fogVisibility.hint": "Cómo de visibles (o cómo es la percepción del brillo) son las baldosas a través de la niebla",
-
-    "betterroofs.settings.forceFallback.name": "Modo rendimiento",
-    "betterroofs.settings.forceFallback.hint": "Fuerza el que se oculten todas las máscaras de los tejados, habilítese si se nota un descenso en el rendimiento",
-
-    "betterroofs.settings.roomPreview.name": "Modo avanzado",
-    "betterroofs.settings.roomPreview.hint": "Cuando se abra la configuración de la baldosa, muestra que la detección de edificios la ha computado como una construcción. También muestra los controles que permiten ajustar de manera manual el polígono que define la habitación. Es útil para hacer depuración de errores",
-
-    "betterroofs.settings.wbIntegration.name": "Integración de Weather Blocker",
-    "betterroofs.settings.wbIntegration.hint": "Si el módulo Weather Blocker está instalado, bloqueará dinámicamente la climatología dentro de los edificios",
-
-    "betterroofs.settings.occlusionRadius.name": "Radio de bloqueo",
-    "betterroofs.settings.occlusionRadius.hint": "Multiplicador del radio para el modo de bloqueo radial",
-
-    "betterroofs.tokenConfig.occlusionRadius.name": "Radio de oclusión",
-    "betterroofs.tokenConfig.occlusionRadius.placeholder": "Por defecto",
-
     "betterroofs.tileConfig.showInFog.name": "Revela la niebla de guerra",
     "betterroofs.tileConfig.showInFog.hint": "Cuando un icono tiene visión de esta baldosa, la misma será visible a través de la niebla de guerra. No funciona con las luces",
-    "betterroofs.tileConfig.brMode.name": "Modo Better Roof",
-    "betterroofs.tileConfig.brMode.option0": "Ninguno (por defecto en Foundry)",
-    "betterroofs.tileConfig.brMode.option1": "Mostrar (mostrar baldosas a través de la niebla)",
-    "betterroofs.tileConfig.brMode.option2": "Ocultar (oculta baldosas a la visión)",
-    "betterroofs.tileConfig.brMode.option3": "Enmascarar (recortar baldosas a la visión)",
-    "betterroofs.tileConfig.manualPoly.name": "Muros seleccionados",
-    "betterroofs.tileConfig.definePoly.name": "Definir polígono",
-    "betterroofs.tileConfig.clearPoly.name": "Borrar polígono",
-    "betterroofs.tileConfig.definePoly.notify": "Seleccione los muros que desee usar para el polígono y haga clic en el botón Definir polígono de nuevo para confirmar",
     "betterroofs.tileConfig.occlusionLinkId": "Id enlace de bloqueo",
     "betterroofs.tileConfig.occlusionLinkIdHint": "Puede ser cualquier cadena de texto. Cuando una baldosa con '¿Fuente del enlace de bloqueo?' es bloqueado (tiene un icono debajo) todas las baldosas con el mismo 'Id enlace de bloqueo' también se bloquearán. Ejemplo de uso: unir tejados",
-    "betterroofs.tileConfig.occlusionLinkSource": "¿Fuente del enlace de bloqueo?",
-
-    "betterroofs.tileConfig.isbroken": "La autodetección de polígonos de esta baldosa ha fallado. Por favor, active el modo avanzado en los ajustes del módulo y defina de manera manual el polígono",
-
-    "betterroofs.wallConfig.externalWall.name":"¿Es un muro externo?",
-
-    "betterroofs.scenecontrols.walledges": "Encapsular los bordes de la escena",
-
-    "betterroofs.yesnodialog.yes": "Confirmar",
-    "betterroofs.yesnodialog.no": "Cancelar",
-    "betterroofs.yesnodialog.title": "Encapsular los bordes de la escena",
-    "betterroofs.yesnodialog.desc": "¿Está seguro que quiere encapsular los bordes de la escena?",
-
-    "betterroofs.bulk.notification": "AVISO: Esta operación modificará todos los ajustes de las baldosas superiores seleccionadas. Si no ha seleccionado ninguna, se procesarán en su lugar todas las baldosas superiores, aunque no afectará a aquellas que tengan seleccionado el modo Better Roof",
-    "betterroofs.bulk.title": "Cambiar en bloque Better Roofs en la escena"
+    "betterroofs.tileConfig.occlusionLinkSource": "¿Fuente del enlace de bloqueo?"
 }

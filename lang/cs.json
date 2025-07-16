@@ -1,0 +1,15 @@
+{
+    "betterroofs": { 
+        "tileConfig": {
+            "showInFog.name": "Odhalit válečnou mlhu?",
+            "showInFog.hint": "Když má token na tuto dlaždici výhled, bude tato dlaždice viditelná i přes válečnou mlhu. Neplatí pro osvětlení.",
+            "occlusionLinkId": "ID propojení zakrytí",
+            "occlusionLinkIdHint": "Může to být libovolný text. Když má dlaždice se zaškrtnutou volbou ´Propojit zakrytí?´ pod sebou token, všechny dlaždice se stejným ID propojení zakrytí budou taktéž zakryty. Například tak lze propojit střechy dohromady.",
+            "occlusionLinkSource": "Propojit zakrytí?"
+        },
+        "settings": {
+            "hoverFade.name": "Mají střechy mizet po přejetí myší?",
+            "hoverFade.hint": "Je-li zaškrtnuto, střechy po přejetí myší zmizí. Je to základní funkce Foundry VTT, toto nastavení ji pouze umožňuje vypnout."
+        }
+    }
+}

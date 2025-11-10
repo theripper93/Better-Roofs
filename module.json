@@ -27,6 +27,11 @@
       "path": "lang/ja.json"
     },
     {
+      "lang": "cs",
+      "name": "Čeština",
+      "path": "lang/cs.json"
+    },
+    {
       "lang": "es",
       "name": "Español",
       "path": "lang/es.json"
@@ -64,3 +69,4 @@
     "verified": "13"
   }
 }
+

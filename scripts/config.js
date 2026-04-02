@@ -69,32 +69,33 @@ Hooks.on("renderTileConfig", (app, html, data) => {
   let occlusionLinkId = app.document.getFlag("betterroofs", "occlusionLinkId") || "";
 
   const newHtml = `
-
-  <div class="form-group">
-  <label>${game.i18n.localize("betterroofs.tileConfig.showInFog.name")}</label>
-  <div class="form-fields">
-      <input type="checkbox" name="flags.betterroofs.brMode" ${brMode ? "checked" : ""}>
-  </div>
-  <p class="hint">${game.i18n.localize("betterroofs.tileConfig.showInFog.hint")}</p>
-  </div>
-
-
-  <div class="form-group">
-  <label for="occlusionLinkId">${game.i18n.localize("betterroofs.tileConfig.occlusionLinkId")}</label>
-  <div class="form-fields">
-      <input type="text" name="flags.betterroofs.occlusionLinkId" value="${occlusionLinkId}">
-  </div>
-  <p class="hint">${game.i18n.localize("betterroofs.tileConfig.occlusionLinkIdHint")}</p>
-</div>
-
-<div class="form-group">
-            <label>${game.i18n.localize("betterroofs.tileConfig.occlusionLinkSource")}</label>
-            <div class="form-fields">
-                <input type="checkbox" name="flags.betterroofs.occlusionLinkSource" ${occlusionLinkSource ? "checked" : ""}>
-            </div>
+    <fieldset>
+      <legend>Better Roofs</legend>
+      <div class="form-group">
+        <label>${game.i18n.localize("betterroofs.tileConfig.showInFog.name")}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="flags.betterroofs.brMode" ${brMode ? "checked" : ""}>
         </div>
+        <p class="hint">${game.i18n.localize("betterroofs.tileConfig.showInFog.hint")}</p>
+      </div>
+
+      <div class="form-group">
+        <label for="occlusionLinkId">${game.i18n.localize("betterroofs.tileConfig.occlusionLinkId")}</label>
+        <div class="form-fields">
+            <input type="text" name="flags.betterroofs.occlusionLinkId" value="${occlusionLinkId}">
+        </div>
+        <p class="hint">${game.i18n.localize("betterroofs.tileConfig.occlusionLinkIdHint")}</p>
+      </div>
+
+      <div class="form-group">
+        <label>${game.i18n.localize("betterroofs.tileConfig.occlusionLinkSource")}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="flags.betterroofs.occlusionLinkSource" ${occlusionLinkSource ? "checked" : ""}>
+        </div>
+      </div>
+    </fieldset>
   `
   
-  html.querySelector(`select[name="occlusion.mode"]`).closest(".form-group").insertAdjacentHTML("afterend", newHtml);
+  html.querySelector(`[name="occlusion.alpha"]`).closest(".form-group").insertAdjacentHTML("afterend", newHtml);
   app.setPosition({height: "auto"});
 });

@@ -12,10 +12,10 @@ function occlusionLink(wrapped,...args){
     for(let otile of canvas.tiles.placeables){
         const occlusionLinkId = otile.document.flags?.betterroofs?.occlusionLinkId;
         if(!occlusionLinkId) continue;
-        // if(_betterRoofs?.isLevels && CONFIG.Levels.currentToken?.document?.elevation >= otile.document.elevation) continue;
+        if (canvas.level.elevation.bottom > otile.document.elevation) continue;
         let occlusionLink = false;
         for(let tile of canvas.tiles.placeables){
-            // if(_betterRoofs?.isLevels && CONFIG.Levels.currentToken?.document?.elevation >= tile.document.elevation) continue;    
+            if (canvas.level.elevation.bottom > tile.document.elevation) continue;
             if(!occluded.has(tile.mesh) || tile.id === otile.id) continue;
             const occlusionLinkSource = tile.document.flags?.betterroofs?.occlusionLinkSource;
             const tOcclusionLinkId = tile.document.flags?.betterroofs?.occlusionLinkId;

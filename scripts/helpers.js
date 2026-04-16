@@ -184,13 +184,15 @@ class betterRoofsHelpers {
 class WhitestShader extends foundry.canvas.rendering.shaders.BaseSamplerShader {
     static classPluginName = null;
 
-    static fragmentShader = `
-    precision ${PIXI.settings.PRECISION_FRAGMENT} float;
-    uniform sampler2D sampler;
-    uniform vec4 tintAlpha;
-    varying vec2 vUvs;
-  
-    void main() {
-      gl_FragColor = vec4(1.0) * (texture2D(sampler, vUvs).a * tintAlpha);
-    }`;
+    static _createFragmentShader() {
+        return `
+            precision ${PIXI.settings.PRECISION_FRAGMENT} float;
+            uniform sampler2D sampler;
+            uniform vec4 tintAlpha;
+            varying vec2 vUvs;
+        
+            void main() {
+            gl_FragColor = vec4(1.0) * (texture2D(sampler, vUvs).a * tintAlpha);
+        }`;
+    }
 }

@@ -11,7 +11,7 @@ class betterRoofsHelpers {
         const oldSprite = _betterRoofs.fogRoofContainer.children.find((c) => c.name == tile.id);
         let tileImg = tile.mesh;
         if (!tileImg || oldSprite || !tileImg.texture.baseTexture) return;
-        let sprite = SpriteMesh.from(tileImg.texture, undefined, WhiteAsFuckShader);
+        let sprite = foundry.canvas.containers.SpriteMesh.from(tileImg.texture, undefined, WhitestShader);
         sprite.alpha = 1;
         sprite.width = tile.document.width;
         sprite.height = tile.document.height;
@@ -181,7 +181,7 @@ class betterRoofsHelpers {
 
 //funny name haha
 
-class WhiteAsFuckShader extends BaseSamplerShader {
+class WhitestShader extends foundry.canvas.rendering.shaders.BaseSamplerShader {
     static classPluginName = null;
 
     static fragmentShader = `

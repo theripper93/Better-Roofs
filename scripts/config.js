@@ -38,7 +38,7 @@ Hooks.on("init", () => {
   });
 
 
-  Hooks.on(game.modules.get("levels")?.active ? "levelsAdvancedFogInit" : "drawCanvasVisibility", () => {
+  Hooks.on("drawCanvasVisibility", () => {
     _betterRoofsHelpers = new betterRoofsHelpers();
     _betterRoofs = betterRoofs.get();
     _betterRoofs.initializePIXIcontainers();

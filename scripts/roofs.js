@@ -6,7 +6,7 @@ class betterRoofs {
     constructor() {
         this.fogRoofContainer;
         this.roofs;
-        this.isLevels = game.modules.get("levels")?.active;
+        // this.isLevels = game.modules.get("levels")?.active;
         this.DEBUG = false;
         this.initializeRoofsDebounced = foundry.utils.debounce(this.initializeRoofs.bind(this), 1000);
     }
